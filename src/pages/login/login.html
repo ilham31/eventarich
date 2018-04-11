@@ -1,0 +1,33 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-content padding>
+    <img class="displayed"  height="320 px" width="244 px" img src="assets/imgs/eventarich.jpg">
+    <ion-list>
+        
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" #email></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" #password></ion-input>
+        </ion-item>
+
+        <button ion-button full (click)="loginNow()" color="eventarich">login</button>
+      
+      </ion-list>
+      <div text-center color="eventarich">
+          Lupa Kata sandi?
+                </div>
+            <button ion-button full (click)="registerPage()" color="secondary" clear>register</button>
+        
+</ion-content>
+

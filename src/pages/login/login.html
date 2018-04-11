@@ -8,7 +8,7 @@
 
 
 <ion-content padding>
-    <img class="displayed"  height="320 px" width="244 px" img src="assets/imgs/eventarich.jpg">
+    <img class="displayed"   height="200 px" width="200 px" img src="assets/imgs/eventarich.jpg">
     <ion-list>
         
         <ion-item>
@@ -24,10 +24,12 @@
         <button ion-button full (click)="loginNow()" color="eventarich">login</button>
       
       </ion-list>
-      <div text-center color="eventarich">
-          Lupa Kata sandi?
-                </div>
-            <button ion-button full (click)="registerPage()" color="secondary" clear>register</button>
+            <button ion-button full (click)="registerPage()" color="eventarich" clear>Lupa Kata sandi?</button>
         
 </ion-content>
+<ion-footer >
+  <ion-toolbar color="footer">
+    <p ion-text color="eventarich" text-center>Belum punya akun ?</p>
+  </ion-toolbar>
+</ion-footer>
 

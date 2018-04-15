@@ -1,0 +1,93 @@
+<!--
+  Generated template for the FilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="eventarich">
+    <ion-title>Filter</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<p ion-text color="eventarich">Jenis Acara</p> 
+
+
+<ion-row radio-group>
+    <ion-col>
+        <ion-item>
+        <ion-label color="eventarich" class="my-label">Kompetisi</ion-label>
+        <ion-radio item-left checked="true" value="1" color="eventarich"></ion-radio>    
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+            <ion-label color="eventarich" class="my-label">Seminar</ion-label>
+            <ion-radio item-left checked="false" value="0" color="eventarich"></ion-radio>
+        </ion-item>
+      </ion-col>
+</ion-row>
+
+<ion-row radio-group>
+    <ion-col>
+        <ion-item>
+        <ion-label color="eventarich" class="my-label">Lingkungan</ion-label>
+        <ion-radio item-left checked="true" value="1" color="eventarich"></ion-radio>    
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+            <ion-label color="eventarich" class="my-label">Expo</ion-label>
+            <ion-radio item-left checked="false" value="0" color="eventarich"></ion-radio>
+        </ion-item>
+      </ion-col>
+</ion-row>
+
+<ion-row radio-group>
+    <ion-col>
+        <ion-item>
+        <ion-label color="eventarich" class="my-label">Olahraga</ion-label>
+        <ion-radio item-left checked="false" value="1" color="eventarich"></ion-radio>    
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+            <ion-label color="eventarich" class="my-label">Bazaar</ion-label>
+            <ion-radio item-left checked="false" value="0" color="eventarich"></ion-radio>
+        </ion-item>
+      </ion-col>
+</ion-row>
+<ion-row radio-group>
+    <ion-col>
+        <ion-item>
+        <ion-label color="eventarich" class="my-label">Seni</ion-label>
+        <ion-radio item-left checked="false" value="1" color="eventarich"></ion-radio>    
+        </ion-item>
+      </ion-col>
+</ion-row>
+<ion-row radio-group>
+    <ion-col>
+        <ion-item>
+        <ion-label color="eventarich" class="my-label">Sosial</ion-label>
+        <ion-radio item-left checked="false" value="1" color="eventarich"></ion-radio>    
+        </ion-item>
+      </ion-col>
+</ion-row>
+
+<p ion-text color="eventarich">Rentang Waktu</p>
+<ion-item>
+  <ion-range dualKnobs="true" [(ngModel)]="dualValue2" min="1" max="12" step="1" snaps="true" color="eventarich"></ion-range>  
+</ion-item>
+<ion-footer no-shadow>
+    <button ion-button full ion-button color="eventarich">Cari</button>
+
+</ion-footer>
+
+</ion-content>

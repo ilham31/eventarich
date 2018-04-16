@@ -9,7 +9,7 @@
       eventarich
     </ion-title>
     <ion-buttons end>
-        <button (click)="searchPage()" ion-button icon-only>
+        <button (click)="myFunction()" ion-button icon-only>
           <ion-icon name="search"></ion-icon>
         </button>
       </ion-buttons>
@@ -17,20 +17,35 @@
     </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+    <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <button ion-button full color="eventarich" [disabled]=true>
+                Eventku
+            </button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button full color ="eventarich">
+              Top Event
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     <ion-card class="cards-list-demo">
       <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">  
       
       <ion-card-header>
-        <div>
-            <ion-badge class="badge-circle" ></ion-badge>  
-        </div>
-        
-        <span>PSN</span>
-      </ion-card-header>
+      <ion-badge class="badge-circle" >23 Feb</ion-badge>  
+        PSN
+        </ion-card-header>
         
       
     </ion-card>
+    <ion-fab right bottom>
+        <button ion-fab color="eventarich"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
 </ion-content>
 <ion-menu [content]="content">
     <ion-header class="lebar-menu">
@@ -43,17 +58,18 @@
         <button ion-item (click)="homePage()" >  <ion-icon name="home" color='eventarich'></ion-icon>
           Home
         </button>
+        <button ion-item (click)="homePage()" >  <ion-icon name="clipboard" color='eventarich'></ion-icon>
+          Kebutuhan Event
+        </button>
         <button ion-item (click)="cekMakanan(gizi)"> <ion-icon name="body" color='eventarich'></ion-icon>
           Vendor Kami
         </button>
         <button ion-item (click)="login()">   <ion-icon name="person" color='eventarich'></ion-icon>
-          Login
+          Akun
         </button>
       </ion-list>
     </ion-content>
   </ion-menu>
   
   <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
-  
-  
   

@@ -1,19 +1,32 @@
 page-home {
-ion-card.cards-list-demo ion-card-header {
-        color: map-get($colors, primary);
-}
-ion-toolbar.lebar-menu{
-    height: 100px;
-}
-// ion-header.lebar-menu{
-//     height: 100px;
-// }
-  .badge-circle{
-      position: relative;
-      display: inline-block;
-      width: 18%;
-      height: 25%;
-      padding: 6% 4px;
-      border-radius: 50%;
+    ion-card.cards-list-demo ion-card-header {
+            color: map-get($colors, primary);
     }
+    ion-toolbar.lebar-menu{
+        height: 100px;
+    }
+    // ion-header.lebar-menu{
+    //     height: 100px;
+    // }
+    .badge-circle{
+        position: relative;
+        display: inline-block;
+        width: 18%;
+        height: 25%;
+        padding: 6% 4px;
+        border-radius: 50%;
+    }
+
+    .navbar_home {
+        width: 100%;
+        .title_home {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .search_home {
+            margin-right: 4%;
+        }
+    }
+    
 }

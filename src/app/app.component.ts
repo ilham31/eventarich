@@ -8,11 +8,13 @@ import {LoginPage} from '../pages/login/login';
 import {SetelahloginPage} from '../pages/setelahlogin/setelahlogin';
 import {SearchPage} from '../pages/search/search';
 import {FilterPage} from '../pages/filter/filter';
+import {ProfilPage} from '../pages/profil/profil';
+import {RegisterPage}from '../pages/register/register';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = FilterPage;
+  rootPage:any = RegisterPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

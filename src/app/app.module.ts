@@ -10,6 +10,8 @@ import {LoginPage} from'../pages/login/login';
 import {SetelahloginPage} from '../pages/setelahlogin/setelahlogin';
 import {SearchPage} from '../pages/search/search';
 import {FilterPage} from '../pages/filter/filter';
+import {ProfilPage} from '../pages/profil/profil';
+import {RegisterPage}from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {FilterPage} from '../pages/filter/filter';
     LoginPage,
     SetelahloginPage,
     SearchPage,
-    FilterPage
+    FilterPage,
+    ProfilPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,9 @@ import {FilterPage} from '../pages/filter/filter';
     LoginPage,
     SetelahloginPage,
     SearchPage,
-    FilterPage
+    FilterPage,
+    ProfilPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

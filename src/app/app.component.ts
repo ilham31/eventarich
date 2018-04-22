@@ -10,11 +10,14 @@ import {SearchPage} from '../pages/search/search';
 import {FilterPage} from '../pages/filter/filter';
 import {ProfilPage} from '../pages/profil/profil';
 import {RegisterPage}from '../pages/register/register';
+import {KebutuhaneventPage}from '../pages/kebutuhanevent/kebutuhanevent';
+import {EventPage}from '../pages/event/event'
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = RegisterPage;
+  rootPage:any = EventPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

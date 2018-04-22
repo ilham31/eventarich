@@ -12,6 +12,8 @@ import {SearchPage} from '../pages/search/search';
 import {FilterPage} from '../pages/filter/filter';
 import {ProfilPage} from '../pages/profil/profil';
 import {RegisterPage}from '../pages/register/register';
+import {KebutuhaneventPage}from '../pages/kebutuhanevent/kebutuhanevent';
+import {EventPage}from '../pages/event/event';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {RegisterPage}from '../pages/register/register';
     SearchPage,
     FilterPage,
     ProfilPage,
-    RegisterPage
+    RegisterPage,
+    KebutuhaneventPage,
+    EventPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import {RegisterPage}from '../pages/register/register';
     SearchPage,
     FilterPage,
     ProfilPage,
-    RegisterPage
+    RegisterPage,
+    KebutuhaneventPage,
+    EventPage
   ],
   providers: [
     StatusBar,

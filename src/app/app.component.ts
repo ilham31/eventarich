@@ -11,7 +11,8 @@ import {FilterPage} from '../pages/filter/filter';
 import {ProfilPage} from '../pages/profil/profil';
 import {RegisterPage}from '../pages/register/register';
 import {KebutuhaneventPage}from '../pages/kebutuhanevent/kebutuhanevent';
-import {EventPage}from '../pages/event/event'
+import {EventPage}from '../pages/event/event';
+import {TambaheventPage}from '../pages/tambahevent/tambahevent'
 
 @Component({
   templateUrl: 'app.html'

@@ -14,6 +14,7 @@ import {ProfilPage} from '../pages/profil/profil';
 import {RegisterPage}from '../pages/register/register';
 import {KebutuhaneventPage}from '../pages/kebutuhanevent/kebutuhanevent';
 import {EventPage}from '../pages/event/event';
+import {TambaheventPage}from '../pages/tambahevent/tambahevent';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {EventPage}from '../pages/event/event';
     ProfilPage,
     RegisterPage,
     KebutuhaneventPage,
-    EventPage
+    EventPage,
+    TambaheventPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import {EventPage}from '../pages/event/event';
     ProfilPage,
     RegisterPage,
     KebutuhaneventPage,
-    EventPage
+    EventPage,
+    TambaheventPage
   ],
   providers: [
     StatusBar,

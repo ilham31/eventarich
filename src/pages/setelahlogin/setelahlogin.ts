@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {SearchPage} from '../search/search';
 
 /**
  * Generated class for the SetelahloginPage page.
@@ -19,6 +20,10 @@ export class SetelahloginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SetelahloginPage');
+  }
+  searchPage()
+  {
+    this.navCtrl.push(SearchPage);
   }
 
 }

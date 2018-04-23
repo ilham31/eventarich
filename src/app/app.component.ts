@@ -12,7 +12,7 @@ import {FilterPage} from '../pages/filter/filter';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = FilterPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

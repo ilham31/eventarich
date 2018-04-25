@@ -1,0 +1,51 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header color="white" no-border>
+
+  <ion-navbar color="white">
+    <ion-title >Register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label color="eventarich" stacked>Email</ion-label>
+            <ion-input class="text-input" type="email" placeholder="astaganaga@gmail.com"></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label color="eventarich" stacked>Nama Display</ion-label>
+              <ion-input class="text-input" type="email" placeholder="BEM - G"></ion-input>
+          </ion-item>
+
+          <ion-item>
+             <ion-label color="eventarich" stacked>No HP</ion-label>
+             <ion-input class="text-input" type="email" placeholder="0858192xxxx"></ion-input>
+           </ion-item>
+
+            <ion-item>
+               <ion-label color="eventarich" stacked>Alamat</ion-label>
+               <ion-input class="text-input" type="email" placeholder="Dramaga"></ion-input>
+           </ion-item>
+    </ion-list>
+    <button ion-button color="eventarich">Upload Foto</button>
+
+    
+    <div float-right class="my-checkbox">
+        <ion-checkbox [(ngModel)]="setuju"></ion-checkbox>
+        <p>Dengan ini saya menyetujui syarat & ketentuan yang berlaku</p>  
+    </div>
+        
+        
+</ion-content>
+<ion-footer no-shadow>
+    <button ion-button full ion-button color="eventarich">Daftar</button>
+
+</ion-footer>

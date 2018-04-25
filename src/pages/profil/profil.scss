@@ -1,0 +1,25 @@
+page-profil {
+    .lebar-menu{
+        height: 200px;
+    }
+    .btn {
+        display:block;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        text-align:right
+        
+      }
+      ion-card.cards-list-demo ion-card-header {
+        color: map-get($colors, primary);
+}
+.badge-circle{
+    position: relative;
+      display: inline-block;
+      width: 80%;
+      height: 90%;
+      padding: 10% 0;
+      border-radius: 50%;
+    }
+   
+}

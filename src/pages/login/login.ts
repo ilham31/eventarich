@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {SetelahloginPage} from '../setelahlogin/setelahlogin';
+import {RegisterPage} from '../register/register';
 /**
  * Generated class for the LoginPage page.
  *
@@ -20,6 +21,14 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+  loginNow()
+  {
+    this.navCtrl.setRoot(SetelahloginPage);
+  }
+  registerPage()
+  {
+    this.navCtrl.push(RegisterPage);
   }
 
 }

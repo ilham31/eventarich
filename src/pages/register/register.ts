@@ -1,29 +1,24 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {FilterPage} from'../filter/filter';
 
 /**
- * Generated class for the SearchPage page.
+ * Generated class for the RegisterPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-search',
-  templateUrl: 'search.html',
+  selector: 'page-register',
+  templateUrl: 'register.html',
 })
-export class SearchPage {
+export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
-  }
-  filter()
-  {
-    this.navCtrl.push(FilterPage);
+    console.log('ionViewDidLoad RegisterPage');
   }
 
 }

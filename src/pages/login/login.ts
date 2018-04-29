@@ -1,7 +1,8 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-
+import {SetelahloginPage} from '../setelahlogin/setelahlogin';
+import {RegisterPage} from '../register/register';
 /**
  * Generated class for the LoginPage page.
  *
@@ -15,6 +16,8 @@ import { HomePage } from '../home/home';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+
+  homePage = HomePage;
 
   submitted = false;
   status = "password";
@@ -30,6 +33,14 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+  // loginNow()
+  // {
+  //   this.navCtrl.setRoot(SetelahloginPage);
+  // }
+  registerPage()
+  {
+    this.navCtrl.push(RegisterPage);
   }
 
   showPassword(){

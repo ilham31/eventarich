@@ -1,0 +1,24 @@
+page-register {
+    .bar-header {
+        border: 0px !important;
+        border-bottom-color: transparent !important;
+        background-image: none !important;
+        border-bottom: none !important;
+    }
+    .toolbar-title.toolbar-title-ios { color: map-get($colors, eventarich); }
+    .my-checkbox {
+        display: flex;
+        align-items: center;
+    }
+    // .text-input::-moz-placeholder {
+    //     color: #FF3080;
+    //   }
+      
+    //   .text-input:-ms-input-placeholder {
+    //     color:#FF3080;
+    //   }
+      
+    //   .text-input::-webkit-input-placeholder {
+    //     color: #FF3080;
+    //   }
+}

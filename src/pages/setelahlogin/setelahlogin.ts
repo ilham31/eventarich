@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {SearchPage} from '../search/search';
+import{TambaheventPage} from '../tambahevent/tambahevent'
+import {KebutuhaneventPage} from '../kebutuhanevent/kebutuhanevent'
 /**
  * Generated class for the SetelahloginPage page.
  *
@@ -19,6 +21,18 @@ export class SetelahloginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SetelahloginPage');
+  }
+  searchPage()
+  {
+    this.navCtrl.push(SearchPage);
+  }
+  kebutuhan()
+  {
+      this.navCtrl.push(KebutuhaneventPage);
+  }
+  addEvent()
+  {
+      this.navCtrl.push(TambaheventPage);
   }
 
 }

@@ -23,7 +23,8 @@
           <button class="passHide_login" [hidden]="look == true" (click)="hidePassword()" ion-button clear color="dark" type="button" outline item-end> <ion-icon name="md-eye-off" class='icon' color="primary2"> </ion-icon> </button>
         </ion-item>
 
-        <button class="button_login" ion-button full (click)="loginNow()" color="eventarich">login</button>
+        <!-- <button class="button_login" ion-button full (click)="loginNow()" color="eventarich">login</button> -->
+        <button class="button_login" ion-button full [navPush]="homePage" color="eventarich">login</button>
       
       </ion-list>
             <button ion-button full (click)="registerPage()" color="eventarich" clear>Lupa Kata sandi?</button>

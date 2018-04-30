@@ -19,7 +19,7 @@ import {TambaheventPage}from '../pages/tambahevent/tambahevent'
 })
 export class MyApp {
 
-  rootPage:any = LoginPage;
+  rootPage:any = HomePage;
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

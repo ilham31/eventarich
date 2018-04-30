@@ -2,5 +2,36 @@ page-event {
     .lebar-menu{
         height: 200px;
     }
-
+ ion-label {
+        margin: 0;
+        display: inline;
+}
+.profilebutton {
+    z-index: 1;
+    position: absolute;
+    left: 3%;
+    top: 5%;
+    margin: auto;
+}
+.profilepic {
+	border:1px solid #000;
+	width: 100%;
+	height: 100%;
+}
+.profilepic-border {
+	position: relative;
+	background: #a3a3a3;
+}
+.topleft{
+    position: relative;
+    top : 20px;
+    left : 10px;
+    font-size: 20px;
+}
+.toolbar-background {
+    background-image: url("../assets/imgs/contoh.jpg")!important;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 }

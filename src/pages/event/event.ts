@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {SetelahloginPage} from '../setelahlogin/setelahlogin'
 /**
  * Generated class for the EventPage page.
  *
@@ -19,6 +19,10 @@ export class EventPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPage');
+  }
+  home()
+  {
+    this.navCtrl.setRoot(SetelahloginPage);
   }
 
 }

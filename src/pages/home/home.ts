@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { App,NavController,MenuController } from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {SearchPage} from '../search/search';
-
+import {EventPage} from '../event/event';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -18,6 +18,9 @@ export class HomePage {
   searchPage()
   {
     this.navCtrl.push(SearchPage);
+  }
+  lihatEvent(){
+    this.navCtrl.setRoot(EventPage);
   }
   
 

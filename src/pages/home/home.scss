@@ -2,6 +2,7 @@ page-home {
     ion-card.cards-list-demo ion-card-header {
             color: map-get($colors, primary);
     }
+    
     ion-toolbar.lebar-menu{
         height: 100px;
     }
@@ -57,6 +58,7 @@ page-home {
             .col_content {
                 // border: solid;
             }
+            
 
         }
     }

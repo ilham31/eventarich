@@ -4,6 +4,8 @@ import {SearchPage} from '../search/search';
 import{TambaheventPage} from '../tambahevent/tambahevent';
 import {KebutuhaneventPage} from '../kebutuhanevent/kebutuhanevent';
 import {EventPage} from '../event/event';
+import {VendorkamiPage} from'../vendorkami/vendorkami';
+import {ProfilPage} from'../profil/profil';
 /**
  * Generated class for the SetelahloginPage page.
  *
@@ -37,6 +39,14 @@ export class SetelahloginPage {
   }
   lihatEvent(){
     this.navCtrl.push(EventPage);
+  }
+  vendorkami()
+  {
+    this.navCtrl.push(VendorkamiPage)
+  }
+  akun()
+  {
+    this.navCtrl.push(ProfilPage);
   }
 
 }

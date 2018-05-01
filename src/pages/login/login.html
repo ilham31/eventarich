@@ -11,25 +11,32 @@
     <img class="displayed"   height="200 px" width="200 px" img src="assets/imgs/eventarich.jpg">
     <ion-list>
         
-        <ion-item>
-          <ion-label floating>Email</ion-label>
+        <ion-item class="form_login">
+          <ion-label stacked>Email</ion-label>
           <ion-input type="text" #email></ion-input>
         </ion-item>
       
-        <ion-item>
-          <ion-label floating>Password</ion-label>
-          <ion-input type="password" #password></ion-input>
+        <ion-item class="form_login">
+          <ion-label stacked>Password</ion-label>
+          <ion-input  [(ngModel)]="password" name="pass" type="{{status}}" #pass="ngModel"  required></ion-input>
+          <button class="passHide_login" [hidden]="look == false" (click)="showPassword()" ion-button clear color="dark" type="button" outline item-end> <ion-icon name="md-eye" class='icon' color="primary2"> </ion-icon> </button>
+          <button class="passHide_login" [hidden]="look == true" (click)="hidePassword()" ion-button clear color="dark" type="button" outline item-end> <ion-icon name="md-eye-off" class='icon' color="primary2"> </ion-icon> </button>
         </ion-item>
 
-        <button ion-button full (click)="loginNow()" color="eventarich">login</button>
+        <!-- <button class="button_login" ion-button full (click)="loginNow()" color="eventarich">login</button> -->
+        <button class="button_login" ion-button full (click)="loginNow()" color="eventarich">login</button>
       
       </ion-list>
             <button ion-button full (click)="lupaSandi()" color="eventarich" clear>Lupa Kata sandi?</button>
         
 </ion-content>
+
 <ion-footer >
   <ion-toolbar color="footer">
-    <p ion-text color="dark" text-center>Belum punya akun ?</p> <button ion-button full (click)="registerPage()" color="eventarich" clear>Daftar</button>
+    <p ion-text text-center>
+      Belum punya akun ?
+      <font (click)="registerPage()" id="daftar_login" clear>Daftar</font>
+    </p>
   </ion-toolbar>
 </ion-footer>
 

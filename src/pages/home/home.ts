@@ -3,6 +3,7 @@ import { App,NavController,MenuController } from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {SearchPage} from '../search/search';
 import {EventPage} from '../event/event';
+import {VendorkamiPage} from'../vendorkami/vendorkami';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -21,6 +22,10 @@ export class HomePage {
   }
   lihatEvent(){
     this.navCtrl.setRoot(EventPage);
+  }
+  vendorkami()
+  {
+    this.navCtrl.push(VendorkamiPage);
   }
   
 

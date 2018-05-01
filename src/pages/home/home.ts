@@ -21,7 +21,7 @@ export class HomePage {
     this.navCtrl.push(SearchPage);
   }
   lihatEvent(){
-    this.navCtrl.setRoot(EventPage);
+    this.navCtrl.push(EventPage);
   }
   vendorkami()
   {

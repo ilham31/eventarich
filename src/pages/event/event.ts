@@ -20,9 +20,10 @@ export class EventPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPage');
   }
-  home()
+  back()
   {
-    this.navCtrl.setRoot(SetelahloginPage);
+    this.navCtrl.pop();
   }
+
 
 }

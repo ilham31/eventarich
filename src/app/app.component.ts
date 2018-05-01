@@ -12,7 +12,8 @@ import {ProfilPage} from '../pages/profil/profil';
 import {RegisterPage}from '../pages/register/register';
 import {KebutuhaneventPage}from '../pages/kebutuhanevent/kebutuhanevent';
 import {EventPage}from '../pages/event/event';
-import {TambaheventPage}from '../pages/tambahevent/tambahevent'
+import {TambaheventPage}from '../pages/tambahevent/tambahevent';
+import {VendorkamiPage}from '../pages/vendorkami/vendorkami';
 
 @Component({
   templateUrl: 'app.html'

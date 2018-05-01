@@ -56,6 +56,7 @@ export class LoginPage {
   }
 
   loginNow() {
+
     this.navCtrl.setRoot(SetelahloginPage);
   }
 }

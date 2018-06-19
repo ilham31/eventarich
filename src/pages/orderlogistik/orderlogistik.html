@@ -1,0 +1,87 @@
+<!--
+  Generated template for the OrderlogistikPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header color="eventarich">
+
+  <ion-navbar color="eventarich">
+    <ion-title>Pesan Logistik</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked color="eventarich">Tanggal Pemesanan</ion-label>
+      <ion-input type="date"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label stacked color="eventarich">Budgeting</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item  no-lines>
+        <ion-label stacked>Pilihan Kebutuhan</ion-label>
+    </ion-item>
+        
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-item no-lines>
+                        <ion-label>Panggung</ion-label>
+                        <ion-checkbox color="eventarich" checked="false" value="panggung"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+              </ion-row>
+            <ion-row >
+              <ion-col >
+                  <ion-item no-lines float-left>
+                      <ion-label>Mic</ion-label>
+                      <ion-checkbox color="eventarich" checked="false" value="mic"></ion-checkbox>
+                    </ion-item>
+              </ion-col>
+              <ion-col>
+                  <div  class="counter" float-right>
+                      <ion-icon name="remove-circle" (click)="decrement()" color="eventarich"></ion-icon>
+                          {{currentNumber}}
+                      <ion-icon name="add-circle" (click)="increment()" color="eventarich"></ion-icon>
+                  </div>        
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item no-lines item-start>
+                        <ion-label>Stand</ion-label>
+                        <ion-checkbox color="eventarich" checked="false" value="stand"></ion-checkbox>
+                      </ion-item>
+                </ion-col>
+                <ion-col>
+                    <div class="counter" float-right >
+                        <ion-icon name="remove-circle" (click)="decrement()" color="eventarich"></ion-icon>
+                            {{currentNumber}}
+                        <ion-icon name="add-circle" (click)="increment()" color="eventarich"></ion-icon>
+                    </div>        
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+   
+      <ion-item>
+        <ion-label stacked color="eventarich">Catatan Tambahan</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+    <ion-item>
+        <ion-label stacked color="eventarich">Alamat Pemesanan</ion-label>
+        <ion-input type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-footer no-shadow>
+      <button ion-button full ion-button color="eventarich">Pesan</button>
+  
+  </ion-footer>
+</ion-content>

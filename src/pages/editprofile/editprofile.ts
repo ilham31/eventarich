@@ -2,28 +2,23 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ProfilPage page.
+ * Generated class for the EditprofilePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-profil',
-  templateUrl: 'profil.html',
+  selector: 'page-editprofile',
+  templateUrl: 'editprofile.html',
 })
-export class ProfilPage {
+export class EditprofilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilPage');
-  }
-
-  back()
-  {
-    this.navCtrl.pop();
+    console.log('ionViewDidLoad EditprofilePage');
   }
 
 }

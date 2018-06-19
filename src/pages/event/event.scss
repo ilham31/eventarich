@@ -23,9 +23,9 @@ page-event {
 	background: #a3a3a3;
 }
 .topleft{
-    position: relative;
-    top : 20px;
-    left : 10px;
+    position: absolute;
+    top :6px;
+    left : 6px;
     font-size: 20px;
 }
 .toolbar-background {
@@ -33,5 +33,10 @@ page-event {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+}
+.eventName{
+    position: absolute;
+    top : -10px;
+    left : 40px;
 }
 }

@@ -1,0 +1,52 @@
+<!--
+  Generated template for the TambaheventPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header  no-border>
+    <ion-navbar transparent>
+       </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-col>
+    <ion-row>
+       <div class="avatar" >
+          <img  img src="assets/imgs/contoh.jpg" alt="Avatar">
+          <ion-icon (click)="upload()" name="camera" color="eventarich" ></ion-icon>
+       </div> 
+    </ion-row>
+</ion-col>
+  
+  
+  
+<ion-col>
+    <ion-list>
+        <ion-item>
+            <ion-label color="eventarich" stacked>Nama Display</ion-label>
+            <ion-input class="text-input" type="text" placeholder="BEM - G"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+              <ion-label color="eventarich" stacked>Deskripsi</ion-label>
+              <ion-input class="text-input" type="text" placeholder="Isi deskripsi acara"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+             <ion-label color="eventarich" stacked>No Hp</ion-label>
+             <ion-input class="text-input" type="number" placeholder="08746721xxx"></ion-input>
+           </ion-item>
+    
+            <ion-item>
+               <ion-label color="eventarich" stacked>Alamat</ion-label>
+               <ion-input class="text-input" type="text" placeholder="FMIPA"></ion-input>
+           </ion-item>
+    </ion-list>
+</ion-col>  
+</ion-content>
+<ion-footer no-shadow>
+  <button ion-button full ion-button color="eventarich">Edit profile</button>
+
+</ion-footer>

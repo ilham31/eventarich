@@ -7,17 +7,14 @@
 <ion-header>
 
   <ion-navbar color="eventarich">
-      <ion-item>        
-          <ion-label> <ion-icon name="search"></ion-icon>Search</ion-label>
-          <ion-input clearInput type="text"></ion-input>
-          
-  </ion-item>
+    <ion-searchbar></ion-searchbar>
   
-  <ion-buttons end>
+    <ion-buttons end>
       <button (click)="filter()" ion-button icon-only>
         <ion-icon name="reorder"></ion-icon>
       </button>
     </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>

@@ -14,3 +14,34 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+.navbar_home {
+    width: 100%;
+    .title_home {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .search_home {
+        margin-right: 4%;
+    }
+}
+
+.lebar-menu{
+    height: 7em;
+    #event_title {
+        background-color: transparent;
+        color: map-get($colors, putih);
+        h1 {
+            font-size: 4rem !important;
+        }
+    }
+}
+
+ion-list {
+    #menu_button {
+        margin: 2vw;
+        font-size: 1.75rem;
+    }
+}

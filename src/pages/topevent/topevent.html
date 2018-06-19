@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar color="eventarich">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      
+         
+    <ion-title  text-center>
+      eventarich
+    </ion-title>
+    <ion-buttons end>
+        <button (click)="searchPage()" ion-button icon-only>
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+      
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    
+      <ion-card (click)="lihatEvent()" class="cards-list-demo">
+        <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">  
+      
+      <ion-card-header class="footer_card">
+        <div>
+          <ion-row>
+            <ion-col col-3 class="col_badge">
+              <ion-badge class="badge-circle" >
+                <p id="tanggal_badge">28 Sept</p>
+              </ion-badge>  
+            </ion-col>
+            <ion-col col-9 class="col_content">
+              <div class="card_content">
+                <h2 id="event_title">Event Name</h2>
+                <h3 id="organizer_event">BEM-G</h3>
+                <h5 id="hashtag_event">#akusehat</h5>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-card-header>
+
+    </ion-card>
+    <ion-fab right bottom>
+        <button ion-fab color="eventarich" ion-fab (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+</ion-content>
+<ion-menu [content]="content">
+    <ion-header class="lebar-menu">
+        <ion-toolbar class="lebar-menu"  color="eventarich">
+          <ion-title>eventarich</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    <ion-content>
+      <ion-list>
+        <button ion-item (click)="homePage()" >  <ion-icon name="home" color='eventarich'></ion-icon>
+          Home
+        </button>
+        <button ion-item (click)="kebutuhan()" >  <ion-icon name="clipboard" color='eventarich'></ion-icon>
+          Kebutuhan Event
+        </button>
+        <button ion-item (click)="vendorkami()"> <ion-icon name="body" color='eventarich'></ion-icon>
+          Vendor Kami
+        </button>
+        <button ion-item (click)="akun()">   <ion-icon name="person" color='eventarich'></ion-icon>
+          Akun
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-nav id="nav" #content [root]="rootPage"></ion-nav>

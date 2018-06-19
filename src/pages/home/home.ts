@@ -1,112 +1,39 @@
 import { Component } from '@angular/core';
-import { App,NavController,MenuController } from 'ionic-angular';
-import {LoginPage} from '../login/login';
-import {SearchPage} from '../search/search';
-import {EventPage} from '../event/event';
-import {VendorkamiPage} from'../vendorkami/vendorkami';
+import { App, NavController, MenuController, IonicPage } from 'ionic-angular';
+
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,public menuCtrl : MenuController) {
+  constructor(public navCtrl: NavController,
+              public menuCtrl : MenuController) {
 
   }
   login(){
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push('LoginPage');
+    this.menuCtrl.close();
   }
   searchPage()
   {
-    this.navCtrl.push(SearchPage);
+    this.navCtrl.push('SearchPage');
   }
   lihatEvent(){
-    this.navCtrl.push(EventPage);
+    this.navCtrl.push('EventPage');
   }
   vendorkami()
   {
-    this.navCtrl.push(VendorkamiPage);
+    this.navCtrl.push('VendorkamiPage');
   }
-  
+  lihatprofil()
+  {
+    this.navCtrl.push('EditprofilePage');
+  }
+  oderlogistik()
+  {
+    this.navCtrl.push('OrderlogistikPage');
+  }
 
 }
-@Component({
-  template: `
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Menus
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <button ion-button block menuToggle>Toggle Menu</button>
-</ion-content>
-`
-})
-export class BasicPage {
-  constructor(app: App, menu: MenuController) {
-    menu.enable(true);
-  }
-}
-
-@Component({
-  template: `
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Menus
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <button ion-button block menuToggle>Toggle Menu</button>
-</ion-content>
-`
-})
-export class PageOne { }
-
-@Component({
-  template: `
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Friends
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <button ion-button block menuToggle>Toggle Menu</button>
-</ion-content>
-`
-})
-export class PageTwo { }
-
-@Component({
-  template: `
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle icon-only>
-      <ion-icon name='menu'></ion-icon>
-    </button>
-    <ion-title>
-      Events
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content padding>
-  <button ion-button block menuToggle>Toggle Menu</button>
-</ion-content>
-`
-})
-export class PageThree { }
-

@@ -6,11 +6,17 @@
 -->
 <ion-header class="lebar-menu">
 
-  <ion-navbar class="lebar-menu">
-    <ion-title text-center>A</ion-title>
-    <ion-fab top right>
-      <button ion-button round class="btn"><ion-icon name="person-add"></ion-icon></button>
-    </ion-fab>  
+  <ion-navbar class="lebar-menu" hideBackButton>
+    <img  img src="assets/imgs/contoh.jpg">
+    <div class="topright">
+      <button ion-button round class="badge-header" color="eventarich">
+        <ion-icon name="person-add" color="white" ></ion-icon>
+      </button>
+    
+    </div>
+    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"class="topleft" color="eventarich" style="zoom:2.0;" (click)="back()"></ion-icon>
+    
+              
     
   </ion-navbar>
 
@@ -18,26 +24,33 @@
 
 
 <ion-content padding>
-<h1>BEM - G</h1>
-<p>Deskripsi</p>
 
-<ion-card class="cards-list-demo">
-  
-    <ion-row justify-content: center>
-      <ion-col align-self: center>
-        <ion-badge class="badge-circle"><p text center>23 Feb</p></ion-badge>    
-      </ion-col>
-      <ion-col align-self: center>
-        PSN     
-      </ion-col>
-      <ion-col align-self: center>
-        <ion-item item-end>        
-          <ion-label color="eventarich"> <ion-icon name="heart" color="eventarich"></ion-icon> 100 likes</ion-label>
-          <ion-input clearInput type="text"></ion-input>
-      </ion-item>      
-      </ion-col>
-    </ion-row>
-    
-  
+<h1 text-center ion-text color="eventarich">BEM - G</h1>
+<p text-center>Deskripsi</p>
+
+<ion-card (click)="lihatprofil()" class="cards-list-demo">
+    <ion-card-content class="footer_card">
+        <ion-row>
+          <ion-col col-3 class="col_badge">
+            <ion-badge class="badge-circle" >
+              <p class="date_badge">28 Sept</p>
+            </ion-badge>  
+          </ion-col>
+          <ion-col col-9 class="col_content">
+            <div class="card_content">
+              <h2 id="event_title">Event Name</h2>
+              <h5 id="hashtag_event">#akusehat</h5>
+              <h5 id="tanggal_event">10 agustus 2017</h5>
+              <!-- <h3 id="organizer_event" >BEM-G</h3> -->
+            </div>
+          </ion-col>
+          <ion-col   >
+            <div class="like">
+                <ion-icon ios="ios-heart" md="md-heart" color="eventarich" id="icon_like"></ion-icon>
+                <p id="jumlah" ion-text color="eventarich">200 like</p>
+            </div> 
+          </ion-col>
+        </ion-row>
+    </ion-card-content>
 </ion-card>
 </ion-content>

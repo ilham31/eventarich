@@ -1,23 +1,19 @@
-import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SetelahloginPage} from '../setelahlogin/setelahlogin';
-import {RegisterPage} from '../register/register';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
+// import { AuthServiceProvider } from './../../providers/auth-service';
 
+// import { SetelahloginPage } from '../setelahlogin/setelahlogin';
+// import { RegisterPage } from '../register/register';
+// import { HomePage } from './../home/home';
+
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
 
-  homePage = HomePage;
+export class LoginPage {
 
   submitted = false;
   status = "password";
@@ -25,23 +21,43 @@ export class LoginPage {
 
   token: string;
   
-  email: string;
-  password: string;
+  loading: any;
+  loginData = {
+    email: '',
+    password: ''
+  };
+  data : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              // public authService: AuthServiceProvider,
+              public loadCtrl: LoadingController,
+              private toastCtrl: ToastController
+             ) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-  // loginNow()
-  // {
-  //   this.navCtrl.setRoot(SetelahloginPage);
-  // }
-  registerPage()
-  {
-    this.navCtrl.push(RegisterPage);
+
+  login() {
+    // this.showLoader();
+    // this.authService.login(this.loginData).then((result) => {
+    //   this.loading.dismiss();
+    //   this.data = result;
+    //   localStorage.setItem('token', this.data.access_token);
+    //   this.navCtrl.setRoot(SetelahloginPage);
+    // }, (err) => {
+    //   this.loading.dismiss();
+    //   this.presentToast(err);
+    //   console.log(err);
+    // });
+    // this.navCtrl.setRoot(SetelahloginPage);
+    this.navCtrl.setRoot('SetelahloginPage');
   }
+
+  // registerPage() {
+  //   this.navCtrl.push(RegisterPage);
+  // }
 
   showPassword(){
     this.status = "text";
@@ -55,8 +71,26 @@ export class LoginPage {
     console.log(this.status);
   }
 
-  loginNow() {
+  // showLoader() {
+  //   this.loading = this.loadCtrl.create({
+  //     content: 'memuat..'
+  //   });
 
-    this.navCtrl.setRoot(SetelahloginPage);
+  //   this.loading.present();
+  // }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+    
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 }

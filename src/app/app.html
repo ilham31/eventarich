@@ -1,1 +1,25 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="nav" persistent="true">
+    <ion-header>
+        <ion-toolbar class="lebar-menu" color="eventarich">
+            <ion-item id="event_title" no-lines>
+                <h1>eventarich</h1>
+            </ion-item>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list *ngIf="isLoggedIn == false">
+            <button id="menu_button" ion-item menuClose *ngFor="let page of pagesNotLoggedIn" (click)="openPage(page)">
+                <ion-icon [name]="page.icon" [color]="page.color"></ion-icon>
+                {{ page.title }}
+            </button>
+        </ion-list>
+        <ion-list *ngIf="isLoggedIn == true">
+            <button id="menu_button" ion-item menuClose *ngFor="let page of pagesLoggedIn" (click)="openPage(page)">
+                <ion-icon [name]="page.icon" [color]="page.color"></ion-icon>
+                {{ page.title }}
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #nav swipeBackEnabled="true"></ion-nav>

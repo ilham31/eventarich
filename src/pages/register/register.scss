@@ -10,6 +10,22 @@ page-register {
         display: flex;
         align-items: center;
     }
+
+    ion-item.item-input {
+        padding-left: 0;
+    }
+
+    .passHide_login {
+        font-size: 6vw;
+        margin: 0 auto;
+        margin-top: 25px !important;
+    }
+
+    .buttonReg {
+        position: fixed;
+        bottom: 0px;
+        right: 0px; 
+    }
     // .text-input::-moz-placeholder {
     //     color: #FF3080;
     //   }

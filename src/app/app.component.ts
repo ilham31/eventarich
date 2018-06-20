@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, MenuController, Nav } from 'ionic-angular';
+import { Component, ViewChild,OnInit } from '@angular/core';
+import { IonicPage,Platform, NavController, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,15 +16,33 @@ export interface PageInterface {
 })
 export class MyApp {
 
-  isLoggedIn: boolean =true;
+  isLoggedIn: boolean ;
   vendorPage = 'VendorkamiPage';
   orderPage = 'OrderlogistikPage';
   // homePage = HomePage;
   // loginPage = LoginPage;
   // tabsPage = TabsPage;
+  
 
   rootPage:any = 'HomePage';
   @ViewChild('nav') nav: Nav; 
+  
+  ngOnInit(){
+    //called after the constructor and called  after the first ngOnChanges() 
+ 
+    console.log('firstpage');
+    if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
+      this.isLoggedIn =true;
+      console.log("sudah login")
+    }
+    else 
+    {
+      this.isLoggedIn=false
+      console.log("belum login")
+    }
+      
+  }
+
 
   pagesNotLoggedIn: PageInterface[] = [
     { title: 'Home', pageName: 'HomePage', color: 'eventarich', index: 0, icon: 'home'},
@@ -36,7 +54,7 @@ export class MyApp {
     { title: 'Home', pageName: 'SetelahloginPage', color: 'eventarich', index: 0, icon: 'home'},
     { title: 'Kebutuhan Event', pageName: 'PesananPage', color: 'eventarich', index: 1, icon: 'cube'},
     { title: 'Vendor Kami', pageName: 'VendorkamiPage', color: 'eventarich', index: 2, icon: 'body'},
-    { title: 'Akun', pageName: 'LoginPage', color: 'eventarich', index: 3, icon: 'person'},
+    { title: 'Profil', pageName: 'ProfilPage', color: 'eventarich', index: 3, icon: 'person'},
   ];
 
 

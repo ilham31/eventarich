@@ -46,6 +46,8 @@ export class LoginPage {
       console.log("ini tokennya",this.data.access_token)
       this.navCtrl.setRoot('SetelahloginPage');
     }, (err) => {
+      this.loading.dismiss();
+      this.presentToast(err);
       console.log(err);
     });;
     }
@@ -66,13 +68,13 @@ export class LoginPage {
     console.log(this.status);
   }
 
-  // showLoader() {
-  //   this.loading = this.loadCtrl.create({
-  //     content: 'memuat..'
-  //   });
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
 
-  //   this.loading.present();
-  // }
+    this.loading.present();
+  }
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({

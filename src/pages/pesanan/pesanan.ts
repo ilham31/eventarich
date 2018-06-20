@@ -3,16 +3,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-kebutuhanevent',
-  templateUrl: 'kebutuhanevent.html',
+  selector: 'page-pesanan',
+  templateUrl: 'pesanan.html',
 })
-export class KebutuhaneventPage {
-  selectedLeave : string = '';
+export class PesananPage {
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad KebutuhaneventPage');
+    console.log('ionViewDidLoad PesananPage');
   }
 
 }

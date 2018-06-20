@@ -23,7 +23,7 @@ export class ProfilPage {
 
   back()
   {
-    this.navCtrl.pop();
+    this.navCtrl.setRoot('SetelahloginPage');
   }
 
 }

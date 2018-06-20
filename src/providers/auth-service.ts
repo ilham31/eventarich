@@ -19,8 +19,11 @@ export class AuthServiceProvider {
         this.http.post(apiUrl+'/users/login', JSON.stringify(credentials), {headers: headers})
           .subscribe(res => {
             resolve(res.json());  
-            console.log("response login",res);
-            
+          //   var data=res[0];
+          // for (var i=0; i<data.length(); i++){
+          //   console.log("message : ",data[i].message);
+          //   console.log("token : ",data[i].token);
+          // }
           }, (err) => {
             reject(err);
           });
@@ -29,14 +32,14 @@ export class AuthServiceProvider {
 
 
   register(data) {
-        
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
    
-      this.http.post(apiUrl+'/users/register', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl+'/users/signup', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           resolve(res);
+          
         }, (err) => {
           reject(err);
         });

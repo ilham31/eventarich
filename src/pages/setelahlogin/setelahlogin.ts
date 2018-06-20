@@ -30,22 +30,22 @@ export class SetelahloginPage {
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad SetelahloginPage');
   // }
-  // searchPage()
-  // {
-  //   this.navCtrl.push(SearchPage);
-  // }
+  searchPage()
+  {
+    this.navCtrl.push('SearchPage');
+  }
   // kebutuhan()
   // {
   //     this.navCtrl.push(KebutuhaneventPage);
   // }
-  // addEvent()
-  // {
-  //     this.navCtrl.push(TambaheventPage);
-  // }
-  // lihatEvent(){
-  //   this.navCtrl.push(EventPage);
-  // }
-  // vendorkami()
+  addEvent()
+  {
+      this.navCtrl.push('TambaheventPage');
+  }
+  lihatEvent(){
+    this.navCtrl.push('EventPage');
+  }
+  //vendorkami()
   // {
   //   this.navCtrl.push(VendorkamiPage)
   // }

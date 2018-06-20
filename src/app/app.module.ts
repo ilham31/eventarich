@@ -20,7 +20,7 @@ import { MyApp } from './app.component';
 // import { TambaheventPage }from '../pages/tambahevent/tambahevent';
 // import { VendorkamiPage }from '../pages/vendorkami/vendorkami';
 
-// import { AuthServiceProvider } from '../providers/auth-service';
+ import { AuthServiceProvider } from '../providers/auth-service';
 // import { TabsPage } from '../pages/tabs/tabs';
 // import { TopeventPage } from '../pages/topevent/topevent';
 // import { EditprofilePage } from '../pages/editprofile/editprofile';
@@ -43,6 +43,7 @@ import { MyApp } from './app.component';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthServiceProvider,
   ]
 })
 export class AppModule {}

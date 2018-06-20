@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 
 import { AuthServiceProvider } from '../../providers/auth-service';
 
-
+@IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
@@ -14,13 +14,11 @@ export class RegisterPage {
   look = true;
 
   loading: any;
-  registerData = {
-    email: '',
-    username: '',
-    address: '',
-    phone_number: '',
-    password: ''
-  };
+    email: string;
+    username: string;
+    address: string;
+    phone_number: number;
+    password: string;
   data : any;
 
   constructor(public navCtrl: NavController, 
@@ -33,23 +31,24 @@ export class RegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
-  // doSignup() {
-  //   let regData = [{ 
-  //     email:this.email, 
-  //     password:this.password,
-  //     username:this.username,
-  //     address:this.address,
-  //     phone_number:this.phone_number }];
+   doSignup() {
+    let regData = { 
+      email:this.email, 
+      password:this.password,
+      name:this.username,
+      address:this.address,
+      phone_number:this.phone_number };
 
-  //   console.log(this.email,this.password);
-  //   console.log(regData);
-  //   this.authService.addUser(regData).then((result) => {
-  //     this.navCtrl.pop();
-  //     console.log(result,regData);
-  //   }, (err) => {
-  //     console.log(err);
-  //   });
-  // }
+    console.log(this.email,this.password);
+    console.log(regData);
+    this.authService.register(regData).then((result) => {
+      this.navCtrl.push('LoginPage');
+      console.log(result,regData);
+    }, (err) => {
+      console.log(err);
+    });
+      console.log(this.email,this.address)
+   }
 
   showPassword(){
     this.status = "text";

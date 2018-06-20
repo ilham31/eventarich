@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
-// import { AuthServiceProvider } from './../../providers/auth-service';
+import { AuthServiceProvider } from './../../providers/auth-service';
 
 // import { SetelahloginPage } from '../setelahlogin/setelahlogin';
 // import { RegisterPage } from '../register/register';
@@ -30,7 +30,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
-              // public authService: AuthServiceProvider,
+              public authService: AuthServiceProvider,
               public loadCtrl: LoadingController,
               private toastCtrl: ToastController
              ) {}
@@ -39,25 +39,20 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login() {
-    // this.showLoader();
-    // this.authService.login(this.loginData).then((result) => {
-    //   this.loading.dismiss();
-    //   this.data = result;
-    //   localStorage.setItem('token', this.data.access_token);
-    //   this.navCtrl.setRoot(SetelahloginPage);
-    // }, (err) => {
-    //   this.loading.dismiss();
-    //   this.presentToast(err);
-    //   console.log(err);
-    // });
-    // this.navCtrl.setRoot(SetelahloginPage);
-    this.navCtrl.setRoot('SetelahloginPage');
-  }
+  login() {    
+      this.authService.login(this.loginData).then((result) => {
+      this.data = result;
+      localStorage.setItem('token', this.data.access_token);
+      console.log("ini tokennya",this.data.access_token)
+      this.navCtrl.setRoot('SetelahloginPage');
+    }, (err) => {
+      console.log(err);
+    });;
+    }
 
-  // registerPage() {
-  //   this.navCtrl.push(RegisterPage);
-  // }
+  registerPage() {
+    this.navCtrl.push('RegisterPage');
+  }
 
   showPassword(){
     this.status = "text";

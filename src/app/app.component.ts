@@ -16,7 +16,7 @@ export interface PageInterface {
 })
 export class MyApp {
 
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean =true;
   vendorPage = 'VendorkamiPage';
   orderPage = 'OrderlogistikPage';
   // homePage = HomePage;

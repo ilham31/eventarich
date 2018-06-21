@@ -2,6 +2,7 @@ import { Component, ViewChild,OnInit } from '@angular/core';
 import { IonicPage,Platform, NavController, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 export interface PageInterface {
   title: string;
@@ -14,11 +15,14 @@ export interface PageInterface {
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
 
-  isLoggedIn: boolean ;
+
+export class MyApp {
+  
+  isLoggedIn: boolean =false;
   vendorPage = 'VendorkamiPage';
   orderPage = 'OrderlogistikPage';
+  tes:any;
   // homePage = HomePage;
   // loginPage = LoginPage;
   // tabsPage = TabsPage;
@@ -29,17 +33,18 @@ export class MyApp {
   
   ngOnInit(){
     //called after the constructor and called  after the first ngOnChanges() 
- 
-    console.log('firstpage');
-    if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
-      this.isLoggedIn =true;
-      console.log("sudah login")
-    }
-    else 
-    {
-      this.isLoggedIn=false
-      console.log("belum login")
-    }
+    this.storage.get('token').then((val) => {
+      if(val !== null && val !== ""){
+        this.isLoggedIn =true;
+        console.log("sudah login, token :",val)
+      }
+      else 
+      {
+        this.isLoggedIn=false
+        console.log("belum login")
+      }  
+    });
+    
       
   }
 
@@ -62,7 +67,8 @@ export class MyApp {
   constructor(platform: Platform, 
               statusBar: StatusBar, 
               splashScreen: SplashScreen,
-              public menuCtrl: MenuController) {
+              public menuCtrl: MenuController,
+            private storage : Storage) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();

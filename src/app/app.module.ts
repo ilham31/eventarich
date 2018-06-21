@@ -21,6 +21,7 @@ import { MyApp } from './app.component';
 // import { VendorkamiPage }from '../pages/vendorkami/vendorkami';
 
  import { AuthServiceProvider } from '../providers/auth-service';
+ import { IonicStorageModule } from '@ionic/storage';
 // import { TabsPage } from '../pages/tabs/tabs';
 // import { TopeventPage } from '../pages/topevent/topevent';
 // import { EditprofilePage } from '../pages/editprofile/editprofile';
@@ -33,7 +34,8 @@ import { MyApp } from './app.component';
   ],
   imports: [
     BrowserModule,HttpModule,HttpClientModule, 
-    IonicModule.forRoot(MyApp,{tabsHideOnSubPages: true})
+    IonicModule.forRoot(MyApp,{tabsHideOnSubPages: true}),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

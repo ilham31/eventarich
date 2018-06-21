@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the ProfilPage page.
@@ -14,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage) {
   }
 
   ionViewDidLoad() {
@@ -25,5 +26,12 @@ export class ProfilPage {
   {
     this.navCtrl.setRoot('SetelahloginPage');
   }
-
+logout()
+{
+  this.storage.set("token","");
+  this.storage.get("token").then((val)=>{
+    console.log("isi token",val);
+  });
+  this.navCtrl.setRoot('HomePage');
+}
 }

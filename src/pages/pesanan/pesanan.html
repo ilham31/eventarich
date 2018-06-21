@@ -9,34 +9,60 @@
 
 <ion-content padding>
     <ion-grid>
+      <ion-row justify-content-center align-items-center style="height: 100%">
+        <ion-col col-11>
+          <strong style="font-size: 4vw;">Tambah Pesanan</strong>
+        </ion-col>
+        <ion-col col-1>
+          <ion-icon class="add_pesanan" name="add" (click)="addPesanan()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  <h6>List Pesanan :</h6>
+  <ion-list>
+
+    <ion-item-sliding #item>
+      <ion-item class="order_item" no-padding>
+
         <ion-row>
           <ion-col>
-            <h6>Tambah Pesanan</h6>
-          </ion-col>
-          <ion-col >
-              <ion-icon float-right ios="ios-add" md="md-add" (click)="tambahpesanan()" class="posisi"></ion-icon>
+            <div class="order_item_attribute">
+              <h2>Pesan Logistik</h2>
+              <p><small>Untuk tanggal : 25 Agustus 2018</small></p>
+            </div>
           </ion-col>
         </ion-row>
-      </ion-grid>
 
-  List Pesanan :
-  <ion-item-sliding #item>
-      <ion-item>
-          <ion-card class="cards-list-demo">
-              <ion-card-content class="footer_card">
-                  <ion-row>
-                    <ion-col>
-                      <div class="card_content">
-                        <h3 id="organizer_event" >BEM-G</h3>
-                        <h5 id="hashtag_event">#akusehat</h5>
-                      </div>
-                    </ion-col>
-                  </ion-row>
-              </ion-card-content>
-          </ion-card>
-        </ion-item>
-      <ion-item-options side="right">
-        <button ion-button (click)="unread(item)">Unread</button>
+      </ion-item>
+      <ion-item-options class="order_option" side="right">
+        <button ion-button color="danger" (click)="unread(item)">
+          <ion-icon name="trash"></ion-icon>
+          Batal
+        </button>
       </ion-item-options>
     </ion-item-sliding>
+
+    <ion-item-sliding #item>
+      <ion-item class="order_item" no-padding>
+
+        <ion-row>
+          <ion-col>
+            <div class="order_item_attribute">
+              <h2>Pesan Souvenir</h2>
+              <p><small>Untuk tanggal : 25 Agustus 2018</small></p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </ion-item>
+      <ion-item-options class="order_option" side="right">
+        <button ion-button color="danger" (click)="unread(item)">
+          <ion-icon name="trash"></ion-icon>
+          Hapus
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
 </ion-content>

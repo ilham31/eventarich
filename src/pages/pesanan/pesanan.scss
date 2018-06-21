@@ -1,32 +1,21 @@
 page-pesanan {
-    ion-card.cards-list-demo ion-card-header {
-        color: map-get($colors, primary);
-}
-    ion-card {
-        .footer_card {
-            padding: 10px;
-            
-            .card_content {
-                display: inline-block;
-                width: auto;
-                margin-left: -3%;
-                #event_title {
-                    font-weight: 700;
-                }
-                // #organizer_event {
+    .add_pesanan {
+        font-size: 6vw;
+        font-weight: 600;
+    }
+    
+    .order_item {
+        margin-top: 1vw;
+        border: 1.2px solid map-get($colors, footer);
+        border-radius: 10px 0 0 10px;
 
-                // }
-                #hashtag_event {
-                    font-size: 3vw;
-                }
-            }
-            .col_badge {
-                // border: solid;
-            }
-            .col_content {
-                // border: solid;
-            }
-
+        .order_item_attribute {
+            height: 100%;
+            margin-left: 2vw;
         }
-}
+    }
+
+    .order_option {
+        margin-top: 1vw;
+    }
 }

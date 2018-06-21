@@ -21,6 +21,7 @@ export class MyApp {
   
   isLoggedIn: boolean =false;
   vendorPage = 'VendorkamiPage';
+
   orderPage = 'OrderlogistikPage';
   tes:any;
   // homePage = HomePage;
@@ -45,7 +46,6 @@ export class MyApp {
       }  
     });
     
-      
   }
 
 

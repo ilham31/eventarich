@@ -57,7 +57,7 @@ export class MyApp {
 
   pagesLoggedIn: PageInterface[] = [
     { title: 'Home', pageName: 'SetelahloginPage', color: 'eventarich', index: 0, icon: 'home'},
-    { title: 'Kebutuhan Event', pageName: 'OrderlogistikPage', color: 'eventarich', index: 1, icon: 'cube'},
+    { title: 'Kebutuhan Event', pageName: 'PesananPage', color: 'eventarich', index: 1, icon: 'cube'},
     { title: 'Vendor Kami', pageName: 'VendorkamiPage', color: 'eventarich', index: 2, icon: 'body'},
     { title: 'Profil', pageName: 'ProfilPage', color: 'eventarich', index: 3, icon: 'person'},
   ];

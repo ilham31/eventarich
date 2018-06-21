@@ -3,16 +3,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-orderlogistik',
-  templateUrl: 'orderlogistik.html',
+  selector: 'page-pesanan',
+  templateUrl: 'pesanan.html',
 })
-export class OrderlogistikPage {
+export class PesananPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderlogistikPage');
+    console.log('ionViewDidLoad PesananPage');
   }
 
 }

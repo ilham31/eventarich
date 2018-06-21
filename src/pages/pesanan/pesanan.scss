@@ -1,0 +1,32 @@
+page-pesanan {
+    ion-card.cards-list-demo ion-card-header {
+        color: map-get($colors, primary);
+}
+    ion-card {
+        .footer_card {
+            padding: 10px;
+            
+            .card_content {
+                display: inline-block;
+                width: auto;
+                margin-left: -3%;
+                #event_title {
+                    font-weight: 700;
+                }
+                // #organizer_event {
+
+                // }
+                #hashtag_event {
+                    font-size: 3vw;
+                }
+            }
+            .col_badge {
+                // border: solid;
+            }
+            .col_content {
+                // border: solid;
+            }
+
+        }
+}
+}

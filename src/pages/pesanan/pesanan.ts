@@ -8,11 +8,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PesananPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PesananPage');
+  }
+
+
+  addPesanan() {
+    this.navCtrl.push('KebutuhaneventPage');
   }
 
 }

@@ -39,12 +39,14 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login() {    
+  login() {
+      this.showLoader();    
       this.authService.login(this.loginData).then((result) => {
-      this.data = result;
-      localStorage.setItem('token', this.data.access_token);
-      console.log("ini tokennya",this.data.access_token)
-      this.navCtrl.setRoot('SetelahloginPage');
+        this.loading.dismiss();
+        this.data = result;
+        localStorage.setItem('token', this.data.access_token);
+        console.log("ini tokennya",this.data.access_token)
+        this.navCtrl.setRoot('SetelahloginPage');
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);

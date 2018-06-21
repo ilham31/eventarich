@@ -41,10 +41,14 @@ export class RegisterPage {
 
     console.log(this.email,this.password);
     console.log(regData);
+    this.showLoader();
     this.authService.register(regData).then((result) => {
+      this.loading.dismiss();
       this.navCtrl.push('LoginPage');
       console.log(result,regData);
     }, (err) => {
+      this.loading.dismiss();
+      this.presentToast(err);
       console.log(err);
     });
       console.log(this.email,this.address)
@@ -60,6 +64,29 @@ export class RegisterPage {
     this.status = "password";
     this.look = true;
     console.log(this.status);
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
+
+    this.loading.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+    
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
 }

@@ -18,7 +18,7 @@ export class MyApp {
 
   isLoggedIn: boolean ;
   vendorPage = 'VendorkamiPage';
-  orderPage = 'OrderlogistikPage';
+  orderPage = 'PesananPage';
   // homePage = HomePage;
   // loginPage = LoginPage;
   // tabsPage = TabsPage;
@@ -32,13 +32,13 @@ export class MyApp {
  
     console.log('firstpage');
     if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
-      this.isLoggedIn =true;
-      console.log("sudah login")
+      this.isLoggedIn = true;
+      console.log("sudah login");
     }
     else 
     {
-      this.isLoggedIn=false
-      console.log("belum login")
+      this.isLoggedIn = false;
+      console.log("belum login");
     }
       
   }

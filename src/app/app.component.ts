@@ -22,7 +22,7 @@ export interface PageInterface {
 
 export class MyApp {
   
-  isLoggedIn: boolean;
+  loggedIn: boolean = false;
   vendorPage = 'VendorkamiPage';
   pesananPage = 'PesananPage';
   profilePage = 'ProfilPage';
@@ -55,16 +55,7 @@ export class MyApp {
     });
   }
 
-  ngOnInit() {
-    this.auth.isLogin().then((value) => {
-      console.log(value);
-      if(value) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
-    });
-  }
+  
   
   
   // ngOnInit(){

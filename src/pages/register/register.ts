@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 import { AuthServiceProvider } from '../../providers/auth-service';
+import { NgForm } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -20,6 +21,7 @@ export class RegisterPage {
     phone_number: number;
     password: string;
   data : any;
+  
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -31,26 +33,33 @@ export class RegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
-   doSignup() {
-    let regData = { 
-      email:this.email, 
-      password:this.password,
-      name:this.username,
-      address:this.address,
-      phone_number:this.phone_number };
-
-    console.log(this.email,this.password);
-    console.log(regData);
-    this.showLoader();
-    this.authService.register(regData).then((result) => {
-      this.loading.dismiss();
-      this.navCtrl.push('LoginPage');
-      console.log(result,regData);
-    }, (err) => {
-      this.loading.dismiss();
-      this.presentToast(err);
-      console.log(err);
-    });
+   doSignup(form : NgForm) {
+     this.submitted=true;
+     if(form.valid){
+        let regData = { 
+          email:this.email, 
+          password:this.password,
+          name:this.username,
+          address:this.address,
+          phone_number:this.phone_number };
+    
+        console.log(this.email,this.password);
+        console.log(regData);
+        this.showLoader();
+        this.authService.register(regData).then((result) => {
+          this.loading.dismiss();
+          this.navCtrl.push('LoginPage');
+          console.log(result,regData);
+        }, (err) => {
+          this.loading.dismiss();
+          this.presentToast("error");
+          console.log(err);
+        });
+      }
+    else
+    {
+      this.presentToast("form belum terisi")
+    }
       console.log(this.email,this.address)
    }
 

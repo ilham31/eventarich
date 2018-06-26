@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from './../../providers/auth-service';
-
+import { NgForm } from '@angular/forms';
 // import { SetelahloginPage } from '../setelahlogin/setelahlogin';
 // import { RegisterPage } from '../register/register';
 // import { HomePage } from './../home/home';
@@ -29,7 +29,6 @@ export class LoginPage {
   data : any;
 
 
-  isLoggedIn = 'statusnyah';
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public authService: AuthServiceProvider,
@@ -42,27 +41,29 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login() {
-      this.showLoader();    
-      this.authService.login(this.loginData).then((result) => {
-        this.loading.dismiss();
-        this.data = result;
-<<<<<<< HEAD
-        console.log("nilai token",this.data.token);
-        localStorage.setItem("token",this.data.token);
-        // this.storage.set("token",this.data.token);
-        
-        this.navCtrl.setRoot('SetelahloginPage',);
-=======
-        localStorage.setItem('token', this.data.access_token);
-        // console.log("ini tokennya",this.data.access_token)
-        this.navCtrl.setRoot('SetelahloginPage');
->>>>>>> 49472032f8da5df7651613cab00745266635d2f0
-    }, (err) => {
-      this.loading.dismiss();
-      this.presentToast(err);
-      console.log(err);
-    });;
+  login(form : NgForm) {
+      this.submitted=true;
+      if(form.valid)
+      {
+            this.showLoader();    
+            this.authService.login(this.loginData).then((result) => {
+              this.loading.dismiss();
+              this.data = result;
+              console.log("nilai token",this.data.token);
+              localStorage.setItem("token",this.data.token);
+              // this.storage.set("token",this.data.token);
+              
+              this.navCtrl.setRoot('SetelahloginPage',);
+          }, (err) => {
+            this.loading.dismiss();
+            this.presentToast("Username atau Password tidak valid");
+            console.log(err);
+          });;
+      }
+      else
+      {
+        this.presentToast("Form belum terisi");
+      }
     }
 
   registerPage() {

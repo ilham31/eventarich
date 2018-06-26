@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { AuthServiceProvider } from './../../providers/auth-service';
-/**
- * Generated class for the ProfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import{AuthServiceProvider} from '../../providers/auth-service';
+
+
 @IonicPage()
 @Component({
   selector: 'page-profil',
@@ -22,13 +18,8 @@ export class ProfilPage {
     console.log('ionViewDidLoad ProfilPage');
   }
 
-  back()
+  goProfileMore()
   {
-    this.navCtrl.setRoot('SetelahloginPage');
+    this.navCtrl.push('ProfilMorePage');
   }
-logout()
-{
-  this.authService.logout();
-  this.navCtrl.setRoot('HomePage');
-}
 }

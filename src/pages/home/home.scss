@@ -8,14 +8,12 @@ page-home {
         .badge-circle{
             position: relative;
             display: inline-block;
-            width: auto;
-            height: 100%;
-            padding: 5%;
+            width: 80%;
+            height: 0;
+            padding: 40% 0;
             border-radius: 50%;
-            .date_badge {
-                font-size: 3.4vw !important;
-                margin-top: 11px !important;
-            }
+            text-align: center;
+            line-height:0;
         }
     
     }

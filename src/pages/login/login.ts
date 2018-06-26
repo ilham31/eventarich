@@ -47,11 +47,17 @@ export class LoginPage {
       this.authService.login(this.loginData).then((result) => {
         this.loading.dismiss();
         this.data = result;
+<<<<<<< HEAD
         console.log("nilai token",this.data.token);
         localStorage.setItem("token",this.data.token);
         // this.storage.set("token",this.data.token);
         
         this.navCtrl.setRoot('SetelahloginPage',);
+=======
+        localStorage.setItem('token', this.data.access_token);
+        // console.log("ini tokennya",this.data.access_token)
+        this.navCtrl.setRoot('SetelahloginPage');
+>>>>>>> 49472032f8da5df7651613cab00745266635d2f0
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);

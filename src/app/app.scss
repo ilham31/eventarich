@@ -26,6 +26,21 @@
     }
 }
 
+ion-card-content {
+
+    .badge-circle{
+        position: relative;
+        display: inline-block;
+        width: 80%;
+        height: 0;
+        padding: 40% 0;
+        border-radius: 50%;
+        text-align: center;
+        line-height:0;
+    }
+
+}
+
 .lebar-menu{
     height: 7em;
     #event_title {
@@ -48,4 +63,20 @@ ion-list {
     position: fixed;
     bottom: 0px;
     right: 0px; 
+}
+
+.transparent-navbar {
+    .toolbar {
+        position: absolute;
+    
+        .toolbar-background {
+          background: transparent;
+        }
+        .toolbar-title {
+          color: map-get($colors, eventarich);
+        }
+      }
+    ion-icon.back-button-icon.icon {
+        color: map-get($colors, eventarich);
+    }
 }

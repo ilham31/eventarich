@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../providers/auth-service'
 
+
+
 export interface PageInterface {
   title: string;
   pageName: string;
@@ -20,18 +22,67 @@ export interface PageInterface {
 
 export class MyApp {
   
-  loggedIn: boolean = false;
+  isLoggedIn: boolean;
   vendorPage = 'VendorkamiPage';
-  val : any;
-  orderPage = 'OrderlogistikPage';
+  pesananPage = 'PesananPage';
+  profilePage = 'ProfilPage';
+  tes:any;
   // homePage = HomePage;
   // loginPage = LoginPage;
   // tabsPage = TabsPage;
   
 
   rootPage:any = 'HomePage';
-  @ViewChild('nav') nav: Nav; 
+  @ViewChild('nav') nav: Nav;
+
+  constructor(public platform: Platform, 
+              public statusBar: StatusBar, 
+              public splashScreen: SplashScreen,
+              public menuCtrl: MenuController,
+              private storage : Storage,
+              public auth: AuthServiceProvider) 
+              
+  {
+    this.initApp();
+
+
+  }
+
+  initApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+
+  ngOnInit() {
+    this.auth.isLogin().then((value) => {
+      console.log(value);
+      if(value) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
+  }
   
+  
+  // ngOnInit(){
+  //   //called after the constructor and called  after the first ngOnChanges() 
+  //   this.storage.get('token').then((val) => {
+  //     if(val !== null && val !== ""){
+  //       this.isLoggedIn =true;
+  //       console.log("sudah login, token :",val)
+  //     }
+  //     else 
+  //     {
+  //       this.isLoggedIn=false
+  //       console.log("belum login")
+  //     }  
+  //   });
+    
+  // }
+
 
 1
   pagesNotLoggedIn: PageInterface[] = [
@@ -48,74 +99,9 @@ export class MyApp {
   ];
 
 
-//   ionViewWillEnter(){
-//     console.log("nilai token :",localStorage.getItem("token"))
-//     if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
-//       console.log("sudah login");
-//       this.isLoggedIn=true;
-//     }
-//     else{
-//       console.log("belum login")
-//       this.isLoggedIn=false;
-//     }
-// }
-
-
-// ionViewDidLoad() {
-//   console.log("nilai token :",localStorage.getItem("token"))
-//     if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
-//       console.log("sudah login");
-//       this.isLoggedIn=true;
-//     }
-//     else{
-//       console.log("belum login")
-//       this.isLoggedIn=false;
-//     }
-// }
-  constructor(platform: Platform, 
-              statusBar: StatusBar, 
-              splashScreen: SplashScreen,
-              public menuCtrl: MenuController,
-            private storage : Storage,public authservice : AuthServiceProvider) {
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-      this.storage.get("token").then((val)=>{
-        if(this.val !== null && this.val !== "")
-        {
-            this.loggedIn = true;
-            console.log(this.loggedIn,this.val);
-        }
-      })
-      
-      // this.authservice.isLogin().then((value) => {
-      //   if(value) {
-      //     this.loggedIn = true;
-      //   } else {
-      //     this.loggedIn = false;
-      //   }
-
-      //   console.log(this.loggedIn); 
-      // });
-     
-     
-      // this.storage.get("token").then((val)=>{
-      //     if(val !== null && val !== ""){
-      //     this.isLoggedIn =true;
-      //     console.log("sudah login, token :",val)
-      //     }
-      //     else{
-      //       console.log("belum login");
-      //     }
-      })
-            
-  
-    
-  }
-  
   openPage(page: PageInterface) {
 
-    if((page.pageName == this.vendorPage) || (page.pageName == this.orderPage)) {
+    if((page.pageName == this.vendorPage) || (page.pageName == this.pesananPage) || (page.pageName == this.profilePage)) {
       this.nav.push(page.pageName);
       this.menuCtrl.close();  
     } else {
@@ -123,16 +109,5 @@ export class MyApp {
       this.menuCtrl.close();
     }
   }
-
-
-  // onLoad(page: any) {
-  //   this.nav.setRoot(page);
-  //   this.menuCtrl.close();  
-  // }
-
-  // vendor() {
-  //   this.nav.push(VendorkamiPage);
-  //   this.menuCtrl.close();  
-  // }
 }
 

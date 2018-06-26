@@ -11,12 +11,12 @@ export class AuthServiceProvider {
   message:any;
   token:any;
   tes:any;
+
+  public isLoggedIn = 'status';
   constructor(
     public http: Http,
     private storage: Storage ) {}
 
-  public isLoggedIn = 'statusnyah';
-  
   login(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
@@ -29,28 +29,23 @@ export class AuthServiceProvider {
             console.log("respon",this.data);
             this.message = this.data.message;
             this.token = this.data.token;
-
-            this.storage.set(this.isLoggedIn, true);
-            // localStorage.setItem("token",this.data)
-
-            // console.log("message",this.message);
-            // console.log("token",this.token);
-            // localStorage.setItem('token', this.data.token);
-            // this.tes = localStorage.getItem('token');
-            // console.log("isi storage",this.tes);
+            this.storage.set("token",this.token);
+            this.storage.set('status', true);
            }, (err) => {
             reject(err);
           });
     });
   }
 
-
   isLogin() {
-    return this.storage.get(this.isLoggedIn).then((value) => {
+    return this.storage.get('status').then((value) => { 
+      console.log(value);
       return value;
     });
   }
 
+
+ 
   cektoken()
   {
       this.storage.get('token').then((val)=>{
@@ -59,12 +54,7 @@ export class AuthServiceProvider {
      
   }
 
-  logout()
-  {
-    this.storage.remove("token");
-    // this.storage.remove()
-  }
-
+ 
   register(data) {
   return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -78,6 +68,10 @@ export class AuthServiceProvider {
           reject(err);
         });
     });
+  }
+
+  logout(){
+    this.storage.remove(this.isLoggedIn);
   }
 
 }

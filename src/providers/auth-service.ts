@@ -14,6 +14,8 @@ export class AuthServiceProvider {
   constructor(
     public http: Http,
     private storage: Storage ) {}
+
+  public isLoggedIn = 'statusnyah';
   
   login(credentials) {
     return new Promise((resolve, reject) => {
@@ -27,7 +29,10 @@ export class AuthServiceProvider {
             console.log("respon",this.data);
             this.message = this.data.message;
             this.token = this.data.token;
-            this.storage.set("token",this.token);
+
+            this.storage.set(this.isLoggedIn, true);
+            // localStorage.setItem("token",this.data)
+
             // console.log("message",this.message);
             // console.log("token",this.token);
             // localStorage.setItem('token', this.data.token);
@@ -39,6 +44,26 @@ export class AuthServiceProvider {
     });
   }
 
+
+  isLogin() {
+    return this.storage.get(this.isLoggedIn).then((value) => {
+      return value;
+    });
+  }
+
+  cektoken()
+  {
+      this.storage.get('token').then((val)=>{
+        return val;
+      })
+     
+  }
+
+  logout()
+  {
+    this.storage.remove("token");
+    // this.storage.remove()
+  }
 
   register(data) {
   return new Promise((resolve, reject) => {
@@ -52,20 +77,6 @@ export class AuthServiceProvider {
         }, (err) => {
           reject(err);
         });
-    });
-  }
-
-  logout(){
-    return new Promise((resolve, reject) => {
-        let headers = new Headers();
-        headers.append('X-Auth-Token', localStorage.getItem('token'));
-
-        this.http.post(apiUrl+'logout', {}, {headers: headers})
-          .subscribe(res => {
-            localStorage.clear();
-          }, (err) => {
-            reject(err);
-          });
     });
   }
 

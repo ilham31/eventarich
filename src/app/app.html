@@ -7,13 +7,13 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-list *ngIf="isLoggedIn == false">
+        <ion-list *ngIf="loggedIn == false">
             <button id="menu_button" ion-item menuClose *ngFor="let page of pagesNotLoggedIn" (click)="openPage(page)">
                 <ion-icon [name]="page.icon" [color]="page.color"></ion-icon>
                 {{ page.title }}
             </button>
         </ion-list>
-        <ion-list *ngIf="isLoggedIn == true">
+        <ion-list *ngIf="loggedIn == true">
             <button id="menu_button" ion-item menuClose *ngFor="let page of pagesLoggedIn" (click)="openPage(page)">
                 <ion-icon [name]="page.icon" [color]="page.color"></ion-icon>
                 {{ page.title }}

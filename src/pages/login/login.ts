@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from './../../providers/auth-service';
 
 // import { SetelahloginPage } from '../setelahlogin/setelahlogin';
@@ -28,11 +28,14 @@ export class LoginPage {
   };
   data : any;
 
+
+  isLoggedIn = 'statusnyah';
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public authService: AuthServiceProvider,
               public loadCtrl: LoadingController,
-              private toastCtrl: ToastController
+              private toastCtrl: ToastController,
+              public storage : Storage,
              ) {}
 
   ionViewDidLoad() {
@@ -44,9 +47,11 @@ export class LoginPage {
       this.authService.login(this.loginData).then((result) => {
         this.loading.dismiss();
         this.data = result;
-        localStorage.setItem('token', this.data.access_token);
-        console.log("ini tokennya",this.data.access_token)
-        this.navCtrl.setRoot('SetelahloginPage');
+        console.log("nilai token",this.data.token);
+        localStorage.setItem("token",this.data.token);
+        // this.storage.set("token",this.data.token);
+        
+        this.navCtrl.setRoot('SetelahloginPage',);
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);

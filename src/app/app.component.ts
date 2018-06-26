@@ -3,6 +3,7 @@ import { IonicPage,Platform, NavController, MenuController, Nav } from 'ionic-an
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
+import { AuthServiceProvider } from '../providers/auth-service'
 
 export interface PageInterface {
   title: string;
@@ -19,11 +20,10 @@ export interface PageInterface {
 
 export class MyApp {
   
-  isLoggedIn: boolean =false;
+  loggedIn: boolean = false;
   vendorPage = 'VendorkamiPage';
-
+  val : any;
   orderPage = 'OrderlogistikPage';
-  tes:any;
   // homePage = HomePage;
   // loginPage = LoginPage;
   // tabsPage = TabsPage;
@@ -32,23 +32,8 @@ export class MyApp {
   rootPage:any = 'HomePage';
   @ViewChild('nav') nav: Nav; 
   
-  ngOnInit(){
-    //called after the constructor and called  after the first ngOnChanges() 
-    this.storage.get('token').then((val) => {
-      if(val !== null && val !== ""){
-        this.isLoggedIn =true;
-        console.log("sudah login, token :",val)
-      }
-      else 
-      {
-        this.isLoggedIn=false
-        console.log("belum login")
-      }  
-    });
-    
-  }
 
-
+1
   pagesNotLoggedIn: PageInterface[] = [
     { title: 'Home', pageName: 'HomePage', color: 'eventarich', index: 0, icon: 'home'},
     { title: 'Vendor Kami', pageName: 'VendorkamiPage', color: 'eventarich', index: 1, icon: 'body'},
@@ -63,18 +48,71 @@ export class MyApp {
   ];
 
 
+//   ionViewWillEnter(){
+//     console.log("nilai token :",localStorage.getItem("token"))
+//     if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
+//       console.log("sudah login");
+//       this.isLoggedIn=true;
+//     }
+//     else{
+//       console.log("belum login")
+//       this.isLoggedIn=false;
+//     }
+// }
 
+
+// ionViewDidLoad() {
+//   console.log("nilai token :",localStorage.getItem("token"))
+//     if(localStorage.getItem("token") !== null && localStorage.getItem("token") !== ""){
+//       console.log("sudah login");
+//       this.isLoggedIn=true;
+//     }
+//     else{
+//       console.log("belum login")
+//       this.isLoggedIn=false;
+//     }
+// }
   constructor(platform: Platform, 
               statusBar: StatusBar, 
               splashScreen: SplashScreen,
               public menuCtrl: MenuController,
-            private storage : Storage) {
+            private storage : Storage,public authservice : AuthServiceProvider) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-    });
-  }
+      this.storage.get("token").then((val)=>{
+        if(this.val !== null && this.val !== "")
+        {
+            this.loggedIn = true;
+            console.log(this.loggedIn,this.val);
+        }
+      })
+      
+      // this.authservice.isLogin().then((value) => {
+      //   if(value) {
+      //     this.loggedIn = true;
+      //   } else {
+      //     this.loggedIn = false;
+      //   }
 
+      //   console.log(this.loggedIn); 
+      // });
+     
+     
+      // this.storage.get("token").then((val)=>{
+      //     if(val !== null && val !== ""){
+      //     this.isLoggedIn =true;
+      //     console.log("sudah login, token :",val)
+      //     }
+      //     else{
+      //       console.log("belum login");
+      //     }
+      })
+            
+  
+    
+  }
+  
   openPage(page: PageInterface) {
 
     if((page.pageName == this.vendorPage) || (page.pageName == this.orderPage)) {

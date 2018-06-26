@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-
+@IonicPage()
 @Component({
   selector: 'page-filter',
   templateUrl: 'filter.html',
@@ -22,9 +22,21 @@ export class FilterPage {
     upper:12,
     lower:1
     }
+    kompetisi : boolean =false;
+    seminar : boolean =false;
+    lingkungan : boolean =false;
+    expo : boolean =false;
+    olahraga : boolean =false;
+    bazaar : boolean =false;
+    seni : boolean =false;
+    sosial : boolean =false;
   ionViewDidLoad() {
     console.log('ionViewDidLoad FilterPage');
   }
   
-
+  cari()
+  {
+    console.log("nilai",this.kompetisi,this.seminar,this.lingkungan,this.expo,this.olahraga,this.bazaar,this.seni,this.sosial,this.dualValue2.upper,this.dualValue2.lower);
+    
+  }
 }

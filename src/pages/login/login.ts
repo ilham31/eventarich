@@ -45,7 +45,7 @@ export class LoginPage {
         this.loading.dismiss();
         this.data = result;
         localStorage.setItem('token', this.data.access_token);
-        console.log("ini tokennya",this.data.access_token)
+        // console.log("ini tokennya",this.data.access_token)
         this.navCtrl.setRoot('SetelahloginPage');
     }, (err) => {
       this.loading.dismiss();

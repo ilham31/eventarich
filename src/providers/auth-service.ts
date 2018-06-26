@@ -11,10 +11,12 @@ export class AuthServiceProvider {
   message:any;
   token:any;
   tes:any;
+
+  public isLoggedIn = 'status';
   constructor(
     public http: Http,
     private storage: Storage ) {}
-  
+
   login(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
@@ -28,14 +30,17 @@ export class AuthServiceProvider {
             this.message = this.data.message;
             this.token = this.data.token;
             this.storage.set("token",this.token);
-            // console.log("message",this.message);
-            // console.log("token",this.token);
-            // localStorage.setItem('token', this.data.token);
-            // this.tes = localStorage.getItem('token');
-            // console.log("isi storage",this.tes);
+            this.storage.set('status', true);
            }, (err) => {
             reject(err);
           });
+    });
+  }
+
+  isLogin() {
+    return this.storage.get('status').then((value) => { 
+      console.log(value);
+      return value;
     });
   }
 
@@ -56,17 +61,7 @@ export class AuthServiceProvider {
   }
 
   logout(){
-    return new Promise((resolve, reject) => {
-        let headers = new Headers();
-        headers.append('X-Auth-Token', localStorage.getItem('token'));
-
-        this.http.post(apiUrl+'logout', {}, {headers: headers})
-          .subscribe(res => {
-            localStorage.clear();
-          }, (err) => {
-            reject(err);
-          });
-    });
+    this.storage.remove(this.isLoggedIn);
   }
 
 }

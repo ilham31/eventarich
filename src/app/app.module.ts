@@ -35,7 +35,10 @@ import { MyApp } from './app.component';
   imports: [
     BrowserModule,HttpModule,HttpClientModule, 
     IonicModule.forRoot(MyApp,{tabsHideOnSubPages: true}),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: ['sqlite', 'websql', 'indexeddb']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

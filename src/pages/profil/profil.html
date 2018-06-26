@@ -1,10 +1,4 @@
-<!--
-  Generated template for the ProfilPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header class="lebar-menu">
+<!-- <ion-header class="lebar-menu">
 
   <ion-navbar class="lebar-menu" hideBackButton>
     <img  img src="assets/imgs/contoh.jpg">
@@ -16,45 +10,74 @@
     </div>
     <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"class="topleft" color="eventarich" style="zoom:2.0;" (click)="back()"></ion-icon>
     
-              
+  </ion-navbar>
+
+</ion-header> -->
+<ion-header class="transparent-navbar">
+
+  <ion-navbar color="eventarich">
+
+    <ion-buttons class="badge-header" end>
+      <button ion-button (click)="goProfileMore()">
+        <ion-icon id="add-icon" name="md-more" color="eventarich"></ion-icon>
+      </button>
+    </ion-buttons>
     
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
+  
+  <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img>
+  
+  <div class="profile-desc">
+    <h1 text-center ion-text color="eventarich">BEM - G</h1>
+    <p text-center>Official Account BEM - G</p>
+  </div>
 
-<h1 text-center ion-text color="eventarich">BEM - G</h1>
-<p text-center>Deskripsi</p>
+  <ion-list>
+      <ion-item-sliding no-padding>
+        
+        <ion-item class="card-item" no-lines>
+          <ion-card (click)="lihatprofil()">
 
-<ion-card (click)="lihatprofil()" class="cards-list-demo">
-    <ion-card-content class="footer_card">
-        <ion-row>
-          <ion-col col-3 class="col_badge">
-            <ion-badge class="badge-circle" >
-              <p class="date_badge">28 Sept</p>
-            </ion-badge>  
-          </ion-col>
-          <ion-col col-9 class="col_content">
-            <div class="card_content">
-              <h2 id="event_title">Event Name</h2>
-              <h5 id="hashtag_event">#akusehat</h5>
-              <h5 id="tanggal_event">10 agustus 2017</h5>
-              <!-- <h3 id="organizer_event" >BEM-G</h3> -->
-            </div>
-          </ion-col>
-          <ion-col   >
-            <div class="like">
-                <ion-icon ios="ios-heart" md="md-heart" color="eventarich" id="icon_like"></ion-icon>
-                <p id="jumlah" ion-text color="eventarich">200 like</p>
-            </div> 
-          </ion-col>
-        </ion-row>
-    </ion-card-content>
-</ion-card>
-<ion-footer no-shadow>
-  <button ion-button full ion-button color="eventarich" (click)="logout()">Log out</button>
+            <ion-card-content class="footer_card">
+                <ion-row>
+                  <ion-col col-3 class="col_badge">
+                    <ion-badge class="badge-circle" >
+                      28 Sept
+                    </ion-badge>  
+                  </ion-col>
+                  <ion-col col-9 class="col_content">
+                    <div class="card_content">
+                      <h2 id="event_title">Event Name</h2>
+                      <h5 id="hashtag_event">#akusehat</h5>
+                      <h5 id="tanggal_event">10 agustus 2017</h5>
+                      <!-- <h3 id="organizer_event" >BEM-G</h3> -->
+                    </div>
+                  </ion-col>
+                  <ion-col   >
+                    <div class="like">
+                        <ion-icon ios="ios-heart" md="md-heart" color="eventarich" id="icon_like"></ion-icon>
+                        <p id="jumlah" ion-text color="eventarich">200 like</p>
+                    </div> 
+                  </ion-col>
+                </ion-row>
+            </ion-card-content>
 
-</ion-footer>
+          </ion-card>          
+        </ion-item>   
+
+        <ion-item-options class="order_option" side="right">
+          <button ion-button color="danger" (click)="unread(item)">
+            <ion-icon name="trash"></ion-icon>
+            Hapus
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+
+  </ion-list>
+  
 </ion-content>

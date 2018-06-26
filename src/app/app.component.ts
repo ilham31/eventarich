@@ -4,6 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
+import { AuthServiceProvider } from '../providers/auth-service';
+
+
 export interface PageInterface {
   title: string;
   pageName: string;
@@ -19,10 +22,10 @@ export interface PageInterface {
 
 export class MyApp {
   
-  isLoggedIn: boolean =false;
+  isLoggedIn: boolean;
   vendorPage = 'VendorkamiPage';
-
-  orderPage = 'OrderlogistikPage';
+  pesananPage = 'PesananPage';
+  profilePage = 'ProfilPage';
   tes:any;
   // homePage = HomePage;
   // loginPage = LoginPage;
@@ -30,23 +33,55 @@ export class MyApp {
   
 
   rootPage:any = 'HomePage';
-  @ViewChild('nav') nav: Nav; 
-  
-  ngOnInit(){
-    //called after the constructor and called  after the first ngOnChanges() 
-    this.storage.get('token').then((val) => {
-      if(val !== null && val !== ""){
-        this.isLoggedIn =true;
-        console.log("sudah login, token :",val)
-      }
-      else 
-      {
-        this.isLoggedIn=false
-        console.log("belum login")
-      }  
-    });
-    
+  @ViewChild('nav') nav: Nav;
+
+  constructor(public platform: Platform, 
+              public statusBar: StatusBar, 
+              public splashScreen: SplashScreen,
+              public menuCtrl: MenuController,
+              private storage : Storage,
+              public auth: AuthServiceProvider) 
+              
+  {
+    this.initApp();
+
+
   }
+
+  initApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+
+  ngOnInit() {
+    this.auth.isLogin().then((value) => {
+      console.log(value);
+      if(value) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
+  }
+  
+  
+  // ngOnInit(){
+  //   //called after the constructor and called  after the first ngOnChanges() 
+  //   this.storage.get('token').then((val) => {
+  //     if(val !== null && val !== ""){
+  //       this.isLoggedIn =true;
+  //       console.log("sudah login, token :",val)
+  //     }
+  //     else 
+  //     {
+  //       this.isLoggedIn=false
+  //       console.log("belum login")
+  //     }  
+  //   });
+    
+  // }
 
 
   pagesNotLoggedIn: PageInterface[] = [
@@ -63,21 +98,9 @@ export class MyApp {
   ];
 
 
-
-  constructor(platform: Platform, 
-              statusBar: StatusBar, 
-              splashScreen: SplashScreen,
-              public menuCtrl: MenuController,
-            private storage : Storage) {
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-  }
-
   openPage(page: PageInterface) {
 
-    if((page.pageName == this.vendorPage) || (page.pageName == this.orderPage)) {
+    if((page.pageName == this.vendorPage) || (page.pageName == this.pesananPage) || (page.pageName == this.profilePage)) {
       this.nav.push(page.pageName);
       this.menuCtrl.close();  
     } else {
@@ -85,16 +108,5 @@ export class MyApp {
       this.menuCtrl.close();
     }
   }
-
-
-  // onLoad(page: any) {
-  //   this.nav.setRoot(page);
-  //   this.menuCtrl.close();  
-  // }
-
-  // vendor() {
-  //   this.nav.push(VendorkamiPage);
-  //   this.menuCtrl.close();  
-  // }
 }
 

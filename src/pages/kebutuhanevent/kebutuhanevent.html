@@ -8,38 +8,48 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item class="item-leave-height" no-lines no-padding>
-        <ion-label>Jenis Pemesanan</ion-label>
-        <ion-select [(ngModel)]="selectedLeave">
-            <ion-option value="Pesan_Logistik">Pesan Logistik</ion-option>
-            <ion-option value="Pesan_Souvenir">Pesan Souvenir</ion-option>
-            <ion-option value="Pesan_Konveksi">Pesan Konveksi</ion-option>
-            <ion-option value="Pesan_Konsumsi">Pesan Konsumsi</ion-option>
-            <ion-option value="vep">Video Editing & Photography</ion-option>
-            <ion-option value="eo">Event Organizer</ion-option>
-        </ion-select>
-    </ion-item>
-    <ion-item no-padding>
-        <ion-label stacked color="eventarich">Tanggal Dibutuhkan</ion-label>
-        <ion-input type="date"></ion-input>
-    </ion-item>
-    <ion-item no-padding>
-      <ion-label stacked color="eventarich">Budgeting</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-      
-    <ion-item no-padding>
-      <ion-label stacked color="eventarich">Deskripsi pesanan</ion-label>
-      <ion-textarea type="text" color="eventarich"></ion-textarea>
-    </ion-item>
-
-    <ion-item no-padding>
-        <ion-label stacked color="eventarich">Alamat Pemesanan</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-  </ion-list>
   
-    <button class="button_bottom" ion-button full ion-button color="eventarich">Pesan</button>
+  <form #kebutuhanEvent = "ngForm" (ngSubmit)="pesan(kebutuhanEvent)" novalidate >
+    <ion-list no-padding>  
+    <ion-item class="item-leave-height" no-lines no-padding>
+          <ion-label>Jenis Pemesanan</ion-label>
+          <ion-select [(ngModel)]="selectedLeave" name="select" #slc = "ngModel" required>
+              <ion-option value="Pesan_Logistik">Pesan Logistik</ion-option>
+              <ion-option value="Pesan_Souvenir">Pesan Souvenir</ion-option>
+              <ion-option value="Pesan_Konveksi">Pesan Konveksi</ion-option>
+              <ion-option value="Pesan_Konsumsi">Pesan Konsumsi</ion-option>
+              <ion-option value="vep">Video Editing & Photography</ion-option>
+              <ion-option value="eo">Event Organizer</ion-option>
+          </ion-select>
+      </ion-item>
+      <p ion-text [hidden]="slc.valid || submitted == false" color="danger" padding-left class="teksWarning">Jenis pemesanan harus diisi</p>
+      <ion-item no-padding>
+          <ion-label stacked color="dark">Tanggal Dibutuhkan</ion-label>
+          <ion-input type="date" displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-input>
+      </ion-item>
+      <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
+      
+      <ion-item no-padding>
+        <ion-label stacked color="dark">Budgeting</ion-label>
+        <ion-input type="number" [(ngModel)]="budget" name="biaya" #bdg="ngModel" required></ion-input>
+      </ion-item>
+      <p ion-text [hidden]="bdg.valid || submitted == false" color="danger" padding-left class="teksWarning">Budget harus diisi</p>
+      
+      <ion-item no-padding>
+        <ion-label stacked color="dark">Deskripsi pesanan</ion-label>
+        <ion-textarea type="text" color="eventarich" [(ngModel)]="deskripsiPesanan" name="deskripsi" #desc="ngModel" required></ion-textarea>
+      </ion-item>
+      <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
+
+      <ion-item no-padding>
+          <ion-label stacked color="dark">Alamat Pemesanan</ion-label>
+          <ion-input type="text" [(ngModel)]="alamat" name="alamatPesanan" #add="ngModel" required></ion-input>
+      </ion-item>
+      <p ion-text [hidden]="add.valid || submitted == false" color="danger" padding-left class="teksWarning">Alamat harus diisi</p>
+    </ion-list>
     
+      <button class="button_bottom" ion-button full ion-button color="eventarich" type="submit">Pesan</button>
+  
+  </form>
+        
 </ion-content>

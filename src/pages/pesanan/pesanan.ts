@@ -15,4 +15,9 @@ export class PesananPage {
     console.log('ionViewDidLoad PesananPage');
   }
 
+  addPesanan()
+{
+  this.navCtrl.push('KebutuhaneventPage')
+}
+
 }

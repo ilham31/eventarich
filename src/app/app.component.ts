@@ -22,7 +22,7 @@ export interface PageInterface {
 
 export class MyApp {
   
-  loggedIn: boolean = false;
+  loggedIn: boolean = true;
   vendorPage = 'VendorkamiPage';
   pesananPage = 'PesananPage';
   profilePage = 'ProfilPage';

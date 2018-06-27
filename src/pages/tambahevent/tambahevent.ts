@@ -112,8 +112,7 @@ export class TambaheventPage {
         
   //   });
   // }
-  addEvent( form : NgForm)
-  {
+  addEvent( form : NgForm) {
     this.submitted=true;
     if(form.valid)
     {

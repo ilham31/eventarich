@@ -4,13 +4,6 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the OrderProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-
 let apiUrl = 'http://localhost:3000';
 
 @Injectable()
@@ -20,21 +13,18 @@ token : any;
   constructor(
     public http: Http,
     private storage: Storage) {
-    this.bawaToken();
+    this.assignToken();
     console.log('Hello OrderProvider Provider');
   }
 
-getToken()
-{
+getToken() {
   return this.storage.get("token").then((val)=>
   {
     return val;
-    
-    
   });
 }
 
-bawaToken() {
+assignToken() {
   this.getToken().then((data) => {
     this.token = data;
   });

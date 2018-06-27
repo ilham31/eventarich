@@ -4,44 +4,33 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
-
-/*
-  Generated class for the EventProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 let apiUrl = 'http://localhost:3000';
 
 @Injectable()
 export class EventProvider {
 token: any;
 data:any;
-  constructor(
-    public http: Http,
-    private storage: Storage,
-    
-  ) {
-    this.bawaToken();
+
+constructor(  public http: Http,
+              private storage: Storage ) {
+    this.assignToken();
     console.log('Hello EventProvider Provider');
   }
-  getToken()
-  {
+
+  getToken() {
     return this.storage.get("token").then((val)=>
     {
       return val;
-      
-      
     });
   }
   
-  bawaToken() {
+  assignToken() {
     this.getToken().then((data) => {
       this.token = data;
     });
   }
-  tambahEvent(data)
-  {
+
+  tambahEvent(data) {
     return new Promise((resolve, reject) => {
       var pala = new Headers();
       pala.append('Content-Type', 'application/json');
@@ -54,7 +43,7 @@ data:any;
          }, (err) => {
           reject(err);
         });
-  });
+    });
   }  
 }
 

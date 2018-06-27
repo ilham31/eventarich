@@ -16,8 +16,9 @@ export class KebutuhaneventPage {
   myDate :string ='';
   submitted = false;
   token : any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController, public orderprovider : OrderProvider) {
-  this.getToken();
+    this.getToken();
   }
 
   getToken() {
@@ -51,8 +52,7 @@ export class KebutuhaneventPage {
     }
     else
     {
-      this.presentToast("form tidak valid");
-      console.log("form tidak valid")
+      this.presentToast("Form tidak valid");
     }
   }
 

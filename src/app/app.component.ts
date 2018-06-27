@@ -1,5 +1,5 @@
-import { Component, ViewChild,OnInit } from '@angular/core';
-import { IonicPage,Platform, NavController, MenuController, Nav } from 'ionic-angular';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { IonicPage, Platform, NavController, MenuController, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -22,67 +22,14 @@ export interface PageInterface {
 
 export class MyApp {
   
-  isLoggedIn: boolean;
+  // isLoggedIn: boolean;
   vendorPage = 'VendorkamiPage';
   pesananPage = 'PesananPage';
   profilePage = 'ProfilPage';
   tes:any;
-  // homePage = HomePage;
-  // loginPage = LoginPage;
-  // tabsPage = TabsPage;
-  
 
-  rootPage:any = 'HomePage';
+  rootPage:any = 'TabsPage';
   @ViewChild('nav') nav: Nav;
-
-  constructor(public platform: Platform, 
-              public statusBar: StatusBar, 
-              public splashScreen: SplashScreen,
-              public menuCtrl: MenuController,
-              private storage : Storage,
-              public auth: AuthServiceProvider) 
-              
-  {
-    this.initApp();
-
-
-  }
-
-  initApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
-
-  ngOnInit() {
-    this.auth.isLogin().then((value) => {
-      console.log(value);
-      if(value) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
-    });
-  }
-  
-  
-  // ngOnInit(){
-  //   //called after the constructor and called  after the first ngOnChanges() 
-  //   this.storage.get('token').then((val) => {
-  //     if(val !== null && val !== ""){
-  //       this.isLoggedIn =true;
-  //       console.log("sudah login, token :",val)
-  //     }
-  //     else 
-  //     {
-  //       this.isLoggedIn=false
-  //       console.log("belum login")
-  //     }  
-  //   });
-    
-  // }
-
 
   pagesNotLoggedIn: PageInterface[] = [
     { title: 'Home', pageName: 'HomePage', color: 'eventarich', index: 0, icon: 'home'},
@@ -98,6 +45,34 @@ export class MyApp {
   ];
 
 
+  constructor(public platform: Platform, 
+              public statusBar: StatusBar, 
+              public splashScreen: SplashScreen,
+              public menuCtrl: MenuController,
+              public storage : Storage,
+              public auth: AuthServiceProvider,
+              public events: Events,
+              // public navCtrl: NavController
+            ) 
+              
+  {
+    this.initApp();
+
+    this.auth.hasLoggedIn().then((hasLoggedIn) => {
+      this.enableMenu(hasLoggedIn === true);
+    });
+
+    this.listenToLoginEvents();
+    
+  }
+
+  initApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+
   openPage(page: PageInterface) {
 
     if((page.pageName == this.vendorPage) || (page.pageName == this.pesananPage) || (page.pageName == this.profilePage)) {
@@ -107,6 +82,21 @@ export class MyApp {
       this.nav.setRoot(page.pageName);
       this.menuCtrl.close();
     }
+  }
+
+  enableMenu(loggedIn: boolean) {
+    this.menuCtrl.enable(loggedIn, 'loggedInMenu');
+    this.menuCtrl.enable(!loggedIn, 'loggedOutMenu');
+  }
+
+  listenToLoginEvents() {
+    this.events.subscribe('user:login', () => {
+      this.enableMenu(true);
+    });
+
+    this.events.subscribe('user:logout', () => {
+      this.enableMenu(false);
+    });
   }
 }
 

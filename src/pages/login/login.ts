@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 import { AuthServiceProvider } from './../../providers/auth-service';
+import { UserOptions } from '../../interfaces/user-options';
 
-// import { SetelahloginPage } from '../setelahlogin/setelahlogin';
-// import { RegisterPage } from '../register/register';
-// import { HomePage } from './../home/home';
+// import { Storage } from '@ionic/storage';
+
+
 
 @IonicPage()
 @Component({
@@ -15,6 +16,11 @@ import { AuthServiceProvider } from './../../providers/auth-service';
 
 export class LoginPage {
 
+  loginProp: UserOptions = { 
+    email: '', 
+    password: '',
+  };
+
   submitted = false;
   status = "password";
   look = true;
@@ -22,10 +28,6 @@ export class LoginPage {
   token: string;
   
   loading: any;
-  loginData = {
-    email: '',
-    password: ''
-  };
   data : any;
 
   constructor(public navCtrl: NavController, 
@@ -35,23 +37,17 @@ export class LoginPage {
               private toastCtrl: ToastController
              ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-  login() {
-      this.showLoader();    
-      this.authService.login(this.loginData).then((result) => {
+  onLogin() {
+      this.showLoader();
+      this.submitted = true;    
+      this.authService.login(this.loginProp).then((result) => {
         this.loading.dismiss();
-        this.data = result;
-        localStorage.setItem('token', this.data.access_token);
-        // console.log("ini tokennya",this.data.access_token)
-        this.navCtrl.setRoot('SetelahloginPage');
-    }, (err) => {
-      this.loading.dismiss();
-      this.presentToast(err);
-      console.log(err);
-    });;
+        this.navCtrl.setRoot('TabsPage');
+      }, (err) => {
+        this.loading.dismiss();
+        this.presentToast(err);
+        console.log(err);
+      });;
     }
 
   registerPage() {

@@ -51,11 +51,11 @@ $colors: (
 
 
 
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
+$tabs-md-tab-icon-color-active	: map-get($colors, eventarich );
+$tabs-md-tab-text-color-active	: map-get($colors, eventarich );
 
 
 

@@ -28,24 +28,18 @@ export class RegisterPage {
               private toastCtrl: ToastController
             ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
-   doSignup() {
+  doSignup() {
     let regData = { 
       email:this.email, 
       password:this.password,
       name:this.username,
       address:this.address,
-      phone_number:this.phone_number };
-
-    console.log(this.email,this.password);
-    console.log(regData);
+      phone_number:this.phone_number 
+    };
     this.showLoader();
-    this.authService.register(regData).then((result) => {
+    this.authService.signup(regData).then((result) => {
       this.loading.dismiss();
       this.navCtrl.push('LoginPage');
-      console.log(result,regData);
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);
@@ -68,7 +62,7 @@ export class RegisterPage {
 
   showLoader() {
     this.loading = this.loadCtrl.create({
-      content: 'memuat..'
+      content: 'memuat....'
     });
 
     this.loading.present();

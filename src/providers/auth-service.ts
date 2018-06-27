@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
-// import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
+
 let apiUrl = 'http://localhost:3000';
 
 @Injectable()
@@ -12,56 +13,60 @@ export class AuthServiceProvider {
   token:any;
   tes:any;
 
-  public isLoggedIn = 'status';
-  constructor(
-    public http: Http,
-    private storage: Storage ) {}
+  HAS_LOGGED_IN = 'hasLoggedIn';
+
+  constructor(  public http: Http,
+                private storage: Storage,
+                public events: Events ) {}
 
   login(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
+        
         this.http.post(apiUrl+'/users/login', JSON.stringify(credentials), {headers: headers})
           .subscribe(res => {
+            console.log(res);
             resolve(res.json());  
             this.data = res.json();
-            console.log("respon",this.data);
+            // console.log('response',this.data);
             this.message = this.data.message;
             this.token = this.data.token;
-            this.storage.set("token",this.token);
-            this.storage.set('status', true);
+            this.storage.set('token', this.token);
+            this.storage.set(this.HAS_LOGGED_IN, true);
+            this.events.publish('user:login');
            }, (err) => {
             reject(err);
           });
     });
   }
 
-  isLogin() {
-    return this.storage.get('status').then((value) => { 
-      console.log(value);
-      return value;
+  hasLoggedIn(): Promise<boolean> {
+    return this.storage.get(this.HAS_LOGGED_IN).then((value) => { 
+      return value === true;
     });
-  }
+  };
 
 
-  register(data) {
-  return new Promise((resolve, reject) => {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-   
-      this.http.post(apiUrl+'/users/signup', JSON.stringify(data), {headers: headers})
-        .subscribe(res => {
-          resolve(res);
-          
-        }, (err) => {
-          reject(err);
-        });
-    });
+  signup(data) {
+    return new Promise((resolve, reject) => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+    
+        this.http.post(apiUrl+'/users/signup', JSON.stringify(data), {headers: headers})
+          .subscribe(res => {
+            resolve(res);
+            this.events.publish('user:signup');
+            
+          }, (err) => {
+            reject(err);
+          });
+      });
   }
 
   logout(){
-    this.storage.remove(this.isLoggedIn);
+    this.storage.remove(this.HAS_LOGGED_IN);
+    this.events.publish('user:logout')
   }
 
 }

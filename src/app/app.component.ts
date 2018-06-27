@@ -3,8 +3,8 @@ import { IonicPage, Platform, NavController, MenuController, Nav, Events } from 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
+import { AuthServiceProvider } from '../providers/auth-service'
 
-import { AuthServiceProvider } from '../providers/auth-service';
 
 
 export interface PageInterface {

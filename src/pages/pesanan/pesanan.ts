@@ -15,4 +15,9 @@ export class PesananPage {
     this.navCtrl.push('KebutuhaneventPage');
   }
 
+  addPesanan()
+{
+  this.navCtrl.push('KebutuhaneventPage')
+}
+
 }

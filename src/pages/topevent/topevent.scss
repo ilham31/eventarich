@@ -1,0 +1,66 @@
+page-topevent {
+    ion-card.cards-list-demo ion-card-header {
+        color: map-get($colors, primary);
+}
+
+ion-toolbar.lebar-menu{
+    height: 100px;
+}
+// ion-header.lebar-menu{
+//     height: 100px;
+// }
+.badge-circle{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: 100%;
+    padding: 5%;
+    border-radius: 50%;
+}
+
+.navbar_home {
+    width: 100%;
+    .title_home {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .search_home {
+        margin-right: 4%;
+    }
+}
+
+.card_home {
+    .footer_card {
+        padding: 10px;
+        #tanggal_badge {
+            font-size: 4vw;
+            padding-top: 15px;
+        }
+        
+        .card_content {
+            display: inline-block;
+            width: auto;
+            margin-left: -3%;
+            #event_title {
+                font-weight: 600;
+            }
+            // #organizer_event {
+
+            // }
+            #hashtag_event {
+                font-size: 3vw;
+            }
+        }
+        .col_badge {
+            // border: solid;
+        }
+        .col_content {
+            // border: solid;
+        }
+        
+
+    }
+}
+
+}

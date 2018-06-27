@@ -42,13 +42,13 @@
       <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
 
       <ion-item no-padding>
-          <ion-label stacked color="dark">Alamat Pemesanan</ion-label>
-          <ion-input type="text" [(ngModel)]="alamat" name="alamatPesanan" #add="ngModel" required></ion-input>
+        <ion-label stacked color="dark">Alamat Pemesanan</ion-label>
+        <ion-input type="text" [(ngModel)]="alamat" name="alamatPesanan" #add="ngModel" required></ion-input>
       </ion-item>
       <p ion-text [hidden]="add.valid || submitted == false" color="danger" padding-left class="teksWarning">Alamat harus diisi</p>
     </ion-list>
-    
-      <button class="button_bottom" ion-button full ion-button color="eventarich" type="submit">Pesan</button>
+  
+    <button class="button_bottom" ion-button full ion-button color="eventarich">Tambahkan Pesanan</button>
   
   </form>
         

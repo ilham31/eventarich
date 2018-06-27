@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
+
+import { AuthServiceProvider } from '../../providers/auth-service';
 
 @IonicPage()
 @Component({
@@ -8,13 +10,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TabsPage {
 
-  tab1Root = 'SetelahloginPage';
-  tab2Root = 'TopeventPage';
+  tab1Root = 'HomePage';
+  tab2Root = 'SetelahloginPage';
 
-  constructor(public navCtrl: NavController) {}
+  variable: any;
 
-  ionViewDidLoad(){
-    console.log('Dibuka Tabsnya');
+  mySelectedIndex: number;
+
+  constructor(public navParams: NavParams,
+              public auth: AuthServiceProvider
+              ) {
+    this.mySelectedIndex = navParams.data.tabIndex || 0; 
+
+    this.auth.hasLoggedIn().then((value) => {
+      if(value) {
+        this.variable = true;
+      } else {
+        this.variable = false;
+      }
+    });
   }
 
 }

@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
-import { Camera,CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { NgForm } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
 
-
-/**
- * Generated class for the EditprofilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-editprofile',
@@ -80,10 +73,6 @@ export class EditprofilePage {
       const result =  await this.camera.getPicture(options);
 
       this.image = 'data:image/jpeg;base64,' + result;
-
-     
-      
-
 
     }
     catch (e) {

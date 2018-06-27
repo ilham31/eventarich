@@ -3,12 +3,9 @@ page-setelahlogin {
         color: map-get($colors, primary);
     }
 
-ion-toolbar.lebar-menu{
-    height: 100px;
-}
-// ion-header.lebar-menu{
-//     height: 100px;
-// }
+    ion-toolbar.lebar-menu{
+        height: 100px;
+    }
 
     ion-card {
         .footer_card {
@@ -37,9 +34,4 @@ ion-toolbar.lebar-menu{
 
         }
     }
-
-
-
-
-
 }

@@ -1,17 +1,17 @@
 <ion-content padding>
-    <img class="displayed"   height="200 px" width="200 px" img src="assets/imgs/eventarich.jpg">
-    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+    <img class="displayed" height="200 px" width="200 px" img src="assets/imgs/eventarich.jpg">
+    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
       <ion-list>
           
           <ion-item class="form_login">
             <ion-label stacked>Email</ion-label>
-            <ion-input type="email"  [(ngModel)]="loginData.email" name="email" #mail="ngModel" required></ion-input>
+            <ion-input type="email" [(ngModel)]="loginProp.email" name="email" name="email" #mail="ngModel" required></ion-input>
           </ion-item>
           <p ion-text [hidden]="mail.valid || submitted == false" color="danger" padding-left class="teksWarning">Email harus diisi</p>
         
           <ion-item class="form_login">
             <ion-label stacked>Password</ion-label>
-            <ion-input  #pwd ="ngModel" [(ngModel)]="loginData.password" name="password" type="{{status}}" #pass="ngModel"  required></ion-input>
+            <ion-input #pwd ="ngModel" [(ngModel)]="loginProp.password" name="password" type="{{status}}" #pass="ngModel"  required></ion-input>
             <button class="passHide_login" [hidden]="look == false" (click)="showPassword()" ion-button clear color="dark" type="button" outline item-end> <ion-icon name="md-eye" class='icon' color="primary2"> </ion-icon> </button>
             <button class="passHide_login" [hidden]="look == true" (click)="hidePassword()" ion-button clear color="dark" type="button" outline item-end> <ion-icon name="md-eye-off" class='icon' color="primary2"> </ion-icon> </button>
           </ion-item>

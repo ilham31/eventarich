@@ -17,10 +17,6 @@ export class KebutuhaneventPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad KebutuhaneventPage');
-  }
-
   pesan(form : NgForm)
   {
     this.submitted=true;

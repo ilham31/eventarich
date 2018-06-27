@@ -11,9 +11,6 @@ export class SearchPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
-  }
   filter()
   {
     this.navCtrl.push('FilterPage');

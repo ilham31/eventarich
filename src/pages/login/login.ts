@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from './../../providers/auth-service';
+
+import { UserOptions } from '../../interfaces/user-options';
 import { NgForm } from '@angular/forms';
-// import { SetelahloginPage } from '../setelahlogin/setelahlogin';
-// import { RegisterPage } from '../register/register';
-// import { HomePage } from './../home/home';
+
+
+// import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -15,6 +17,11 @@ import { NgForm } from '@angular/forms';
 
 export class LoginPage {
 
+  loginProp: UserOptions = { 
+    email: '', 
+    password: '',
+  };
+
   submitted = false;
   status = "password";
   look = true;
@@ -22,10 +29,6 @@ export class LoginPage {
   token: string;
   
   loading: any;
-  loginData = {
-    email: '',
-    password: ''
-  };
   data : any;
 
 
@@ -37,31 +40,19 @@ export class LoginPage {
               public storage : Storage,
              ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-  login(form : NgForm) {
-      this.submitted=true;
-      if(form.valid)
-      {
-            this.showLoader();    
-            this.authService.login(this.loginData).then((result) => {
-              this.loading.dismiss();
-              this.data = result;
-              console.log("nilai token",this.data.token);
-              localStorage.setItem("token",this.data.token);
-              // this.storage.set("token",this.data.token);
-              
-              this.navCtrl.setRoot('SetelahloginPage',);
+  onLogin(form: NgForm) {
+      this.showLoader();
+      this.submitted = true;
+      if(form.valid) {
+        this.authService.login(this.loginProp).then((result) => {
+          this.loading.dismiss();
+          this.navCtrl.setRoot('TabsPage');
           }, (err) => {
             this.loading.dismiss();
             this.presentToast("Username atau Password tidak valid");
             console.log(err);
-          });;
-      }
-      else
-      {
+        });
+      } else {
         this.presentToast("Form belum terisi");
       }
     }

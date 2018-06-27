@@ -73,9 +73,11 @@ export class AuthServiceProvider {
   }
 
   logout(){
+    this.storage.remove("token");
     this.storage.remove(this.HAS_LOGGED_IN);
     this.events.publish('user:logout');
-    this.storage.remove("token");
+    
+    
   }
 
   getData()
@@ -86,7 +88,7 @@ export class AuthServiceProvider {
       headers.append("Authorization","Bearer "+ this.token);
       this.http.get(apiUrl+'/users', {headers: headers})
         .subscribe(res => {
-          resolve(res);
+          resolve(res.json());
 
         }, (err) => {
           reject(err);

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,ActionSheetController, ToastControl
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { NgForm } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
+import { EventProvider } from '../../providers/event/event';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class TambaheventPage {
   myDate : string = '';
   kota : string ='';
   deskripsiEvent : string ='';
-
+  data:any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -28,95 +29,110 @@ export class TambaheventPage {
     public toastCtrl: ToastController, 
     public platform: Platform, 
     public loadingCtrl: LoadingController,
-    public authService: AuthServiceProvider,
+    public eventprov:EventProvider,
  ) {
 
   }
 
-  uploadPicture() {
+  // uploadPicture() {
     
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Pilihan',
-      buttons: [
-        {
-          text: 'Ambil Gambar Baru',
-          role: 'ambilGambar',
-          handler: () => {
-            this.takePicture();
-          }
-        },
-        {
-          text: 'Pilih Dari Galleri',
-          role: 'gallery',
-          handler: () => {
-            this.getPhotoFromGallery();
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'Pilihan',
+  //     buttons: [
+  //       {
+  //         text: 'Ambil Gambar Baru',
+  //         role: 'ambilGambar',
+  //         handler: () => {
+  //           this.takePicture();
+  //         }
+  //       },
+  //       {
+  //         text: 'Pilih Dari Galleri',
+  //         role: 'gallery',
+  //         handler: () => {
+  //           this.getPhotoFromGallery();
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
 
 
-  async takePicture(){
-    try {
-      const options : CameraOptions = {
-        quality: 50, //to reduce img size
-        targetHeight: 600,
-        targetWidth: 600,
-        destinationType: this.camera.DestinationType.DATA_URL, //to make it base64 image
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType:this.camera.MediaType.PICTURE,
-        correctOrientation: true
-      }
+  // async takePicture(){
+  //   try {
+  //     const options : CameraOptions = {
+  //       quality: 50, //to reduce img size
+  //       targetHeight: 600,
+  //       targetWidth: 600,
+  //       destinationType: this.camera.DestinationType.DATA_URL, //to make it base64 image
+  //       encodingType: this.camera.EncodingType.JPEG,
+  //       mediaType:this.camera.MediaType.PICTURE,
+  //       correctOrientation: true
+  //     }
 
-      const result =  await this.camera.getPicture(options);
+  //     const result =  await this.camera.getPicture(options);
 
-      this.image = 'data:image/jpeg;base64,' + result;
+  //     this.image = 'data:image/jpeg;base64,' + result;
 
      
       
 
 
-    }
-    catch (e) {
-      console.error(e);
-      alert("error");
-    }
+  //   }
+  //   catch (e) {
+  //     console.error(e);
+  //     alert("error");
+  //   }
 
-  }
+  // }
 
-  getPhotoFromGallery(){
-    this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        sourceType     : this.camera.PictureSourceType.PHOTOLIBRARY,
-        targetWidth: 600,
-        targetHeight: 600
-    }).then((imageData) => {
-      // this.base64Image = imageData;
-      // this.uploadFoto();
-      this.image = 'data:image/jpeg;base64,' + imageData;
+  // getPhotoFromGallery(){
+  //   this.camera.getPicture({
+  //       destinationType: this.camera.DestinationType.DATA_URL,
+  //       sourceType     : this.camera.PictureSourceType.PHOTOLIBRARY,
+  //       targetWidth: 600,
+  //       targetHeight: 600
+  //   }).then((imageData) => {
+  //     // this.base64Image = imageData;
+  //     // this.uploadFoto();
+  //     this.image = 'data:image/jpeg;base64,' + imageData;
       
-  //     // const picture = storage().ref('picture/profileDonatur/'+ this.id_donatur);
-  //     // picture.putString(this.image, 'data_url');
+  // //     // const picture = storage().ref('picture/profileDonatur/'+ this.id_donatur);
+  // //     // picture.putString(this.image, 'data_url');
       
-  //     // storage().ref().child('picture/profileDonatur/'+ this.id_donatur).getDownloadURL().then(url =>{
-  //     //   // ini kedata base
-  //     //   this.db.object('/donatur/'+ this.id_donatur).update({
-  //     //   image: url })
-  //     // })
+  // //     // storage().ref().child('picture/profileDonatur/'+ this.id_donatur).getDownloadURL().then(url =>{
+  // //     //   // ini kedata base
+  // //     //   this.db.object('/donatur/'+ this.id_donatur).update({
+  // //     //   image: url })
+  // //     // })
 
-      }, (err) => {
-         alert("error");
+  //     }, (err) => {
+  //        alert("error");
         
-    });
-  }
+  //   });
+  // }
   addEvent( form : NgForm)
   {
     this.submitted=true;
     if(form.valid)
     {
-      console.log(this.image,this.eventName,this.kota,this.deskripsiEvent,this.myDate)
+      let eventData = {
+        title:this.eventName,
+        date:this.myDate,
+        city:this.kota,
+        description:this.deskripsiEvent
+      };
+      console.log("data",eventData);
+      this.eventprov.tambahEvent(eventData).then((result)=>{
+      console.log("data",result);
+
+      }, (err) => {
+        // this.loading.dismiss();
+        console.log(err);
+      });
+
+      console.log(this.eventName,this.kota,this.deskripsiEvent,this.myDate)
     }
     else
     {

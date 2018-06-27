@@ -10,7 +10,7 @@ let apiUrl = 'http://localhost:3000';
 export class AuthServiceProvider {
   data:any;
   message:any;
-  token:any;
+  public token:any;
   tes:any;
 
   HAS_LOGGED_IN = 'hasLoggedIn';

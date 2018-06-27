@@ -22,6 +22,10 @@ import { MyApp } from './app.component';
 
  import { AuthServiceProvider } from '../providers/auth-service';
  import { IonicStorageModule } from '@ionic/storage';
+ import { File } from '@ionic-native/file';
+ import { Transfer } from '@ionic-native/transfer';
+ import { FilePath } from '@ionic-native/file-path';
+ import { Camera } from '@ionic-native/camera';
 // import { TabsPage } from '../pages/tabs/tabs';
 // import { TopeventPage } from '../pages/topevent/topevent';
 // import { EditprofilePage } from '../pages/editprofile/editprofile';
@@ -47,6 +51,10 @@ import { MyApp } from './app.component';
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
   ]

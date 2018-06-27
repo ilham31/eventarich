@@ -74,7 +74,24 @@ export class AuthServiceProvider {
 
   logout(){
     this.storage.remove(this.HAS_LOGGED_IN);
-    this.events.publish('user:logout')
+    this.events.publish('user:logout');
+    this.storage.remove("token");
+  }
+
+  getData()
+  {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append("Authorization","Bearer "+ this.token);
+      this.http.get(apiUrl+'/users', {headers: headers})
+        .subscribe(res => {
+          resolve(res);
+
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
 
 }

@@ -10,14 +10,22 @@ import{AuthServiceProvider} from '../../providers/auth-service';
   templateUrl: 'profil.html',
 })
 export class ProfilPage {
-
+  data:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage,public authService: AuthServiceProvider,) {
+    this.loadProfile();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilPage');
   }
-
+loadProfile()
+{
+  this.authService.getData().then((datas)=>{
+    this.data=datas;
+    console.log("data profil",this.data);
+    console.log("profil",this.data.name);
+  })
+}
   goProfileMore()
   {
     this.navCtrl.push('ProfilMorePage');

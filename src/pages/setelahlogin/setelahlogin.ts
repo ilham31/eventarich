@@ -17,45 +17,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SetelahloginPage {
   // isLoggedIn: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // if(localStorage.getItem("token")) {
-    //   this.isLoggedIn = true;
-    //   console.log("ada akun");
-    // }
-    // else{
-    //   console.log("ga ada akun");
-    // }
-  
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad SetelahloginPage');
-  // }
+
   searchPage()
   {
     this.navCtrl.push('SearchPage');
   }
-  // kebutuhan()
-  // {
-  //     this.navCtrl.push(KebutuhaneventPage);
-  // }
+  
   addEvent()
   {
       this.navCtrl.push('TambaheventPage');
   }
+
   lihatEvent(){
     this.navCtrl.push('EventPage');
   }
-  //vendorkami()
-  // {
-  //   this.navCtrl.push(VendorkamiPage)
-  // }
-  // akun()
-  // {
-  //   this.navCtrl.push(ProfilPage);
-  // }
-  // lihatProfil()
-  // {
-  //   this.navCtrl.push(ProfilPage);
-  // }
-
+  
 }

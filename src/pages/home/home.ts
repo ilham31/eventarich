@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { App, NavController, MenuController, IonicPage } from 'ionic-angular';
 
+import { AuthServiceProvider } from '../../providers/auth-service';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -8,8 +10,20 @@ import { App, NavController, MenuController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
+  variable: boolean;
+
   constructor(public navCtrl: NavController,
-              public menuCtrl : MenuController) {
+              public menuCtrl : MenuController,
+              public auth: AuthServiceProvider
+            ) {
+
+    this.auth.hasLoggedIn().then((value) => {
+      if(value) {
+        this.variable = true;
+      } else {
+        this.variable = false;
+      }
+    });
 
   }
   login(){

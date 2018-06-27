@@ -53,6 +53,7 @@ export class LoginPage {
             console.log(err);
         });
       } else {
+        this.loading.dismiss();
         this.presentToast("Form belum terisi");
       }
     }

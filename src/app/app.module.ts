@@ -20,9 +20,9 @@ import { MyApp } from './app.component';
 // import { TambaheventPage }from '../pages/tambahevent/tambahevent';
 // import { VendorkamiPage }from '../pages/vendorkami/vendorkami';
 
- import { AuthServiceProvider } from '../providers/auth-service';
- import { IonicStorageModule } from '@ionic/storage';
- import { Camera } from '@ionic-native/camera';
+import { AuthServiceProvider } from '../providers/auth-service';
+import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/camera';
 import { OrderProvider } from '../providers/order/order';
 import { EventProvider } from '../providers/event/event';
 // import { TabsPage } from '../pages/tabs/tabs';

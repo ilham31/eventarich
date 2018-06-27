@@ -54,7 +54,6 @@ export class LoginPage {
         });
       } else {
         this.loading.dismiss();
-          
         this.presentToast("Form belum terisi");
       }
     }

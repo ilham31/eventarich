@@ -1,6 +1,9 @@
 @import "../src/theme/variables";
 
 page-login {
+    .teksWarning{
+        font-size: 0.8em;
+}
     .displayed {
         display: block;
         margin-left: auto;

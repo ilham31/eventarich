@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from './../../providers/auth-service';
+
 import { UserOptions } from '../../interfaces/user-options';
+import { NgForm } from '@angular/forms';
+
 
 // import { Storage } from '@ionic/storage';
-
-
 
 @IonicPage()
 @Component({
@@ -30,24 +31,30 @@ export class LoginPage {
   loading: any;
   data : any;
 
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public authService: AuthServiceProvider,
               public loadCtrl: LoadingController,
-              private toastCtrl: ToastController
+              private toastCtrl: ToastController,
+              public storage : Storage,
              ) {}
 
-  onLogin() {
+  onLogin(form: NgForm) {
       this.showLoader();
-      this.submitted = true;    
-      this.authService.login(this.loginProp).then((result) => {
-        this.loading.dismiss();
-        this.navCtrl.setRoot('TabsPage');
-      }, (err) => {
-        this.loading.dismiss();
-        this.presentToast(err);
-        console.log(err);
-      });;
+      this.submitted = true;
+      if(form.valid) {
+        this.authService.login(this.loginProp).then((result) => {
+          this.loading.dismiss();
+          this.navCtrl.setRoot('TabsPage');
+          }, (err) => {
+            this.loading.dismiss();
+            this.presentToast("Username atau Password tidak valid");
+            console.log(err);
+        });
+      } else {
+        this.presentToast("Form belum terisi");
+      }
     }
 
   registerPage() {

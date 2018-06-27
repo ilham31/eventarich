@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 import { AuthServiceProvider } from '../../providers/auth-service';
+import { NgForm } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -20,6 +21,7 @@ export class RegisterPage {
     phone_number: number;
     password: string;
   data : any;
+  
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -28,25 +30,29 @@ export class RegisterPage {
               private toastCtrl: ToastController
             ) {}
 
-  doSignup() {
-    let regData = { 
-      email:this.email, 
-      password:this.password,
-      name:this.username,
-      address:this.address,
-      phone_number:this.phone_number 
-    };
-    this.showLoader();
-    this.authService.signup(regData).then((result) => {
-      this.loading.dismiss();
-      this.navCtrl.push('LoginPage');
-    }, (err) => {
-      this.loading.dismiss();
-      this.presentToast(err);
-      console.log(err);
-    });
-      console.log(this.email,this.address)
-   }
+  doSignup(form: NgForm) {
+    this.submitted = true;
+    if(form.valid) {
+      let regData = { 
+        email:this.email, 
+        password:this.password,
+        name:this.username,
+        address:this.address,
+        phone_number:this.phone_number 
+      };
+      this.showLoader();
+      this.authService.signup(regData).then((result) => {
+        this.loading.dismiss();
+        this.navCtrl.push('LoginPage');
+      }, (err) => {
+        this.loading.dismiss();
+        this.presentToast(err);
+        console.log(err);
+      });
+    } else {
+      this.presentToast("form belum terisi");
+    }
+  }
 
   showPassword(){
     this.status = "text";

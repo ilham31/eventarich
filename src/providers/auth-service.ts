@@ -63,6 +63,14 @@ export class AuthServiceProvider {
           });
       });
   }
+ 
+  cektoken()
+  {
+      this.storage.get('token').then((val)=>{
+        return val;
+      })
+     
+  }
 
   logout(){
     this.storage.remove(this.HAS_LOGGED_IN);

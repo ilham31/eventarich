@@ -1,9 +1,3 @@
-<!--
-  Generated template for the TambaheventPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header  no-border>
     <ion-navbar transparent>
        </ion-navbar>
@@ -23,30 +17,33 @@
   
   
 <ion-col>
+    <form #editProfil="ngForm" (ngSubmit)="edit(editProfil)" novalidate>
     <ion-list>
         <ion-item>
             <ion-label color="eventarich" stacked>Nama Display</ion-label>
-            <ion-input class="text-input" type="text" placeholder="BEM - G"></ion-input>
+            <ion-input class="text-input" type="text" placeholder="BEM - G"  [(ngModel)]="username" name="Username" #uname="ngModel" required></ion-input>
           </ion-item>
-    
+          <p ion-text [hidden]="uname.valid || submitted == false" color="danger" padding-left class="teksWarning">Username harus diisi</p>
+
           <ion-item>
-              <ion-label color="eventarich" stacked>Deskripsi</ion-label>
-              <ion-input class="text-input" type="text" placeholder="Isi deskripsi acara"></ion-input>
+              <ion-label color="eventarich" stacked>Email</ion-label>
+              <ion-input class="text-input" type="email" placeholder="email" [(ngModel)]="email" name="Email" #mail ="ngModel"  required></ion-input>
           </ion-item>
+          <p ion-text [hidden]="mail.valid || submitted == false" color="danger" padding-left class="teksWarning">Email harus diisi</p>
     
           <ion-item>
              <ion-label color="eventarich" stacked>No Hp</ion-label>
-             <ion-input class="text-input" type="number" placeholder="08746721xxx"></ion-input>
+             <ion-input class="text-input" type="number" placeholder="08746721xxx" #hp="ngModel" [(ngModel)]="phone_number" name="phone" [ngModelOptions]="{standalone: true}" required></ion-input>
            </ion-item>
-    
+           <p ion-text [hidden]="hp.valid || submitted == false" color="danger" padding-left class="teksWarning">Nomor Handphone harus diisi</p>
+
             <ion-item>
                <ion-label color="eventarich" stacked>Alamat</ion-label>
-               <ion-input class="text-input" type="text" placeholder="FMIPA"></ion-input>
+               <ion-input class="text-input" type="text" placeholder="FMIPA"  #alamat="ngModel" [(ngModel)]="address" name="Address" required></ion-input>
            </ion-item>
+           <p ion-text [hidden]="alamat.valid || submitted == false" color="danger" padding-left class="teksWarning">Alamat harus diisi</p>
     </ion-list>
-</ion-col>  
+    </ion-col>  
+    <button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Edit profile</button>
+    </form>
 </ion-content>
-<ion-footer no-shadow>
-  <button ion-button full ion-button color="eventarich">Edit profile</button>
-
-</ion-footer>

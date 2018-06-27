@@ -11,9 +11,7 @@ export class PesananPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  addPesanan() {
-    this.navCtrl.push('KebutuhaneventPage');
-  }
+ 
 
   addPesanan()
 {

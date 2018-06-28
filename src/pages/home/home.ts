@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { App, NavController, MenuController, IonicPage } from 'ionic-angular';
 
 import { AuthServiceProvider } from '../../providers/auth-service';
+import { EventProvider } from '../../providers/event';
 
 @IonicPage()
 @Component({
@@ -11,11 +12,13 @@ import { AuthServiceProvider } from '../../providers/auth-service';
 export class HomePage {
 
   variable: boolean;
-
+  event : any;
   constructor(public navCtrl: NavController,
               public menuCtrl : MenuController,
-              public auth: AuthServiceProvider
-            ) {
+              public auth: AuthServiceProvider,
+              public eventProv : EventProvider,
+              ) 
+  {
 
     this.auth.hasLoggedIn().then((value) => {
       if(value) {
@@ -24,7 +27,19 @@ export class HomePage {
         this.variable = false;
       }
     });
+    this.loadEvent();
+  }
 
+  loadEvent()
+  {
+    this.eventProv.getAllEvent().then((event)=>{
+      this.event=event;
+      console.log("event semua",this.event);
+    })
+  }
+  addEvent()
+  {
+    this.navCtrl.push('TambaheventPage')
   }
   login(){
     this.navCtrl.push('LoginPage');
@@ -44,10 +59,6 @@ export class HomePage {
   lihatprofil()
   {
     this.navCtrl.push('EditprofilePage');
-  }
-  oderlogistik()
-  {
-    this.navCtrl.push('OrderlogistikPage');
   }
 
 }

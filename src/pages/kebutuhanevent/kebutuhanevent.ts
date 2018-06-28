@@ -21,11 +21,12 @@ export class KebutuhaneventPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController, public orderprovider : OrderProvider, public auth: AuthServiceProvider) {
     // this.auth.cekToken();
-    this.assignToken();
+    this.getToken();
   }
 
-  assignToken() {
-    this.auth.cekToken().then((data) => {
+
+  getToken() {
+    this.orderprovider.getToken().then((data) => {
       this.token = data;
       console.log('ionViewDidLoad ProfilPage');
       console.log("token", this.token);
@@ -75,4 +76,10 @@ export class KebutuhaneventPage {
 
     toast.present();
   }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ProfilPage');
+    console.log("token",this.token);
+    this.getToken();
+  }
+
 }

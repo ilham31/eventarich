@@ -39,13 +39,6 @@ export class AuthServiceProvider {
     });
   }
 
-  logout(){
-    this.storage.remove("token");
-    this.storage.remove(this.HAS_LOGGED_IN);
-    this.events.publish('user:logout');
-  }
-
-
   login(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
@@ -84,7 +77,18 @@ export class AuthServiceProvider {
       });
   }
 
-  getData() {
+  logout(){
+    this.storage.remove("token");
+    this.storage.remove(this.HAS_LOGGED_IN);
+    this.events.publish('user:logout');
+    this.storage.clear
+    
+    
+    
+  }
+
+  getData()
+  {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       console.log('Token', this.token);

@@ -45,5 +45,39 @@ constructor(  public http: Http,
         });
     });
   }  
+
+  getEventIdUser()
+  {
+    return new Promise((resolve, reject) => {
+      var pala = new Headers();
+      pala.append('Content-Type', 'application/json');
+      pala.append("Authorization","Bearer "+ this.token);
+      this.http.get(apiUrl+'/events/user', {headers: pala})
+        .subscribe(res => {
+          console.log(res);
+          resolve(res.json());
+          this.data = res.json();
+         }, (err) => {
+          reject(err);
+        });
+  });
+  }
+
+  getAllEvent()
+  {
+    return new Promise((resolve, reject) => {
+      var pala = new Headers();
+      pala.append('Content-Type', 'application/json');
+      pala.append("Authorization","Bearer "+ this.token);
+      this.http.get(apiUrl+'/events', {headers: pala})
+        .subscribe(res => {
+          console.log(res);
+          resolve(res.json());
+          this.data = res.json();
+         }, (err) => {
+          reject(err);
+        });
+  });
+  }
 }
 

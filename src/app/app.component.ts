@@ -27,6 +27,7 @@ export class MyApp {
   pesananPage = 'PesananPage';
   profilePage = 'ProfilPage';
   tes:any;
+  tabBarElement: any;
 
   rootPage:any = 'TabsPage';
   @ViewChild('nav') nav: Nav;
@@ -57,6 +58,7 @@ export class MyApp {
               
   {
     this.initApp();
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
 
     this.auth.hasLoggedIn().then((hasLoggedIn) => {
       this.enableMenu(hasLoggedIn === true);
@@ -65,6 +67,15 @@ export class MyApp {
     this.listenToLoginEvents();
     
   }
+
+  ionViewWillEnter(){
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave(){
+    this.tabBarElement.style.display = 'flex';
+  }
+
 
   initApp() {
     this.platform.ready().then(() => {

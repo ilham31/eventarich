@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ToastController,Loading } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
-import { OrderProvider } from '../../providers/order/order';
+
+import { OrderProvider } from '../../providers/order';
+import { AuthServiceProvider } from './../../providers/auth-service';
 
 @IonicPage()
 @Component({
@@ -17,13 +19,16 @@ export class KebutuhaneventPage {
   submitted = false;
   token : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController, public orderprovider : OrderProvider) {
-    this.getToken();
+  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController, public orderprovider : OrderProvider, public auth: AuthServiceProvider) {
+    // this.auth.cekToken();
+    this.assignToken();
   }
 
-  getToken() {
-    this.orderprovider.getToken().then((data) => {
+  assignToken() {
+    this.auth.cekToken().then((data) => {
       this.token = data;
+      console.log('ionViewDidLoad ProfilPage');
+      console.log("token", this.token);
     });
   }
 
@@ -70,9 +75,4 @@ export class KebutuhaneventPage {
 
     toast.present();
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilPage');
-    console.log("token",this.token);
-  }
-
 }

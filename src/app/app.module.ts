@@ -8,28 +8,12 @@ import { HttpModule } from '@angular/http';
 
 
 import { MyApp } from './app.component';
-// import { HomePage } from '../pages/home/home';
-// import { LoginPage } from'../pages/login/login';
-// import { SetelahloginPage } from '../pages/setelahlogin/setelahlogin';
-// import { SearchPage } from '../pages/search/search';
-// import { FilterPage } from '../pages/filter/filter';
-// import { ProfilPage } from '../pages/profil/profil';
-// import { RegisterPage }from '../pages/register/register';
-// import { KebutuhaneventPage }from '../pages/kebutuhanevent/kebutuhanevent';
-// import { EventPage } from '../pages/event/event';
-// import { TambaheventPage }from '../pages/tambahevent/tambahevent';
-// import { VendorkamiPage }from '../pages/vendorkami/vendorkami';
 
 import { AuthServiceProvider } from '../providers/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
-import { OrderProvider } from '../providers/order/order';
-import { EventProvider } from '../providers/event/event';
-// import { TabsPage } from '../pages/tabs/tabs';
-// import { TopeventPage } from '../pages/topevent/topevent';
-// import { EditprofilePage } from '../pages/editprofile/editprofile';
-// import { OrderlogistikPage } from '../pages/orderlogistik/orderlogistik';
-
+import { OrderProvider } from '../providers/order';
+import { EventProvider } from '../providers/event';
 
 @NgModule({
   declarations: [

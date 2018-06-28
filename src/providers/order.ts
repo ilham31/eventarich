@@ -10,12 +10,16 @@ let apiUrl = 'http://localhost:3000';
 export class OrderProvider {
 data : any;
 token : any;
-  constructor(
-    public http: Http,
-    private storage: Storage) {
-    this.assignToken();
-    console.log('Hello OrderProvider Provider');
-  }
+dataOrder:any;
+constructor(
+  public http: Http,
+  private storage: Storage) {
+  
+  this.assignToken();
+  this.ambildata();
+
+  console.log('Hello OrderProvider Provider');
+}
 
 getToken() {
   return this.storage.get("token").then((val)=>
@@ -30,8 +34,13 @@ assignToken() {
   });
 }
 
-order(data)
-  {
+ambildata() {
+  this.getOrder().then((datas)=>{
+    this.dataOrder=datas;
+  });
+}
+
+order(data) {
     return new Promise((resolve, reject) => {
       var pala = new Headers();
       pala.append('Content-Type', 'application/json');
@@ -40,12 +49,26 @@ order(data)
         .subscribe(res => {
           console.log(res);
           resolve(res.json());
-          this.data = res.json();
-          
-          // console.log('response',this.data);
+          this.data = res.json();          
           }, (err) => {
           reject(err);
         });
+    });
+  }
+
+  getOrder() {
+    return new Promise((resolve,reject)=>{
+      var pala = new Headers();
+      console.log(this.token);
+      pala.append('Content-Type', 'application/json');
+      pala.append("Authorization","Bearer "+ this.token);
+      this.http.get(apiUrl+"/orders", {headers: pala}).subscribe(res => {
+        console.log(res);
+        resolve(res.json());
+        this.data = res.json();        
+        }, (err) => {
+        reject(err);
+      });
     });
   }
 

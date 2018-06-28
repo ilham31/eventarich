@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams,ActionSheetController, ToastControl
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { NgForm } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
-import { EventProvider } from '../../providers/event/event';
+import { EventProvider } from '../../providers/event';
 
 @IonicPage()
 @Component({

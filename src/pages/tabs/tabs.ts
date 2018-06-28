@@ -16,11 +16,12 @@ export class TabsPage {
   variable: any;
 
   mySelectedIndex: number;
+  tabBarElement: any;
 
   constructor(public navParams: NavParams,
               public auth: AuthServiceProvider
               ) {
-    this.mySelectedIndex = navParams.data.tabIndex || 0; 
+    this.mySelectedIndex = navParams.data.tabIndex || 0;
 
     this.auth.hasLoggedIn().then((value) => {
       if(value) {
@@ -30,5 +31,4 @@ export class TabsPage {
       }
     });
   }
-
 }

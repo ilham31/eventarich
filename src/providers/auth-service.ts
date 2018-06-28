@@ -8,16 +8,43 @@ let apiUrl = 'http://localhost:3000';
 
 @Injectable()
 export class AuthServiceProvider {
-  data:any;
-  message:any;
+  public data:any;
+  public message:any;
   public token:any;
-  tes:any;
+  public tes:any;
 
   HAS_LOGGED_IN = 'hasLoggedIn';
 
   constructor(  public http: Http,
                 private storage: Storage,
-                public events: Events ) {}
+                public events: Events ) {
+                  this.assignToken();
+    }
+
+  hasLoggedIn(): Promise<boolean> {
+    return this.storage.get(this.HAS_LOGGED_IN).then((value) => { 
+      return value === true;
+    });
+  };
+
+  cekToken() {
+    return this.storage.get('token').then((val)=>{
+      return val;
+    })
+  }
+
+  assignToken() {
+    this.cekToken().then((data) => {
+      this.token = data;
+    });
+  }
+
+  logout(){
+    this.storage.remove("token");
+    this.storage.remove(this.HAS_LOGGED_IN);
+    this.events.publish('user:logout');
+  }
+
 
   login(credentials) {
     return new Promise((resolve, reject) => {
@@ -41,13 +68,6 @@ export class AuthServiceProvider {
     });
   }
 
-  hasLoggedIn(): Promise<boolean> {
-    return this.storage.get(this.HAS_LOGGED_IN).then((value) => { 
-      return value === true;
-    });
-  };
-
-
   signup(data) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
@@ -63,18 +83,20 @@ export class AuthServiceProvider {
           });
       });
   }
- 
-  cektoken()
-  {
-      this.storage.get('token').then((val)=>{
-        return val;
-      })
-     
-  }
 
-  logout(){
-    this.storage.remove(this.HAS_LOGGED_IN);
-    this.events.publish('user:logout')
+  getData() {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      console.log('Token', this.token);
+      headers.append('Content-Type', 'application/json');
+      headers.append("Authorization","Bearer "+ this.token);
+      this.http.get(apiUrl+'/users', {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
 
 }

@@ -20,6 +20,7 @@ export class KebutuhaneventPage {
   this.getToken();
   }
 
+
   getToken() {
     this.orderprovider.getToken().then((data) => {
       this.token = data;
@@ -73,6 +74,7 @@ export class KebutuhaneventPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilPage');
     console.log("token",this.token);
+    this.getToken();
   }
 
 }

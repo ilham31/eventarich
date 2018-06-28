@@ -76,6 +76,8 @@ export class AuthServiceProvider {
     this.storage.remove("token");
     this.storage.remove(this.HAS_LOGGED_IN);
     this.events.publish('user:logout');
+    this.storage.clear
+    
     
     
   }

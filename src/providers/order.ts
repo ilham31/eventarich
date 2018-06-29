@@ -4,48 +4,55 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
+import { AuthServiceProvider } from './auth-service';
+
 let apiUrl = 'http://localhost:3000';
 
 @Injectable()
 export class OrderProvider {
-data : any;
-token : any;
-dataOrder:any;
+public data : any;
+public token : any;
+public dataOrder:any;
 constructor(
   public http: Http,
-  private storage: Storage) {
+  public storage: Storage,
+  public auth: AuthServiceProvider) {
   
   this.assignToken();
-  this.ambildata();
-
-  console.log('Hello OrderProvider Provider');
+  // this.ambildata();
+  // this.getUserId();
 }
 
-getToken() {
-  return this.storage.get("token").then((val)=>
-  {
-    return val;
+getUserId() {
+  this.auth.getData().then((data) => {
+    console.log(data);
   });
 }
 
+cekToken() {
+  return this.storage.get('token').then((val)=>{
+    return val;
+  })  
+}
+
+
 assignToken() {
-  this.getToken().then((data) => {
+  this.cekToken().then((data) => {
     this.token = data;
   });
 }
-
-ambildata() {
-  this.getOrder().then((datas)=>{
-    this.dataOrder=datas;
-  });
-}
+// ambildata() {
+//   this.getOrder().then((datas)=>{
+//     this.dataOrder = datas;
+//   });
+// }
 
 order(data) {
     return new Promise((resolve, reject) => {
-      var pala = new Headers();
-      pala.append('Content-Type', 'application/json');
-      pala.append("Authorization","Bearer "+ this.token);
-      this.http.post(apiUrl+"/orders", JSON.stringify(data), {headers: pala})
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ this.token);
+      this.http.post(apiUrl+"/orders", JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log(res);
           resolve(res.json());
@@ -58,11 +65,12 @@ order(data) {
 
   getOrder() {
     return new Promise((resolve,reject)=>{
-      var pala = new Headers();
+      var headers = new Headers();
+      this.assignToken();
       console.log(this.token);
-      pala.append('Content-Type', 'application/json');
-      pala.append("Authorization","Bearer "+ this.token);
-      this.http.get(apiUrl+"/orders", {headers: pala}).subscribe(res => {
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ this.token);
+      this.http.get(apiUrl+"/orders", {headers: headers}).subscribe(res => {
         console.log(res);
         resolve(res.json());
         this.data = res.json();        

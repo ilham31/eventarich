@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController,Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController,Loading, LoadingController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 import { OrderProvider } from '../../providers/order';
@@ -18,27 +18,28 @@ export class KebutuhaneventPage {
   myDate :string ='';
   submitted = false;
   token : any;
+  loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController, public orderprovider : OrderProvider, public auth: AuthServiceProvider) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private loadCtrl: LoadingController,public orderprovider : OrderProvider, public auth: AuthServiceProvider) {
     // this.auth.cekToken();
-    this.getToken();
+    // this.getToken();
   }
 
 
-  getToken() {
-    this.orderprovider.getToken().then((data) => {
-      this.token = data;
-      console.log('ionViewDidLoad ProfilPage');
-      console.log("token", this.token);
-    });
-  }
+  // getToken() {
+  //   this.orderprovider.assignToken().then((data) => {
+  //     this.token = data;
+  //     console.log('ionViewDidLoad ProfilPage');
+  //     console.log("token", this.token);
+  //   });
+  // }
 
 
-  pesan(form : NgForm)
-  {
+  pesan(form : NgForm) {
+    this.showLoader();
     this.submitted=true;
-    if(form.valid)
-    {
+    if(form.valid) {
         let orderData = {
           categoryId: this.selectedLeave,
           date: this.myDate,
@@ -49,17 +50,25 @@ export class KebutuhaneventPage {
         console.log("kategori",this.selectedLeave);
         console.log("order data",orderData);
         this.orderprovider.order(orderData).then((result)=>{
-
-      },(err) => {
-        this.presentToast(err);
-        console.log(err);
-      });
+          this.loading.dismiss();
+        },(err) => {
+          this.loading.dismiss();
+          this.presentToast(err);
+          console.log(err);
+        });
       console.log("data",this.selectedLeave,this.myDate,this.budget,this.deskripsiPesanan,this.alamat)
     }
-    else
-    {
+    else {
       this.presentToast("Form tidak valid");
     }
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
+
+    this.loading.present();
   }
 
   presentToast(msg) {
@@ -79,7 +88,7 @@ export class KebutuhaneventPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilPage');
     console.log("token",this.token);
-    this.getToken();
+    // this.getToken();
   }
 
 }

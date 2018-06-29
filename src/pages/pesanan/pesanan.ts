@@ -15,22 +15,7 @@ export class PesananPage {
   public token: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public orderprov : OrderProvider, public auth: AuthServiceProvider, public storage: Storage) {
-    this.assignToken();
     this.loadOrder();
-  }
-
-  cekToken() {
-    return this.storage.get('token').then((val)=>{
-      return val;
-    })
-  }
-
-  assignToken() {
-    this.cekToken().then((data) => {
-      this.token = data;
-      console.log('ionViewDidLoad ProfilPage');
-      console.log("token", this.token);
-    });
   }
 
  loadOrder() {

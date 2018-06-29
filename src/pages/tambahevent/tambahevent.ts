@@ -34,6 +34,34 @@ export class TambaheventPage {
 
   }
 
+  addEvent( form : NgForm) {
+    this.submitted=true;
+    if(form.valid)
+    {
+      let eventData = {
+        title:this.eventName,
+        date:this.myDate,
+        city:this.kota,
+        description:this.deskripsiEvent
+      };
+      console.log("data",eventData);
+      this.eventprov.tambahEvent(eventData).then((result)=>{
+      console.log("data",result);
+
+      }, (err) => {
+        // this.loading.dismiss();
+        console.log(err);
+      });
+
+      console.log(this.eventName,this.kota,this.deskripsiEvent,this.myDate)
+    }
+    else
+    {
+      console.log("form isi dulu")
+    }
+  }
+
+  
   // uploadPicture() {
     
   //   let actionSheet = this.actionSheetCtrl.create({
@@ -112,30 +140,4 @@ export class TambaheventPage {
         
   //   });
   // }
-  addEvent( form : NgForm) {
-    this.submitted=true;
-    if(form.valid)
-    {
-      let eventData = {
-        title:this.eventName,
-        date:this.myDate,
-        city:this.kota,
-        description:this.deskripsiEvent
-      };
-      console.log("data",eventData);
-      this.eventprov.tambahEvent(eventData).then((result)=>{
-      console.log("data",result);
-
-      }, (err) => {
-        // this.loading.dismiss();
-        console.log(err);
-      });
-
-      console.log(this.eventName,this.kota,this.deskripsiEvent,this.myDate)
-    }
-    else
-    {
-      console.log("form isi dulu")
-    }
-  }
 }

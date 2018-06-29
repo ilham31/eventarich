@@ -81,10 +81,7 @@ export class AuthServiceProvider {
     this.storage.remove("token");
     this.storage.remove(this.HAS_LOGGED_IN);
     this.events.publish('user:logout');
-    this.storage.clear
-    
-    
-    
+    this.storage.clear();
   }
 
   getData()
@@ -93,7 +90,7 @@ export class AuthServiceProvider {
       let headers = new Headers();
       console.log('Token', this.token);
       headers.append('Content-Type', 'application/json');
-      headers.append("Authorization","Bearer "+ this.token);
+      headers.append('Authorization','Bearer '+ this.token);
       this.http.get(apiUrl+'/users', {headers: headers})
         .subscribe(res => {
           resolve(res.json());

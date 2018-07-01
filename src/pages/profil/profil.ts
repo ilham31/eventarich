@@ -39,4 +39,8 @@ loadProfile()
   {
     this.navCtrl.push('ProfilMorePage');
   }
+  ionViewWillEnter()
+  {
+    this.loadProfile();
+  }
 }

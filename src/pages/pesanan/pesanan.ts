@@ -15,6 +15,10 @@ export class PesananPage {
   public token: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public orderprov : OrderProvider, public auth: AuthServiceProvider, public storage: Storage) {
+    // this.loadOrder();
+  }
+  ionViewWillEnter()
+  {
     this.loadOrder();
   }
 

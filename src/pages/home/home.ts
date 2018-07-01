@@ -13,12 +13,13 @@ export class HomePage {
 
   variable: boolean;
   event : any;
+
+  token : any = localStorage.getItem('token');
+
   constructor(public navCtrl: NavController,
               public menuCtrl : MenuController,
               public auth: AuthServiceProvider,
-              public eventProv : EventProvider,
-              ) 
-  {
+              public eventProv : EventProvider ) {
 
     this.auth.hasLoggedIn().then((value) => {
       if(value) {
@@ -28,36 +29,38 @@ export class HomePage {
       }
     });
     this.loadEvent();
+
   }
 
-  loadEvent()
-  {
-    this.eventProv.getAllEvent().then((event)=>{
-      this.event=event;
+  loadEvent() {
+    this.eventProv.getAllEvent().then((data)=>{
+      let temp: any = data;
+      this.event = temp.json();
       console.log("event semua",this.event);
-    })
+    });
   }
-  addEvent()
-  {
+
+  addEvent() {
     this.navCtrl.push('TambaheventPage')
   }
+
   login(){
     this.navCtrl.push('LoginPage');
     this.menuCtrl.close();
   }
-  searchPage()
-  {
+
+  searchPage() {
     this.navCtrl.push('SearchPage');
   }
-  lihatEvent(){
+
+  lihatEvent() {
     this.navCtrl.push('EventPage');
   }
-  vendorkami()
-  {
+  vendorKami() {
     this.navCtrl.push('VendorkamiPage');
   }
-  lihatprofil()
-  {
+  
+  lihatProfil() {
     this.navCtrl.push('EditprofilePage');
   }
 

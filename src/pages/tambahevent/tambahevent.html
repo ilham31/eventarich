@@ -7,42 +7,42 @@
 
 <ion-content padding>
 
- <img class="container"  img src="assets/imgs/contoh.jpg">
+  <img class="container" src="assets/imgs/contoh.jpg">
   
   <ion-icon (click)="uploadPicture()" name="camera" color="eventarich"></ion-icon>
 
-<form #tambahEvent="ngForm" (ngSubmit)="addEvent(tambahEvent)" novalidate> 
- 
-<ion-list>
-  <ion-item>
-      <ion-label color="eventarich" stacked>Judul Event</ion-label>
-      <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="eventName" name="event" #evnt="ngModel"  required></ion-input>
-    </ion-item>
-    <p ion-text [hidden]="evnt.valid || submitted == false" color="danger" padding-left class="teksWarning">Nama Event harus diisi</p>
-
-
-    <ion-item>
-        <ion-label color="eventarich" stacked>Tanggal pelaksanaan</ion-label>
-        <ion-input class="text-input" type="date" displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-input>
-    </ion-item>
-    <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
-
-
-    <ion-item>
-       <ion-label color="eventarich" stacked>Kota</ion-label>
-       <ion-input class="text-input" type="text" placeholder="Bogor" [(ngModel)]="kota" name="city" #kot="ngModel" required></ion-input>
-     </ion-item>
-     <p ion-text [hidden]="kot.valid || submitted == false" color="danger" padding-left class="teksWarning">Kota harus diisi</p>
-
+  <form #tambahEvent="ngForm" (ngSubmit)="addEvent(tambahEvent)" novalidate> 
+  
+    <ion-list>
       <ion-item>
-         <ion-label color="eventarich" stacked>Deskripsi</ion-label>
-         <ion-input class="text-input" type="text" placeholder="Donor darah merah" [(ngModel)]="deskripsiEvent" name="deskripsi" #desc="ngModel" required></ion-input>
-     </ion-item>
-     <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
+          <ion-label color="eventarich" stacked>Judul Event</ion-label>
+          <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="namaEvent" name="event" #event="ngModel"  required></ion-input>
+        </ion-item>
+        <p ion-text [hidden]="event.valid || submitted == false" color="danger" padding-left class="teksWarning">Nama Event harus diisi</p>
 
-</ion-list>
-<div id="sesuatu"></div>
-<button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Buat</button>
-</form> 
+
+        <ion-item>
+            <ion-label color="eventarich" stacked>Tanggal pelaksanaan</ion-label>
+            <ion-input class="text-input" type="date" displayFormat="MM/DD/YYYY" [(ngModel)]="tanggalPelaksanaan" name="tanggal" #mydate = "ngModel" required></ion-input>
+        </ion-item>
+        <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
+
+
+        <ion-item>
+          <ion-label color="eventarich" stacked>Kota</ion-label>
+          <ion-input class="text-input" type="text" placeholder="Bogor" [(ngModel)]="kotaPelaksanaan" name="city" #kot="ngModel" required></ion-input>
+        </ion-item>
+        <p ion-text [hidden]="kot.valid || submitted == false" color="danger" padding-left class="teksWarning">Kota harus diisi</p>
+
+          <ion-item>
+            <ion-label color="eventarich" stacked>Deskripsi</ion-label>
+            <ion-input class="text-input" type="text" placeholder="Donor darah merah" [(ngModel)]="deskripsiEvent" name="deskripsi" #desc="ngModel" required></ion-input>
+        </ion-item>
+        <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
+
+    </ion-list>
+    <div id="sesuatu"></div>
+    <button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Buat</button>
+  </form> 
 
 </ion-content>

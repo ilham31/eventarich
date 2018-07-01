@@ -12,18 +12,20 @@ import { Storage } from '@ionic/storage';
 })
 export class PesananPage {
   data : any;
-  public token: any;
+  token: any = localStorage.getItem('token');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public orderprov : OrderProvider, public auth: AuthServiceProvider, public storage: Storage) {
-    this.loadOrder();
+    this.loadOrder(this.token);
   }
 
- loadOrder() {
-   this.orderprov.getOrder().then((datas)=>{
-     this.data = datas;
-     console.log("data",this.data);
-   });
- }
+  //Load order sesuai User
+  loadOrder(token) {
+   this.orderprov.getOrder(token).then((data)=> {
+      let temp: any = data;
+      this.data = temp.json();
+      console.log("data", this.data);
+    });
+  }
 
   addPesanan() {
     this.navCtrl.push('KebutuhaneventPage');

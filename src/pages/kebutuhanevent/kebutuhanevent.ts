@@ -11,54 +11,47 @@ import { AuthServiceProvider } from './../../providers/auth-service';
   templateUrl: 'kebutuhanevent.html',
 })
 export class KebutuhaneventPage {
-  selectedLeave : any;
-  budget : number;
+  kategoriPesanan : any;
+  budgetUser : number;
   deskripsiPesanan : string ='';
-  alamat : string = '';
-  myDate :string ='';
+  alamatUser : string = '';
+  tanggalDibutuhkan :string ='';
+
   submitted = false;
-  token : any;
+  token : any = localStorage.getItem('token');
   loading: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private loadCtrl: LoadingController,public orderprovider : OrderProvider, public auth: AuthServiceProvider) {
-    // this.auth.cekToken();
-    // this.getToken();
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private toastCtrl: ToastController, 
+              private loadCtrl: LoadingController,
+              public orderprovider : OrderProvider, 
+              public auth: AuthServiceProvider) {
+
   }
 
 
-  // getToken() {
-  //   this.orderprovider.assignToken().then((data) => {
-  //     this.token = data;
-  //     console.log('ionViewDidLoad ProfilPage');
-  //     console.log("token", this.token);
-  //   });
-  // }
-
-
+  // Post order dengan masukan form dan token
   pesan(form : NgForm) {
     this.showLoader();
     this.submitted=true;
     if(form.valid) {
         let orderData = {
-          categoryId: this.selectedLeave,
-          date: this.myDate,
+          categoryId: this.kategoriPesanan,
+          date: this.tanggalDibutuhkan,
           description: this.deskripsiPesanan,
-          address:this.alamat,
-          budget:this.budget,
+          address:this.alamatUser,
+          budget:this.budgetUser,
         }
-        console.log("kategori",this.selectedLeave);
-        console.log("order data",orderData);
-        this.orderprovider.order(orderData).then((result)=>{
+        this.orderprovider.orderKebutuhan(orderData, this.token).then((result)=>{
           this.loading.dismiss();
         },(err) => {
           this.loading.dismiss();
           this.presentToast(err);
           console.log(err);
         });
-      console.log("data",this.selectedLeave,this.myDate,this.budget,this.deskripsiPesanan,this.alamat)
-    }
-    else {
+    } else {
       this.presentToast("Form tidak valid");
     }
   }
@@ -84,11 +77,6 @@ export class KebutuhaneventPage {
     });
 
     toast.present();
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilPage');
-    console.log("token",this.token);
-    // this.getToken();
   }
 
 }

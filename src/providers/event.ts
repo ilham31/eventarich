@@ -8,34 +8,22 @@ let apiUrl = 'http://localhost:3000';
 
 @Injectable()
 export class EventProvider {
-token: any;
+
 data:any;
 
 constructor(  public http: Http,
               private storage: Storage ) {
-    this.assignToken();
-    console.log('Hello EventProvider Provider');
+
   }
 
-  getToken() {
-    return this.storage.get("token").then((val)=>
-    {
-      return val;
-    });
-  }
-  
-  assignToken() {
-    this.getToken().then((data) => {
-      this.token = data;
-    });
-  }
 
-  tambahEvent(data) {
+  // Post event baru
+  tambahEvent(data, token) {
     return new Promise((resolve, reject) => {
-      var pala = new Headers();
-      pala.append('Content-Type', 'application/json');
-      pala.append('Authorization','Bearer '+ this.token);
-      this.http.post(apiUrl+'/events', JSON.stringify(data), {headers: pala})
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ token);
+      this.http.post(apiUrl+'/events', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log(res);
           resolve(res.json());
@@ -44,40 +32,38 @@ constructor(  public http: Http,
           reject(err);
         });
     });
-  }  
-
-  getEventIdUser()
-  {
-    return new Promise((resolve, reject) => {
-      var pala = new Headers();
-      pala.append('Content-Type', 'application/json');
-      pala.append('Authorization','Bearer '+ this.token);
-      this.http.get(apiUrl+'/events/user', {headers: pala})
-        .subscribe(res => {
-          console.log(res);
-          resolve(res.json());
-          this.data = res.json();
-         }, (err) => {
-          reject(err);
-        });
-  });
   }
 
-  getAllEvent()
-  {
+  // Get Event yang sudah dibuat user
+  getEventIdUser(token) {
     return new Promise((resolve, reject) => {
-      var pala = new Headers();
-      pala.append('Content-Type', 'application/json');
-      pala.append('Authorization','Bearer '+ this.token);
-      this.http.get(apiUrl+'/events', {headers: pala})
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ token);
+      this.http.get(apiUrl+'/events/user', {headers: headers})
         .subscribe(res => {
           console.log(res);
-          resolve(res.json());
+          resolve(res);
           this.data = res.json();
          }, (err) => {
           reject(err);
         });
-  });
+    });
+  }
+
+  // Get semua event yang udah ada
+  getAllEvent() {
+    return new Promise((resolve, reject) => {
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      // headers.append('Authorization','Bearer '+ token);
+      this.http.get(apiUrl+'/events', {headers: headers}).subscribe(res => {
+          console.log(res);
+          resolve(res);
+         }, (err) => {
+          reject(err);
+        });
+    });
   }
 }
 

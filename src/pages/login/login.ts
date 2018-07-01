@@ -6,9 +6,6 @@ import { AuthServiceProvider } from './../../providers/auth-service';
 import { UserOptions } from '../../interfaces/user-options';
 import { NgForm } from '@angular/forms';
 
-
-// import { Storage } from '@ionic/storage';
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -31,7 +28,6 @@ export class LoginPage {
   loading: any;
   data : any;
 
-
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public authService: AuthServiceProvider,
@@ -45,12 +41,12 @@ export class LoginPage {
       this.submitted = true;
       if(form.valid) {
         this.authService.login(this.loginProp).then((result) => {
-          this.loading.dismiss();
           this.navCtrl.setRoot('TabsPage');
+          this.loading.dismiss();
           }, (err) => {
-            this.loading.dismiss();
             this.presentToast("Username atau Password tidak valid");
             console.log(err);
+            this.loading.dismiss();
         });
       } else {
         this.loading.dismiss();

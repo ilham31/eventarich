@@ -15,12 +15,18 @@ export class TambaheventPage {
   lastImage: string = null;
   loading: Loading;
   image : string;
+
   submitted = false;
-  eventName : string = '';
-  myDate : string = '';
-  kota : string ='';
+
+  namaEvent : string = '';
+  tanggalPelaksanaan : string = '';
+  kotaPelaksanaan : string ='';
   deskripsiEvent : string ='';
+  pathFoto : string ='';
+  
   data:any;
+  token: any = localStorage.getItem('token');
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -28,37 +34,42 @@ export class TambaheventPage {
     public actionSheetCtrl: ActionSheetController, 
     public toastCtrl: ToastController, 
     public platform: Platform, 
-    public loadingCtrl: LoadingController,
+    public loadCtrl: LoadingController,
     public eventprov:EventProvider,
  ) {
 
   }
 
-  addEvent( form : NgForm) {
+  addEvent(form : NgForm) {
+    this.showLoader();
     this.submitted=true;
-    if(form.valid)
-    {
+    if(form.valid) {
       let eventData = {
-        title:this.eventName,
-        date:this.myDate,
-        city:this.kota,
-        description:this.deskripsiEvent
+        title: this.namaEvent,
+        date: this.tanggalPelaksanaan,
+        city: this.kotaPelaksanaan,
+        description: this.deskripsiEvent,
+        path: this.pathFoto
       };
-      console.log("data",eventData);
-      this.eventprov.tambahEvent(eventData).then((result)=>{
-      console.log("data",result);
 
+      this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
+        this.loading.dismiss();
+        console.log("data",result);
       }, (err) => {
-        // this.loading.dismiss();
+        this.loading.dismiss();
         console.log(err);
       });
-
-      console.log(this.eventName,this.kota,this.deskripsiEvent,this.myDate)
-    }
-    else
-    {
+    } else {
       console.log("form isi dulu")
     }
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
+
+    this.loading.present();
   }
 
   

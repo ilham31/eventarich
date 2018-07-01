@@ -13,7 +13,7 @@
     <ion-list no-padding>  
     <ion-item class="item-leave-height" no-lines no-padding>
           <ion-label>Jenis Pemesanan</ion-label>
-          <ion-select [(ngModel)]="selectedLeave" name="select" #slc = "ngModel" required>
+          <ion-select [(ngModel)]="kategoriPesanan" name="select" #slc = "ngModel" required>
               <ion-option value="5b367d246396bf165be41b7b">Pesan Logistik</ion-option>
               <ion-option value="Pesan_Souvenir">Pesan Souvenir</ion-option>
               <ion-option value="Pesan_Konveksi">Pesan Konveksi</ion-option>
@@ -25,13 +25,13 @@
       <p ion-text [hidden]="slc.valid || submitted == false" color="danger" padding-left class="teksWarning">Jenis pemesanan harus diisi</p>
       <ion-item no-padding>
           <ion-label stacked color="dark">Tanggal Dibutuhkan</ion-label>
-          <ion-input type="date" displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-input>
+          <ion-input type="date" displayFormat="MM/DD/YYYY" [(ngModel)]="tanggalDibutuhkan" name="tanggal" #mydate = "ngModel" required></ion-input>
       </ion-item>
       <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
       
       <ion-item no-padding>
         <ion-label stacked color="dark">Budgeting</ion-label>
-        <ion-input type="number" [(ngModel)]="budget" name="biaya" #bdg="ngModel" required></ion-input>
+        <ion-input type="number" [(ngModel)]="budgetUser" name="biaya" #bdg="ngModel" required></ion-input>
       </ion-item>
       <p ion-text [hidden]="bdg.valid || submitted == false" color="danger" padding-left class="teksWarning">Budget harus diisi</p>
       
@@ -43,7 +43,7 @@
 
       <ion-item no-padding>
         <ion-label stacked color="dark">Alamat Pemesanan</ion-label>
-        <ion-input type="text" [(ngModel)]="alamat" name="alamatPesanan" #add="ngModel" required></ion-input>
+        <ion-input type="text" [(ngModel)]="alamatUser" name="alamatPesanan" #add="ngModel" required></ion-input>
       </ion-item>
       <p ion-text [hidden]="add.valid || submitted == false" color="danger" padding-left class="teksWarning">Alamat harus diisi</p>
     </ion-list>

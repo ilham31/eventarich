@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service';
@@ -11,17 +11,48 @@ import { AuthServiceProvider } from '../../providers/auth-service';
 })
 export class ProfilMorePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public auth: AuthServiceProvider) {
+  private loading: any;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public storage: Storage, 
+              public auth: AuthServiceProvider,
+              public toastCtrl: ToastController,
+              public loadCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilMorePage');
   }
 
-  logout()
-  {
+  logout() {
+    this.showLoader();
     this.auth.logout();
     this.navCtrl.setRoot('HomePage');
+    this.loading.dismiss();
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
+
+    this.loading.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+    
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
 }

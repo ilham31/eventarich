@@ -15,13 +15,18 @@ export class TambaheventPage {
   lastImage: string = null;
   loading: Loading;
   image : string;
+
   submitted = false;
   eventName : string = '';
   myDate = new Date().toISOString.toString();
   kota : string ='';
   deskripsiEvent : string ='';
+
+  
   data:any;
   selectedLeave : any;
+  token: any = localStorage.getItem('token');
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -29,17 +34,18 @@ export class TambaheventPage {
     public actionSheetCtrl: ActionSheetController, 
     public toastCtrl: ToastController, 
     public platform: Platform, 
-    public loadingCtrl: LoadingController,
+    public loadCtrl: LoadingController,
     public eventprov:EventProvider,
  ) {
 
   }
 
+
   addEvent( form : NgForm) {
     console.log("selectedleave",this.selectedLeave);
+
     this.submitted=true;
-    if(form.valid)
-    {
+    if(form.valid) {
       let eventData = {
         title:this.eventName,
         date:this.myDate,
@@ -47,21 +53,25 @@ export class TambaheventPage {
         description:this.deskripsiEvent,
         categoryevent:this.selectedLeave
       };
-      console.log("data",eventData);
-      this.eventprov.tambahEvent(eventData).then((result)=>{
-      console.log("data",result);
 
+      this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
+        this.loading.dismiss();
+        console.log("data",result);
       }, (err) => {
-        // this.loading.dismiss();
+        this.loading.dismiss();
         console.log(err);
       });
-
-      console.log(this.eventName,this.kota,this.deskripsiEvent,this.myDate)
-    }
-    else
-    {
+    } else {
       console.log("form isi dulu")
     }
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
+
+    this.loading.present();
   }
 
   

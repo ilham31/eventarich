@@ -12,9 +12,9 @@ import { MyApp } from './app.component';
 import { AuthServiceProvider } from '../providers/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+
 import { OrderProvider } from '../providers/order';
 import { EventProvider } from '../providers/event';
-import { AuthInterceptor } from '../providers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,12 +39,7 @@ import { AuthInterceptor } from '../providers/auth.interceptor';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
     OrderProvider,
-    EventProvider,
-    {
-      provide: HTTP_INTERCEPTORS, 
-      useClass: AuthInterceptor,
-      multi: true
-    }
+    EventProvider
   ]
 })
 export class AppModule {}

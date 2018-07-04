@@ -23,7 +23,7 @@
 
     <ion-item>
         <ion-label color="eventarich" stacked>Tanggal pelaksanaan</ion-label>
-        <ion-input class="text-input" type="date" displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-input>
+        <ion-datetime class="text-input" placeholder="hari/tanggal/tahun" displayFormat="D/M/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-datetime>
     </ion-item>
     <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
 
@@ -39,6 +39,19 @@
          <ion-input class="text-input" type="text" placeholder="Donor darah merah" [(ngModel)]="deskripsiEvent" name="deskripsi" #desc="ngModel" required></ion-input>
      </ion-item>
      <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
+     <ion-item class="item-leave-height" no-lines no-padding>
+      <ion-label>Kategori Event</ion-label>
+      <ion-select [(ngModel)]="selectedLeave" name="select" #slc = "ngModel" required>
+          <ion-option value="5b3c25ff919da9015356ae4e">Kompetisi</ion-option>
+          <ion-option value="5b3bbc70c58fd233b41aab4e">Seminar</ion-option>
+          <ion-option value="Lingkungan">Lingkungan</ion-option>
+          <ion-option value="Expo">Expo</ion-option>
+          <ion-option value="Olahraga">Olahraga</ion-option>
+          <ion-option value="Bazaar">Bazaar</ion-option>
+          <ion-option value="Seni">Seni</ion-option>
+          <ion-option value="Sosial">Sosial</ion-option>
+      </ion-select>
+  </ion-item>
 
 </ion-list>
 <div id="sesuatu"></div>

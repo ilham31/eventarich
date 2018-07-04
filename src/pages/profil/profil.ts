@@ -15,7 +15,7 @@ export class ProfilPage {
   nama:any;
   event:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage,public authService: AuthServiceProvider,public eventProv : EventProvider) {
-    this.loadProfile();
+    // this.loadProfile();
   }
 
   ionViewDidLoad() {

@@ -17,10 +17,11 @@ export class TambaheventPage {
   image : string;
   submitted = false;
   eventName : string = '';
-  myDate : string = '';
+  myDate = new Date().toISOString.toString();
   kota : string ='';
   deskripsiEvent : string ='';
   data:any;
+  selectedLeave : any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -35,6 +36,7 @@ export class TambaheventPage {
   }
 
   addEvent( form : NgForm) {
+    console.log("selectedleave",this.selectedLeave);
     this.submitted=true;
     if(form.valid)
     {
@@ -42,7 +44,8 @@ export class TambaheventPage {
         title:this.eventName,
         date:this.myDate,
         city:this.kota,
-        description:this.deskripsiEvent
+        description:this.deskripsiEvent,
+        categoryevent:this.selectedLeave
       };
       console.log("data",eventData);
       this.eventprov.tambahEvent(eventData).then((result)=>{

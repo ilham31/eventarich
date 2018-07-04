@@ -22,10 +22,10 @@ export class PesananPage {
     this.loadOrder();
   }
 
+
  loadOrder() {
    this.orderprov.getOrder().then((datas)=>{
-     this.data = datas;
-     console.log("data",this.data);
+     return datas;
    });
  }
 

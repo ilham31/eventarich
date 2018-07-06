@@ -18,7 +18,6 @@ export class SearchPage {
   filterData : any;
   dataTanggal : any[]=[];
   tanggal : any;
-  nol : any = 0;
   tanggalCut:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public eventProv:EventProvider) {
     // console.log("yang dikirim filter",this.navParams.data);
@@ -44,14 +43,15 @@ export class SearchPage {
   loadEvent()
   {
     this.eventProv.getAllEvent().then((event)=>{
-      this.allEvent= event;
+      let temp : any = event;
+      this.allEvent= temp.json();
       console.log("event",event);
       console.log("this.allevent",this.allEvent);
       console.log("this.allevent.events",this.allEvent.events);
-      this.tanggal=this.allEvent.events[0].date_event.split('-');
+      // this.tanggal=this.allEvent.events[0].date_event.split('-');
       
     
-      for(var j =0;j<this.allEvent.events.length;j++)   //cek semua event
+      for(var j =0;j<this.allEvent.length;j++)   //cek semua event
       {
         this.tanggalCut=this.allEvent.events[j].date_event.split('-'); //misahin tanggal buat ambil bulannya doang
         this.tanggal[j]=this.tanggalCut[1];//nyimpen tangga yg udah di cut

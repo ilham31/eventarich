@@ -23,13 +23,39 @@ export class EventPage {
   id : any;
   idEvent : any;
   EventId : any;
-
+  dataEvent : any;
+  tanggalEvent;
+  hari :any;
+  bulan : any;
+  tahun : any;
+  category : any;
+  date:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public EventProvider : EventProvider,public authService : AuthServiceProvider) {
     this.loadProfile();
+    this.dataEvent=this.navParams.data;
+    this.tanggal(this.dataEvent);
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPage');
+  }
+  tanggal(dataevent)
+  {
+    console.log("masuk tanggal")
+    this.tanggalEvent=dataevent.date_event.split("-");
+    this.tahun=this.tanggalEvent[0];
+    this.bulan=this.tanggalEvent[1];
+    this.hari=this.tanggalEvent[2].substring(0,2);
+    this.date={
+      tanggal:this.hari,
+      bulan:this.bulan,
+      tahun:this.tahun
+    }
+    console.log("date",this.date);
+    console.log("tanggal",this.tanggalEvent);
+    console.log("data event yang dikirim",this.dataEvent)
+    console.log("tanggal",this.hari,this.bulan,this.tahun); 
   }
   back()
   {

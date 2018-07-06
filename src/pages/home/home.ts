@@ -13,7 +13,7 @@ export class HomePage {
 
   variable: boolean;
   event : any;
-
+  eventsArray : any=[]
   token : any = localStorage.getItem('token');
 
   constructor(public navCtrl: NavController,
@@ -36,7 +36,9 @@ export class HomePage {
     this.eventProv.getAllEvent().then((data)=>{
       let temp: any = data;
       this.event = temp.json();
-      console.log("event semua",this.event);
+      this.eventsArray = this.event.events;
+      console.log("event semua",this.event.events);
+      console.log("event array",this.eventsArray);
     });
   }
 
@@ -53,8 +55,8 @@ export class HomePage {
     this.navCtrl.push('SearchPage');
   }
 
-  lihatEvent() {
-    this.navCtrl.push('EventPage');
+  lihatEvent(listEvent) {
+    this.navCtrl.push('EventPage',listEvent);
   }
   vendorKami() {
     this.navCtrl.push('VendorkamiPage');

@@ -29,8 +29,7 @@ export class FilterPage {
     data : any;
     tanggalBawah: string;
     tanggalAtas : string;
-
-  ionViewDidLoad() {
+      ionViewDidLoad() {
     console.log('ionViewDidLoad FilterPage');
   }
   
@@ -92,8 +91,9 @@ export class FilterPage {
       this.tanggalAtas = this.dualValue2.upper.toString()
       this.tanggal.push(this.tanggalAtas);
      }
-     
+     localStorage.setItem('filter', "true");
     this.navCtrl.push('SearchPage',{list:this.list,tanggal:this.tanggal});
     console.log("list",this.list,this.tanggal)
+    
   }
 }

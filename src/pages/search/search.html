@@ -1,7 +1,11 @@
 <ion-header>
 
-  <ion-navbar class="navbar_home" color="eventarich">
-    
+  <ion-navbar class="navbar_home" color="eventarich" hideBackButton="true">
+      <ion-buttons left>
+          <button (click)="back()" ion-button icon-only>
+              <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
+          </button>
+      </ion-buttons>
     <ion-title>
       Cari Event
     </ion-title>
@@ -18,4 +22,25 @@
 
 <ion-content>
     <ion-searchbar ></ion-searchbar>
+    <ion-card *ngFor="let listEvent of showEvent"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
+
+      <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">        
+      <ion-card-content class="footer_card">
+          <ion-row>
+            <ion-col col-3 class="col_badge">
+              <ion-badge class="badge-circle" >
+                28 Sept
+              </ion-badge>  
+            </ion-col>
+            <ion-col col-9 class="col_content">
+              <div class="card_content">
+                <h2 id="event_title">{{listEvent.title}}</h2>
+                <h3 id="organizer_event" >{{listEvent.userId.name}}</h3>
+                <h5 id="hashtag_event">#eventarich</h5>
+              </div>
+            </ion-col>
+          </ion-row>
+      </ion-card-content>
+  
+    </ion-card>
 </ion-content>

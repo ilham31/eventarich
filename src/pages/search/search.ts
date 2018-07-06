@@ -18,7 +18,10 @@ export class SearchPage {
   filterData : any;
   dataTanggal : any[]=[];
   tanggal : any;
-  tanggalCut:any;
+  tanggalCut:any[]=[];
+  eventsArray:any=[];
+  showEvent : any=[];
+  eventFiltered : any=[]
   constructor(public navCtrl: NavController, public navParams: NavParams,public eventProv:EventProvider) {
     // console.log("yang dikirim filter",this.navParams.data);
   
@@ -34,6 +37,8 @@ export class SearchPage {
     console.log("filter data",this.dataFilter);
     console.log("filter tanggal",this.dataTanggal);
     
+    console.log("localstorage filter",localStorage.getItem('filter'));
+    
     // for(var i =0;i<this.dataFilter.length;i++)
     // {
     //   console.log("tes array",this.dataFilter[i])
@@ -45,37 +50,65 @@ export class SearchPage {
     this.eventProv.getAllEvent().then((event)=>{
       let temp : any = event;
       this.allEvent= temp.json();
-      console.log("event",event);
-      console.log("this.allevent",this.allEvent);
-      console.log("this.allevent.events",this.allEvent.events);
+      this.eventsArray=this.allEvent.events
       // this.tanggal=this.allEvent.events[0].date_event.split('-');
-      
-    
-      for(var j =0;j<this.allEvent.length;j++)   //cek semua event
+      let filter = JSON.parse(localStorage.getItem("filter"));
+      if(filter)
       {
-        this.tanggalCut=this.allEvent.events[j].date_event.split('-'); //misahin tanggal buat ambil bulannya doang
-        this.tanggal[j]=this.tanggalCut[1];//nyimpen tangga yg udah di cut
-        console.log("tanggal",this.tanggal[j]);
-        for(var i =0;i<this.dataFilter.length;i++) //ngambil semua poin yang mau difilter
-        {
-          console.log("category event",this.allEvent.events[j].categoryevent.name)
-          console.log("tanggalbawah",this.dataTanggal[0],"& tanggal atas",this.dataTanggal[1])
-          if(this.allEvent.events[j].categoryevent.name==this.dataFilter[i] || (this.tanggal<=this.dataTanggal[1]&&this.tanggal>=this.dataTanggal[0])) //kalo categoryname filter==datafilter atau tanggal bawah < ttanggal yg udah di cut < tanggal atas  
-          {
-              console.log("sama",this.dataFilter[i],"=",this.allEvent.events[j].categoryevent.name);    //kalo sama tar print gini
-              console.log("sama dengan filter",this.allEvent.events[j]);
-          }
-          // else{
-          //   console.log("ga sama")
-          // }
-        }
+          console.log("masuk if")
+              console.log("masuk if",this.eventsArray[0])
+              for(var j =0;j<this.eventsArray.length;j++)   //cek semua event
+              {
+                console.log("masuk for 1",this.eventsArray[j]);
+                this.tanggalCut=this.eventsArray[j].date_event.split('-'); //misahin tanggal buat ambil bulannya doang
+                this.tanggal=this.tanggalCut[1];//nyimpen tanggal yg udah di cut
+                console.log("tanggal",this.tanggal);
+                for(var i =0;i<this.dataFilter.length;i++) //ngambil semua poin yang mau difilter
+                {
+                  console.log("category event",this.eventsArray[j].categoryevent.name)
+                  console.log("tanggalbawah",this.dataTanggal[0],"& tanggal atas",this.dataTanggal[1])
+                  if(this.eventsArray[j].categoryevent.name==this.dataFilter[i] || (this.tanggal<=this.dataTanggal[1]&&this.tanggal>=this.dataTanggal[0])) //kalo categoryname filter==datafilter atau tanggal bawah < ttanggal yg udah di cut < tanggal atas  
+                  {
+                      console.log("sama",this.dataFilter[i],"=",this.eventsArray[j].categoryevent.name);    //kalo sama tar print gini
+                      console.log("sama dengan filter",this.eventsArray[j]);
+                      this.eventFiltered.push(this.eventsArray[j]);
+                      
+                  }
+                  else{
+                    console.log("ga sama")
+                  }
+                }
 
-        console.log("tes array event",this.allEvent.events[j]);
-        console.log("category event",this.allEvent.events[j].categoryevent.name)
-      } 
+              //   console.log("tes array event",this.allEvent.events[j]);
+              //   console.log("category event",this.allEvent.events[j].categoryevent.name)
+              }
+              // this.eventsArray=this.allEvent.events;
+              // console.log("eventarray",this.eventsArray);
+              // localStorage.removeItem("filter")
+              console.log("hasil yg sama",this.eventFiltered);
+              this.showEvent=this.eventFiltered;
+              
+      }
+      else
+      {
+          console.log("ga masuk filter")
+          this.eventsArray=this.allEvent.events
+          this.showEvent=this.eventsArray;
+          console.log("event",event);
+          console.log("this.allevent",this.allEvent);
+          console.log("this.allevent.events",this.allEvent.events);
+          console.log("localstorage",localStorage.getItem("filter"));
+      }
+       
     });
     
   }
+
+ back()
+ {
+   localStorage.removeItem('filter');
+   this.navCtrl.setRoot('HomePage');
+ }
 
   // filterEvent()
   // {
@@ -98,6 +131,11 @@ export class SearchPage {
   filter()
   {
     this.navCtrl.push('FilterPage');
+    
+  }
+  lihatEvent(listEvent)
+  {
+    this.navCtrl.push('EventPage',listEvent);
   }
 
 }

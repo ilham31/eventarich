@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card class="cards-list-demo">
+  <ion-card *ngFor="let listEvent of eventsArray"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
     <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">        
     <ion-card-content class="footer_card">
@@ -29,9 +29,9 @@
           </ion-col>
           <ion-col col-9 class="col_content">
             <div class="card_content">
-              <h2 id="event_title">Event Name</h2>
-              <h3 id="organizer_event" >BEM-G</h3>
-              <h5 id="hashtag_event">#akusehat</h5>
+              <h2 id="event_title">{{listEvent.title}}</h2>
+              <h3 id="organizer_event" >{{listEvent.userId.name}}</h3>
+              <h5 id="hashtag_event">#eventarich</h5>
             </div>
           </ion-col>
         </ion-row>

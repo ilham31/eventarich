@@ -2,7 +2,7 @@
 
     <ion-navbar class = "lebar-menu" hideBackButton="true" >
         <ion-icon (click)="back()" color="eventarich" class="topleft" ios="ios-close" md="md-close"></ion-icon>
-        <h5 ion-text color="eventarich" class="eventName">Event Name</h5>
+        <h5 ion-text color="eventarich" class="eventName">{{dataEvent.title}}</h5>
     </ion-navbar>
 
 </ion-header>
@@ -14,13 +14,13 @@
               <ion-row>
                 <ion-col>
                     <ion-icon name="calendar" color="eventarich"></ion-icon>
-                    <ion-label>Selasa,20 Agustus 2017</ion-label>
+                    <ion-label>{{date.tanggal}} {{date.bulan}} {{date.tahun}}</ion-label>
                 </ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>
                       <ion-icon name="pin" color="eventarich"></ion-icon>
-                      <ion-label>Bogor, indonesia</ion-label>
+                      <ion-label>{{dataEvent.city}}, indonesia</ion-label>
                   </ion-col>
                 </ion-row>
           </ion-card-content>
@@ -31,7 +31,7 @@
                 Deskripsi event
             </ion-card-header>  
             <ion-card-content>
-                Lorem ipsum kolor                
+                {{dataEvent.description}}                
             </ion-card-content>
             <ion-row >
                 <ion-col>

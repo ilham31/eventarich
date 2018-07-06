@@ -16,6 +16,21 @@ export class FilterPage {
   dualValue2: any = {
     upper:12,
     lower:1
+    }
+    
+    kompetisi : boolean =false;
+    seminar : boolean =false;
+    lingkungan : boolean =false;
+    expo : boolean =false;
+    olahraga : boolean =false;
+    bazaar : boolean =false;
+    seni : boolean =false;
+    sosial : boolean =false;
+    data : any;
+    tanggalBawah: string;
+    tanggalAtas : string;
+      ionViewDidLoad() {
+    console.log('ionViewDidLoad FilterPage');
   }
     
   kompetisi : boolean = false;
@@ -59,19 +74,18 @@ export class FilterPage {
     }
      
      
-    if(this.dualValue2.upper<=9) {
-      this.tanggalAtas="0" + this.dualValue2.upper;
+     if(this.dualValue2.upper<=9)
+     {
+      this.tanggalAtas="0"+this.dualValue2.upper
       this.tanggalFilter.push(this.tanggalAtas);
-    } else {
-      this.tanggalAtas = this.dualValue2.upper.toString();
+     }
+     else{
+      this.tanggalAtas = this.dualValue2.upper.toString()
       this.tanggalFilter.push(this.tanggalAtas);
-    }
-     
-    this.navCtrl.push('SearchPage', {
-      listFilter:this.listFilter,
-      tanggal:this.tanggalFilter
-    });
-
-    console.log("listFilter",this.listFilter,this.tanggalFilter);
+     }
+     localStorage.setItem('filter', "true");
+    this.navCtrl.push('SearchPage',{list:this.listFilter,tanggal:this.tanggal});
+    console.log("list",this.list,this.tanggalFilter)
+    
   }
 }

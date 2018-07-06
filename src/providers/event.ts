@@ -66,6 +66,22 @@ constructor(  public http: Http,
     });
   }
 
+  favouriteEvent(data)
+  {
+    return new Promise((resolve, reject) => {
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      this.http.post(apiUrl+'/events', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log(res);
+          resolve(res.json());
+          this.data = res.json();
+         }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   
 }
 

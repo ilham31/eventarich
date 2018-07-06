@@ -18,14 +18,6 @@ export class PesananPage {
     this.loadOrder(this.token);
   }
 
-<<<<<<< HEAD
-
- loadOrder() {
-   this.orderprov.getOrder().then((datas)=>{
-     return datas;
-   });
- }
-=======
   //Load order sesuai User
   loadOrder(token) {
    this.orderprov.getOrder(token).then((data)=> {
@@ -34,7 +26,6 @@ export class PesananPage {
       console.log("data", this.data);
     });
   }
->>>>>>> fa68364a36fcd8ac6ed258e8587cc2c4c66caf37
 
   addPesanan() {
     this.navCtrl.push('KebutuhaneventPage');

@@ -9,12 +9,12 @@ let apiUrl = 'http://localhost:3000';
 @Injectable()
 export class EventProvider {
 
-data:any;
+  data:any;
 
-constructor(  public http: Http,
-              private storage: Storage ) {
+  constructor(  public http: Http,
+                private storage: Storage ) {
 
-  }
+    }
 
 
   // Post event baru
@@ -65,7 +65,6 @@ constructor(  public http: Http,
         });
     });
   }
-
   
 }
 

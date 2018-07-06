@@ -16,12 +16,8 @@ export class ProfilPage {
   nama:any;
   event:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage,public authService: AuthServiceProvider,public eventProv : EventProvider) {
-<<<<<<< HEAD
-    // this.loadProfile();
-=======
     this.loadProfile();
     this.loadUserEvent();
->>>>>>> fa68364a36fcd8ac6ed258e8587cc2c4c66caf37
   }
 
   ionViewDidLoad() {
@@ -31,7 +27,8 @@ export class ProfilPage {
   // Load data User
   loadProfile() {
     this.authService.getUserData(this.token).then((data)=> {
-      this.data = data;
+      let temp: any = data;
+      this.data = temp.json();
       this.nama = this.data.events[0].name;
       console.log("data profil",this.data);
       console.log("profil",this.data.events[0].name);

@@ -77,7 +77,7 @@ export class AuthServiceProvider {
         .subscribe(res => {
           
           if(res.status == 200 ) {
-            resolve(res.json());
+            resolve(res);
           }
 
         }, (err) => {

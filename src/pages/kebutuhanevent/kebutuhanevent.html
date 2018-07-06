@@ -12,18 +12,13 @@
     <ion-list no-padding>  
     <ion-item class="item-leave-height" no-lines no-padding>
           <ion-label>Jenis Pemesanan</ion-label>
-<<<<<<< HEAD
-          <ion-select [(ngModel)]="selectedLeave" name="select" #slc = "ngModel" required>
-              <ion-option value="5b33c7003ab6bd9a4d14350a">Pesan Logistik</ion-option>
-=======
           <ion-select [(ngModel)]="kategoriPesanan" name="select" #slc = "ngModel" required>
               <ion-option value="5b367d246396bf165be41b7b">Pesan Logistik</ion-option>
->>>>>>> fa68364a36fcd8ac6ed258e8587cc2c4c66caf37
-              <ion-option value="Pesan_Souvenir">Pesan Souvenir</ion-option>
-              <ion-option value="Pesan_Konveksi">Pesan Konveksi</ion-option>
-              <ion-option value="Pesan_Konsumsi">Pesan Konsumsi</ion-option>
-              <ion-option value="vep">Video Editing & Photography</ion-option>
-              <ion-option value="eo">Event Organizer</ion-option>
+              <ion-option value="5b3f24ac636947843ae3353f">Pesan Souvenir</ion-option>
+              <ion-option value="5b3f24c7636947843ae33551">Pesan Konveksi</ion-option>
+              <ion-option value="5b3f24d1636947843ae33555">Pesan Konsumsi</ion-option>
+              <ion-option value="5b3f24e1636947843ae3355e">Video Editing & Photography</ion-option>
+              <ion-option value="5b3f24fe636947843ae33572">Event Organizer</ion-option>
           </ion-select>
       </ion-item>
       <p ion-text [hidden]="slc.valid || submitted == false" color="danger" padding-left class="teksWarning">Jenis pemesanan harus diisi</p>

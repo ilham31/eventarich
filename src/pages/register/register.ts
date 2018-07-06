@@ -15,11 +15,11 @@ export class RegisterPage {
   look = true;
 
   loading: any;
-    email: string;
-    username: string;
-    address: string;
-    phone_number: number;
-    password: string;
+  email: string;
+  username: string;
+  address: string;
+  phone_number: number;
+  password: string;
   data : any;
   
 

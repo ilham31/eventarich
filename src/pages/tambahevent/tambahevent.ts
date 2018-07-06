@@ -35,7 +35,7 @@ export class TambaheventPage {
     public toastCtrl: ToastController, 
     public platform: Platform, 
     public loadCtrl: LoadingController,
-    public eventprov:EventProvider,
+    public eventprov: EventProvider,
  ) {
 
   }
@@ -43,7 +43,7 @@ export class TambaheventPage {
 
   addEvent( form : NgForm) {
     console.log("selectedleave",this.selectedLeave);
-
+    this.showLoader();
     this.submitted=true;
     if(form.valid) {
       let eventData = {

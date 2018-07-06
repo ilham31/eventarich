@@ -11,7 +11,7 @@ let apiUrl = 'http://localhost:3000';
 @Injectable()
 export class OrderProvider {
   public data : any;
-  public token : any;
+  // public token : any;
   public dataOrder:any;
 
   constructor(public http: Http,

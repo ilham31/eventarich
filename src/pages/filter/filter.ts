@@ -8,92 +8,70 @@ import { isDefaultChangeDetectionStrategy } from '@angular/core/src/change_detec
   templateUrl: 'filter.html',
 })
 export class FilterPage {
-  list : any[]=[];
-  tanggal:any[]=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-  }
+  listFilter : any = [];
+  tanggalFilter : any = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+
   dualValue2: any = {
     upper:12,
     lower:1
-    }
-    
-    kompetisi : boolean =false;
-    seminar : boolean =false;
-    lingkungan : boolean =false;
-    expo : boolean =false;
-    olahraga : boolean =false;
-    bazaar : boolean =false;
-    seni : boolean =false;
-    sosial : boolean =false;
-    data : any;
-    tanggalBawah: string;
-    tanggalAtas : string;
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FilterPage');
   }
+    
+  kompetisi : boolean = false;
+  seminar : boolean = false;
+  lingkungan : boolean = false;
+  expo : boolean = false;
+  olahraga : boolean = false;
+  bazaar : boolean = false;
+  seni : boolean = false;
+  sosial : boolean = false;
+  data : any;
+  tanggalBawah: string;
+  tanggalAtas : string;
   
-  cari()
-  {
-    console.log("nilai",this.kompetisi,this.seminar,this.lingkungan,this.expo,this.olahraga,this.bazaar,this.seni,this.sosial,this.dualValue2.upper,this.dualValue2.lower);
-   
-    if(this.kompetisi==true)
-    {
-      this.list.push("Kompetisi")
-
+  cariEvent() {   
+    if(this.kompetisi==true) {
+      this.listFilter.push("Kompetisi");
+    } else if(this.seminar==true) {
+      this.listFilter.push("Seminar");
+    } else if(this.lingkungan==true) {
+      this.listFilter.push("Lingkungan");
+    } else if(this.expo==true) {
+      this.listFilter.push("Expo");
+    } else if(this.olahraga==true) {
+      this.listFilter.push("Olahraga");
+    } else if(this.bazaar==true) {
+      this.listFilter.push("Bazaar");
+    } else if(this.seni==true) {
+      this.listFilter.push("Seni");
+    } else if(this.sosial==true) {
+      this.listFilter.push("Sosial");
+    } 
+     
+    if(this.dualValue2.lower <= 9) {
+      this.tanggalBawah = "0" + this.dualValue2.lower;
+      console.log("date append", this.tanggalBawah);
+      this.tanggalFilter.push(this.tanggalBawah);
+    } else {
+      this.tanggalBawah = this.dualValue2.lower.toString();
+      this.tanggalFilter.push(this.tanggalBawah);
     }
-    if(this.seminar==true)
-      {
-        this.list.push("Seminar")
-      }
-    if(this.lingkungan==true)
-      {
-        this.list.push("Lingkungan")
-      }
-    if(this.expo==true)
-      {
-        this.list.push("Expo")
-      }
-    if(this.olahraga==true)
-      {
-        this.list.push("Olahraga")
-      }
-    if(this.bazaar==true)
-      {
-        this.list.push("Bazaar")
-      }
-    if(this.seni==true)
-      {
-        this.list.push("Seni")
-      }
-    if(this.sosial==true)
-     {
-      this.list.push("Sosial")
-     } 
-     if(this.dualValue2.lower<=9)
-     {
-      this.tanggalBawah = "0"+this.dualValue2.lower
-      console.log("date append", this.tanggalBawah)
-      this.tanggal.push(this.tanggalBawah);
-     }
-     else{
-      this.tanggalBawah = this.dualValue2.lower.toString()
-      this.tanggal.push(this.tanggalBawah);
-     }
      
      
-     if(this.dualValue2.upper<=9)
-     {
-      this.tanggalAtas="0"+this.dualValue2.upper
-      this.tanggal.push(this.tanggalAtas);
-     }
-     else{
-      this.tanggalAtas = this.dualValue2.upper.toString()
-      this.tanggal.push(this.tanggalAtas);
-     }
+    if(this.dualValue2.upper<=9) {
+      this.tanggalAtas="0" + this.dualValue2.upper;
+      this.tanggalFilter.push(this.tanggalAtas);
+    } else {
+      this.tanggalAtas = this.dualValue2.upper.toString();
+      this.tanggalFilter.push(this.tanggalAtas);
+    }
      
-    this.navCtrl.push('SearchPage',{list:this.list,tanggal:this.tanggal});
-    console.log("list",this.list,this.tanggal)
+    this.navCtrl.push('SearchPage', {
+      listFilter:this.listFilter,
+      tanggal:this.tanggalFilter
+    });
+
+    console.log("listFilter",this.listFilter,this.tanggalFilter);
   }
 }

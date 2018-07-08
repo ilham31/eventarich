@@ -55,7 +55,7 @@ export class TambaheventPage {
       };
 
       this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
-        this.loading.dismiss();
+        // this.loading.dismiss();
         console.log("data",result);
       }, (err) => {
         this.loading.dismiss();

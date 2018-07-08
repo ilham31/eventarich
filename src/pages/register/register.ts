@@ -40,7 +40,7 @@ export class RegisterPage {
         address:this.address,
         phone_number:this.phone_number 
       };
-      this.showLoader();
+      // this.showLoader();
       this.authService.signup(regData).then((result) => {
         this.loading.dismiss();
         this.navCtrl.push('LoginPage');

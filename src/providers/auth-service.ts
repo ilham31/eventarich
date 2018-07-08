@@ -88,6 +88,7 @@ export class AuthServiceProvider {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('filter');
     this.storage.remove(this.HAS_LOGGED_IN);
     this.events.publish('user:logout');
     this.storage.clear();

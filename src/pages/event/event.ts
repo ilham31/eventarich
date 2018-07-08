@@ -24,19 +24,17 @@ export class EventPage {
   tahun : any;
   category : any;
   date:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public EventProvider : EventProvider,public authService : AuthServiceProvider) {
     this.loadProfile();
     this.dataEvent=this.navParams.data;
     this.tanggal(this.dataEvent);
-
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EventPage');
   }
-  tanggal(dataevent)
-  {
-    console.log("masuk tanggal")
+
+  tanggal(dataevent) {
     this.tanggalEvent=dataevent.date_event.split("-");
     this.tahun=this.tanggalEvent[0];
     this.bulan=this.tanggalEvent[1];
@@ -51,8 +49,8 @@ export class EventPage {
     console.log("data event yang dikirim",this.dataEvent)
     console.log("tanggal",this.hari,this.bulan,this.tahun); 
   }
-  back()
-  {
+
+  back() {
     this.navCtrl.pop();
   }
   
@@ -65,8 +63,8 @@ export class EventPage {
       console.log("profil",this.data.events[0].name);
     });
   }
-  favouriteEvent(item)
-  {
+  
+  favouriteEvent(item) {
    let favouriteData = {
       id : this.getIdUser,
       idEvent : this.EventId 

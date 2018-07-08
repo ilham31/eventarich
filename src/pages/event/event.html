@@ -1,45 +1,50 @@
-<ion-header class="lebar-menu" hideBackButton="true" >
+<ion-header class="transparent-navbar">
 
-    <ion-navbar class = "lebar-menu" hideBackButton="true" >
-        <ion-icon (click)="back()" color="eventarich" class="topleft" ios="ios-close" md="md-close"></ion-icon>
-        <h5 ion-text color="eventarich" class="eventName">{{dataEvent.title}}</h5>
+    <ion-navbar color="eventarich">
+
+        <ion-buttons class="badge-header" end>
+        </ion-buttons>
+    
     </ion-navbar>
 
 </ion-header>
   
   
-  <ion-content padding>
-      <ion-card class="cards-list-demo">
-          <ion-card-content>
-              <ion-row>
+  
+<ion-content no-padding>
+
+    <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img>
+    
+    <ion-card class="cards-list-demo">
+        <ion-card-content>
+            <ion-row>
                 <ion-col>
                     <ion-icon name="calendar" color="eventarich"></ion-icon>
                     <ion-label>{{date.tanggal}} {{date.bulan}} {{date.tahun}}</ion-label>
                 </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col>
-                      <ion-icon name="pin" color="eventarich"></ion-icon>
-                      <ion-label>{{dataEvent.city}}, indonesia</ion-label>
-                  </ion-col>
-                </ion-row>
-          </ion-card-content>
-          </ion-card>
-  
-          <ion-card class="cards-list-demo">
-            <ion-card-header>
-                Deskripsi event
-            </ion-card-header>  
-            <ion-card-content>
-                {{dataEvent.description}}                
-            </ion-card-content>
-            <ion-row >
+            </ion-row>
+            <ion-row>
                 <ion-col>
-                      <p>link </p>
+                    <ion-icon name="pin" color="eventarich"></ion-icon>
+                    <ion-label>{{dataEvent.city}}, indonesia</ion-label>
                 </ion-col>
-              </ion-row>
-           </ion-card>
-          
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
   
-  </ion-content>
+    <ion-card class="cards-list-demo">
+        <ion-card-header>
+            Deskripsi event
+        </ion-card-header>  
+        <ion-card-content>
+            {{dataEvent.description}}                
+        </ion-card-content>
+        <ion-row >
+            <ion-col>
+                <p>eventarich.me/Wjk13</p>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+</ion-content>
   

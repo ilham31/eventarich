@@ -16,9 +16,13 @@ import { Camera } from '@ionic-native/camera';
 import { OrderProvider } from '../providers/order';
 import { EventProvider } from '../providers/event';
 
+import { SearchPipe } from './../pipes/search/search';
+
+
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    SearchPipe
   ],
   imports: [
     BrowserModule,HttpModule,HttpClientModule, 

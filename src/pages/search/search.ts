@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventProvider } from '../../providers/event';
 
+import { SearchPipe } from '../../pipes/search/search';
+
 @IonicPage()
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',
 })
 export class SearchPage {
-  dataFilter : any[]=[]
+  dataFilter : any = [];
   event : any;
   events : any;
   anu : any;
@@ -16,17 +18,18 @@ export class SearchPage {
   apaan : string;
   modifdata : any;
   filterData : any;
-  dataTanggal : any[]=[];
+  dataTanggal : any = [];
   tanggal : any;
-  tanggalCut:any[]=[];
-  eventsArray:any=[];
-  showEvent : any=[];
-  eventFiltered : any=[]
-  constructor(public navCtrl: NavController, public navParams: NavParams,public eventProv:EventProvider) {
-    // console.log("yang dikirim filter",this.navParams.data);
-  
-    // this.getEvent();
-    }
+  tanggalCut:any = [];
+  eventsArray:any = [];
+  showEvent : any = [];
+  eventFiltered : any = [];
+
+  queryText: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public eventProv:EventProvider) {
+
+  }
 
   ionViewWillEnter()
   {
@@ -38,103 +41,63 @@ export class SearchPage {
     console.log("filter tanggal",this.dataTanggal);
     
     console.log("localstorage filter",localStorage.getItem('filter'));
-    
-    // for(var i =0;i<this.dataFilter.length;i++)
-    // {
-    //   console.log("tes array",this.dataFilter[i])
-    // }
-    
   }
-  loadEvent()
-  {
+
+  loadEvent() {
     this.eventProv.getAllEvent().then((event)=>{
       let temp : any = event;
       this.allEvent= temp.json();
-      this.eventsArray=this.allEvent.events
+      this.eventsArray=this.allEvent.events;
       // this.tanggal=this.allEvent.events[0].date_event.split('-');
       let filter = JSON.parse(localStorage.getItem("filter"));
+      
       if(filter)
       {
-          console.log("masuk if")
-              console.log("masuk if",this.eventsArray[0])
-              for(var j =0;j<this.eventsArray.length;j++)   //cek semua event
-              {
-                console.log("masuk for 1",this.eventsArray[j]);
-                this.tanggalCut=this.eventsArray[j].date_event.split('-'); //misahin tanggal buat ambil bulannya doang
-                this.tanggal=this.tanggalCut[1];//nyimpen tanggal yg udah di cut
-                console.log("tanggal",this.tanggal);
-                for(var i =0;i<this.dataFilter.length;i++) //ngambil semua poin yang mau difilter
-                {
-                  console.log("category event",this.eventsArray[j].categoryevent.name)
-                  console.log("tanggalbawah",this.dataTanggal[0],"& tanggal atas",this.dataTanggal[1])
-                  if(this.eventsArray[j].categoryevent.name==this.dataFilter[i] || (this.tanggal<=this.dataTanggal[1]&&this.tanggal>=this.dataTanggal[0])) //kalo categoryname filter==datafilter atau tanggal bawah < ttanggal yg udah di cut < tanggal atas  
-                  {
-                      console.log("sama",this.dataFilter[i],"=",this.eventsArray[j].categoryevent.name);    //kalo sama tar print gini
-                      console.log("sama dengan filter",this.eventsArray[j]);
-                      this.eventFiltered.push(this.eventsArray[j]);
-                      
-                  }
-                  else{
-                    console.log("ga sama")
-                  }
-                }
-
-              //   console.log("tes array event",this.allEvent.events[j]);
-              //   console.log("category event",this.allEvent.events[j].categoryevent.name)
-              }
-              // this.eventsArray=this.allEvent.events;
-              // console.log("eventarray",this.eventsArray);
-              // localStorage.removeItem("filter")
-              console.log("hasil yg sama",this.eventFiltered);
-              this.showEvent=this.eventFiltered;
+        // console.log("masuk if")
+        // console.log("masuk if",this.eventsArray[0])
+        for(var j =0;j<this.eventsArray.length;j++)   //cek semua event
+        {
+          // console.log("masuk for 1",this.eventsArray[j]);
+          this.tanggalCut=this.eventsArray[j].date_event.split('-'); //misahin tanggal buat ambil bulannya doang
+          this.tanggal=this.tanggalCut[1];//nyimpen tanggal yg udah di cut
+          console.log("tanggal",this.tanggal);
+          for(var i =0;i<this.dataFilter.length;i++) //ngambil semua poin yang mau difilter
+          {
+            console.log("category event",this.eventsArray[j].categoryevent.name);
+            console.log("tanggalbawah",this.dataTanggal[0],"& tanggal atas",this.dataTanggal[1])
+            if(this.eventsArray[j].categoryevent.name==this.dataFilter[i] || (this.tanggal<=this.dataTanggal[1]&&this.tanggal>=this.dataTanggal[0])) //kalo categoryname filter==datafilter atau tanggal bawah < ttanggal yg udah di cut < tanggal atas  
+            {
+                console.log("sama",this.dataFilter[i],"=",this.eventsArray[j].categoryevent.name);    //kalo sama tar print gini
+                console.log("sama dengan filter",this.eventsArray[j]);
+                this.eventFiltered.push(this.eventsArray[j]);
+                
+            } else {
+              console.log("ga sama")
+            }
+          }
+        }
+        console.log("hasil yg sama",this.eventFiltered);
+        this.showEvent=this.eventFiltered;
               
-      }
-      else
-      {
+      } else {
           console.log("ga masuk filter")
           this.eventsArray=this.allEvent.events
           this.showEvent=this.eventsArray;
-          console.log("event",event);
-          console.log("this.allevent",this.allEvent);
-          console.log("this.allevent.events",this.allEvent.events);
-          console.log("localstorage",localStorage.getItem("filter"));
       }
-       
     });
     
   }
 
- back()
- {
-   localStorage.removeItem('filter');
-   this.navCtrl.setRoot('HomePage');
- }
-
-  // filterEvent()
-  // {
-  //   this.modifdata=JSON.parse(JSON.stringify(this.allEvent));
-  //   this.filterData = this.modifdata.filter((this.dataFilter)=>{
-  //     return 
-  //   })
-  // }
-
-  // getEvent()
-  // {
-  //   this.loadEvent().then((data)=>{
-  //     this.events=data;
-  //     console.log("getEvent()",this.events);
-  //   })
-  // }
-
+  ionViewDidLeave(){
+    localStorage.removeItem('filter');
+  }
   
-
-  filter()
-  {
+  filter() {
     this.navCtrl.push('FilterPage');
     
   }
-  lihatEvent(listEvent)
-  {
+
+  lihatEvent(listEvent) {
     this.navCtrl.push('EventPage',listEvent);
   }
 

@@ -15,6 +15,7 @@ export class ProfilPage {
   data:any;
   nama:any;
   event:any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage,public authService: AuthServiceProvider,public eventProv : EventProvider) {
     this.loadProfile();
     this.loadUserEvent();

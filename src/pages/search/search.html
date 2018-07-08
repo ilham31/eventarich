@@ -1,14 +1,7 @@
 <ion-header>
 
-  <ion-navbar class="navbar_home" color="eventarich" hideBackButton="true">
-      <ion-buttons left>
-          <button (click)="back()" ion-button icon-only>
-              <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
-          </button>
-      </ion-buttons>
-    <ion-title>
-      Cari Event
-    </ion-title>
+  <ion-navbar class="navbar_home" color="eventarich">
+    <ion-title>Cari Event</ion-title>
 
     <ion-buttons class="search_home" end>
       <button (click)="filter()" ion-button icon-only>
@@ -21,8 +14,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar ></ion-searchbar>
-    <ion-card *ngFor="let listEvent of showEvent"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
+    <ion-searchbar [(ngModel)]="queryText"></ion-searchbar>
+    <ion-card *ngFor="let listEvent of showEvent | search : queryText"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
       <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">        
       <ion-card-content class="footer_card">

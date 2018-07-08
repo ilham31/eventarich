@@ -16,20 +16,20 @@ export class HomePage {
   eventsArray : any=[]
   token : any = localStorage.getItem('token');
 
-  constructor(public navCtrl: NavController,
-              public menuCtrl : MenuController,
-              public auth: AuthServiceProvider,
-              public eventProv : EventProvider ) {
+  constructor(public navCtrl: NavController, public menuCtrl : MenuController,
+              public auth: AuthServiceProvider, public eventProv : EventProvider ) {
+    
+              this.auth.hasLoggedIn().then((value) => {
+                if(value) {
+                  this.variable = true;
+                } else {
+                  this.variable = false;
+                }
+              });
+  }
 
-    this.auth.hasLoggedIn().then((value) => {
-      if(value) {
-        this.variable = true;
-      } else {
-        this.variable = false;
-      }
-    });
+  ionViewDidEnter(){
     this.loadEvent();
-
   }
 
   loadEvent() {
@@ -56,8 +56,9 @@ export class HomePage {
   }
 
   lihatEvent(listEvent) {
-    this.navCtrl.push('EventPage',listEvent);
+    this.navCtrl.push('EventPage', listEvent);
   }
+  
   vendorKami() {
     this.navCtrl.push('VendorkamiPage');
   }

@@ -8,72 +8,31 @@ import { isDefaultChangeDetectionStrategy } from '@angular/core/src/change_detec
   templateUrl: 'filter.html',
 })
 export class FilterPage {
-<<<<<<< HEAD
-  listFilter : any = [];
-  tanggalFilter : any = [];
+  listFilter : any[]=[];
+  tanggalFilter:any[]=[];
+
+  rentang : boolean = false;
+
+  kompetisi : boolean =false;
+  seminar : boolean =false;
+  lingkungan : boolean =false;
+  expo : boolean =false;
+  olahraga : boolean =false;
+  bazaar : boolean =false;
+  seni : boolean =false;
+  sosial : boolean =false;
+  data : any;
+
+  tanggalBawah: string;
+  tanggalAtas : string;
+
+  dualValue2: any = {
+    upper:12,
+    lower:1
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-  dualValue2: any = {
-    upper:12,
-    lower:1
-=======
-  list : any[]=[];
-  tanggal:any[]=[];
-  rentang : boolean = false;
-    kompetisi : boolean =false;
-    seminar : boolean =false;
-    lingkungan : boolean =false;
-    expo : boolean =false;
-    olahraga : boolean =false;
-    bazaar : boolean =false;
-    seni : boolean =false;
-    sosial : boolean =false;
-    data : any;
-    tanggalBawah: string;
-    tanggalAtas : string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-    
-  }
-  dualValue2: any = {
-    upper:12,
-    lower:1
-    }
-    
-    
-      ionViewDidLoad() {
-    console.log('ionViewDidLoad FilterPage');
->>>>>>> 99bb5fa5fd31d2c618dc0d8ae94531385fe4bb69
-  }
-    
-  //   kompetisi : boolean =false;
-  //   seminar : boolean =false;
-  //   lingkungan : boolean =false;
-  //   expo : boolean =false;
-  //   olahraga : boolean =false;
-  //   bazaar : boolean =false;
-  //   seni : boolean =false;
-  //   sosial : boolean =false;
-  //   data : any;
-  //   tanggalBawah: string;
-  //   tanggalAtas : string;
-  //     ionViewDidLoad() {
-  //   console.log('ionViewDidLoad FilterPage');
-  // }
-    
-  kompetisi : boolean = false;
-  seminar : boolean = false;
-  lingkungan : boolean = false;
-  expo : boolean = false;
-  olahraga : boolean = false;
-  bazaar : boolean = false;
-  seni : boolean = false;
-  sosial : boolean = false;
-  data : any;
-  tanggalBawah: string;
-  tanggalAtas : string;
-  
   cariEvent() {   
     if(this.kompetisi==true) {
       this.listFilter.push("Kompetisi");

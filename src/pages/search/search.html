@@ -11,10 +11,15 @@
     
   </ion-navbar>
 
+  <ion-toolbar no-border-top color="transparent">
+    <ion-searchbar [(ngModel)]="queryText"></ion-searchbar>
+  </ion-toolbar>
+
+
 </ion-header>
 
+
 <ion-content>
-    <ion-searchbar [(ngModel)]="queryText"></ion-searchbar>
     <ion-card *ngFor="let listEvent of showEvent | search : queryText"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
       <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">        

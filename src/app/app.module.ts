@@ -21,8 +21,7 @@ import { SearchPipe } from './../pipes/search/search';
 
 @NgModule({
   declarations: [
-    MyApp,
-    SearchPipe
+    MyApp
   ],
   imports: [
     BrowserModule,HttpModule,HttpClientModule, 

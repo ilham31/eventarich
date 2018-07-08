@@ -10,14 +10,7 @@ import { isDefaultChangeDetectionStrategy } from '@angular/core/src/change_detec
 export class FilterPage {
   list : any[]=[];
   tanggal:any[]=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-  }
-  dualValue2: any = {
-    upper:12,
-    lower:1
-    }
-    
+  rentang : boolean = false;
     kompetisi : boolean =false;
     seminar : boolean =false;
     lingkungan : boolean =false;
@@ -29,6 +22,16 @@ export class FilterPage {
     data : any;
     tanggalBawah: string;
     tanggalAtas : string;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
+    
+  }
+  dualValue2: any = {
+    upper:12,
+    lower:1
+    }
+    
+    
       ionViewDidLoad() {
     console.log('ionViewDidLoad FilterPage');
   }
@@ -70,28 +73,42 @@ export class FilterPage {
      {
       this.list.push("Sosial")
      } 
-     if(this.dualValue2.lower<=9)
-     {
-      this.tanggalBawah = "0"+this.dualValue2.lower
-      console.log("date append", this.tanggalBawah)
-      this.tanggal.push(this.tanggalBawah);
-     }
-     else{
-      this.tanggalBawah = this.dualValue2.lower.toString()
-      this.tanggal.push(this.tanggalBawah);
-     }
      
      
-     if(this.dualValue2.upper<=9)
+     if(this.rentang==false) //kalo rentang waktu ga di centang kirim tanggal 0
      {
-      this.tanggalAtas="0"+this.dualValue2.upper
-      this.tanggal.push(this.tanggalAtas);
+       console.log("ga ngirim data")
+       this.tanggalAtas="0";
+       this.tanggalBawah="0";
+       this.tanggal.push(this.tanggalAtas);
+       this.tanggal.push(this.tanggalBawah);
      }
-     else{
-      this.tanggalAtas = this.dualValue2.upper.toString()
-      this.tanggal.push(this.tanggalAtas);
+     else
+     {
+        if(this.dualValue2.lower<=9)
+        {
+        this.tanggalBawah = "0"+this.dualValue2.lower
+        console.log("date append", this.tanggalBawah)
+        this.tanggal.push(this.tanggalBawah);
+        }
+        else{
+        this.tanggalBawah = this.dualValue2.lower.toString()
+        this.tanggal.push(this.tanggalBawah);
+        }
+
+        if(this.dualValue2.upper<=9)
+        {
+          this.tanggalAtas="0"+this.dualValue2.upper
+          this.tanggal.push(this.tanggalAtas);
+        }
+        else
+        {
+          this.tanggalAtas = this.dualValue2.upper.toString()
+          this.tanggal.push(this.tanggalAtas);
+        }
+ 
      }
-     localStorage.setItem('filter', "true");
+    localStorage.setItem('filter', "true");
     this.navCtrl.push('SearchPage',{list:this.list,tanggal:this.tanggal});
     console.log("list",this.list,this.tanggal)
     

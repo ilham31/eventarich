@@ -69,10 +69,17 @@
     </ion-row>
 </ion-grid>
 
-<p ion-text color="eventarich">Rentang Waktu</p>
-<ion-item>
-  <ion-range dualKnobs="true" [(ngModel)]="dualValue2" min="1" max="12" step="1" snaps="true" color="eventarich"></ion-range>  
-</ion-item>
+
+
+<ion-list>
+    <ion-item>
+        <ion-label><p ion-text color="eventarich">Rentang Waktu</p></ion-label>
+        <ion-toggle [(ngModel)]="rentang"></ion-toggle>
+    </ion-item>
+    <ion-item>
+        <ion-range *ngIf="rentang" dualKnobs="true" [(ngModel)]="dualValue2" min="1" max="12" step="1" snaps="true" color="eventarich"></ion-range>  
+      </ion-item>
+</ion-list>
 <ion-footer no-shadow>
     <button ion-button full ion-button color="eventarich" (click)="cari()">Cari</button>
 

@@ -4,7 +4,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
-let apiUrl = 'http://localhost:3000';
+let apiUrl = 'http://eventarich.codepanda.web.id';
 
 @Injectable()
 export class EventProvider {
@@ -60,6 +60,22 @@ export class EventProvider {
       this.http.get(apiUrl+'/events', {headers: headers}).subscribe(res => {
           console.log(res);
           resolve(res);
+         }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  deleteEvent(token, eventId) {
+    return new Promise((resolve, reject) => {
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ token);
+      this.http.delete(apiUrl+'/events/delete/' + eventId, {headers: headers}).subscribe(res => {
+          console.log(res);
+          if(res.status == 200) {
+            resolve(res);
+          }
          }, (err) => {
           reject(err);
         });

@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 
 import { AuthServiceProvider } from './auth-service';
 
-let apiUrl = 'http://localhost:3000';
+let apiUrl = 'http://eventarich.codepanda.web.id';
 
 @Injectable()
 export class OrderProvider {

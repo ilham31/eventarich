@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 
-let apiUrl = 'http://localhost:3000';
+let apiUrl = 'http://eventarich.codepanda.web.id';
 
 @Injectable()
 export class AuthServiceProvider {
@@ -57,7 +57,7 @@ export class AuthServiceProvider {
         this.http.post(apiUrl+'/users/signup', JSON.stringify(data), {headers: headers})
           .subscribe(res => {
             
-            if(res.status == 200) {
+            if(res.status == 201) {
               resolve(res);
               this.events.publish('user:signup');
             }

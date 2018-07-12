@@ -22,11 +22,13 @@
     <p text-center>Official Account BEM - G</p>
   </div>
 
+
   <ion-list>
-      <ion-item-sliding no-padding>
+      <h4 padding text-center *ngIf="dataEvent == 0">Tidak ada Event untuk ditampilkan, Ayo buat segera!</h4>
+      <ion-item-sliding *ngFor="let listEvent of dataEvent" no-padding>
         
         <ion-item class="card-item" no-lines>
-          <ion-card *ngFor="let listEvent of dataEvent"  (click)="lihatEvent(listEvent)">
+          <ion-card (click)="lihatEvent(listEvent)">
 
             <ion-card-content class="footer_card">
                 <ion-row>
@@ -56,7 +58,7 @@
         </ion-item>   
 
         <ion-item-options class="order_option" side="right">
-          <button ion-button color="danger" (click)="unread(item)">
+          <button ion-button color="danger" (click)="deleteEventId(listEvent._id)">
             <ion-icon name="trash"></ion-icon>
             Hapus
           </button>

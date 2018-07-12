@@ -13,7 +13,7 @@ export class HomePage {
 
   variable: boolean;
   event : any;
-  eventsArray : any=[]
+  eventsArray : any=[];
   token : any = localStorage.getItem('token');
 
   constructor(public navCtrl: NavController, public menuCtrl : MenuController,
@@ -28,7 +28,7 @@ export class HomePage {
               });
   }
 
-  ionViewDidEnter(){
+  ionViewDidLoad(){
     this.loadEvent();
   }
 
@@ -37,8 +37,8 @@ export class HomePage {
       let temp: any = data;
       this.event = temp.json();
       this.eventsArray = this.event.events;
-      console.log("event semua",this.event.events);
-      console.log("event array",this.eventsArray);
+      console.log("Event", this.eventsArray);
+      // console.log("event array",this.eventsArray);
     });
   }
 
@@ -65,6 +65,16 @@ export class HomePage {
   
   lihatProfil() {
     this.navCtrl.push('EditprofilePage');
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.loadEvent();
+      refresher.complete();
+    }, 2000);
   }
 
 }

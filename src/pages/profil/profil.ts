@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import{ AuthServiceProvider } from '../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
@@ -16,12 +16,19 @@ export class ProfilPage {
   nama:any;
   dataEvent : any;
   event:any;
+  eventId:any;
   tanggalEvent : any;
   tahun:any;
   bulan:any;
   hari:any;
-  date:any=[]
-  constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage,public authService: AuthServiceProvider,public eventProv : EventProvider) {
+  date:any=[];
+
+  stat: any;
+  successStatus: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private storage : Storage, public authService: AuthServiceProvider,
+              public eventProv : EventProvider, public alertCtrl : AlertController) {
     this.loadProfile();
     this.loadUserEvent();
   }
@@ -47,8 +54,7 @@ export class ProfilPage {
       let temp: any = data;
       this.event = temp.json();
       this.dataEvent =this.event.events;
-      for(var i=0;i<this.dataEvent.length;i++)
-      {
+      for(var i=0; i<this.dataEvent.length; i++) {
         this.tanggalEvent=this.dataEvent[i].date_event.split("-");
         this.tahun=this.tanggalEvent[0];
         this.bulan=this.tanggalEvent[1];
@@ -62,7 +68,23 @@ export class ProfilPage {
       
       console.log("event by user", this.event);
       console.log("data event",this.dataEvent);
+      console.log("data event",this.dataEvent._id);
     });
+  }
+
+  deleteEventId(eventId) {
+    this.eventProv.deleteEvent(this.token, eventId).then((data)=> {
+        this.alertSuccess();
+        this.loadUserEvent();
+    });
+  }
+
+  alertSuccess() {
+    let alert = this.alertCtrl.create({
+      subTitle: 'Event Anda sudah terhapus',
+      buttons: ['Oke']
+    });
+    alert.present();
   }
 
   goProfileMore() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading, AlertController  } from 'ionic-angular';
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { NgForm } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
@@ -27,19 +27,11 @@ export class TambaheventPage {
   selectedLeave : any;
   token: any = localStorage.getItem('token');
 
-  constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams,
-    private camera: Camera, 
-    public actionSheetCtrl: ActionSheetController, 
-    public toastCtrl: ToastController, 
-    public platform: Platform, 
-    public loadCtrl: LoadingController,
-    public eventprov: EventProvider,
- ) {
-
-  }
-
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private camera: Camera, public actionSheetCtrl: ActionSheetController, 
+              public toastCtrl: ToastController, public platform: Platform, 
+              public loadCtrl: LoadingController, public eventprov: EventProvider,
+              private alertCtrl : AlertController) {}
 
   addEvent( form : NgForm) {
     console.log("selectedleave",this.selectedLeave);
@@ -57,6 +49,7 @@ export class TambaheventPage {
       this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
         this.navCtrl.pop();
         this.loading.dismiss();
+        this.alertSuccess();
         console.log("data",result);
       }, (err) => {
         this.loading.dismiss();
@@ -73,6 +66,14 @@ export class TambaheventPage {
     });
 
     this.loading.present();
+  }
+
+  alertSuccess() {
+    let alert = this.alertCtrl.create({
+      subTitle: "Event berhasil dibuat",
+      buttons: ['Oke']
+    });
+    alert.present();
   }
 
   

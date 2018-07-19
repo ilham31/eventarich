@@ -3,7 +3,7 @@ import { IonicPage, NavParams } from 'ionic-angular';
 
 import { AuthServiceProvider } from '../../providers/auth-service';
 
-@IonicPage()
+@IonicPage({ priority: 'high' })
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',
@@ -22,7 +22,9 @@ export class TabsPage {
               public auth: AuthServiceProvider
               ) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
+  }
 
+  ionViewDidLoad(){
     this.auth.hasLoggedIn().then((value) => {
       if(value) {
         this.variable = true;

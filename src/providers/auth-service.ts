@@ -6,6 +6,8 @@ import { Events } from 'ionic-angular';
 
 let apiUrl = 'http://eventarich.codepanda.web.id';
 
+// let apiUrl = 'http://localhost:3000';
+
 @Injectable()
 export class AuthServiceProvider {
   public data:any;
@@ -17,18 +19,17 @@ export class AuthServiceProvider {
 
   HAS_LOGGED_IN = 'hasLoggedIn';
 
-  constructor(  public http: Http,
-                public storage: Storage,
-                public events: Events ) {
-                }
+  constructor(  private http: Http, private storage: Storage, public events: Events ) {
+    // this.events.publish('event:updated', false);
+  }
 
-  public hasLoggedIn(): Promise<boolean> {
+  hasLoggedIn(): Promise<boolean> {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => { 
       return value === true;
     });
   };
 
-  public login(credentials) {
+  login(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -39,6 +40,7 @@ export class AuthServiceProvider {
             if(res.status == 200) {
               localStorage.setItem('token', res.json().token);
               this.storage.set(this.HAS_LOGGED_IN, true);
+              this.events.publish('event:updated', true);
               this.events.publish('user:login');
               resolve(res);
             }
@@ -49,7 +51,7 @@ export class AuthServiceProvider {
     });
   }
 
-  public signup(data) {
+  signup(data) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -68,7 +70,7 @@ export class AuthServiceProvider {
       });
   }
 
-  public getUserData(token) {
+  getUserData(token) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -78,6 +80,7 @@ export class AuthServiceProvider {
           
           if(res.status == 200 ) {
             resolve(res);
+            console.log('User data', res);
           }
 
         }, (err) => {
@@ -89,6 +92,7 @@ export class AuthServiceProvider {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('filter');
+    localStorage.removeItem('userName');
     this.storage.remove(this.HAS_LOGGED_IN);
     this.events.publish('user:logout');
     this.storage.clear();

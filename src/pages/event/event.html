@@ -1,11 +1,6 @@
 <ion-header class="transparent-navbar">
 
-    <ion-navbar color="eventarich">
-
-        <ion-buttons class="badge-header" end>
-        </ion-buttons>
-    
-    </ion-navbar>
+    <ion-navbar color="eventarich"></ion-navbar>
 
 </ion-header>
   
@@ -14,8 +9,9 @@
 <ion-content no-padding>
 
     <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img>
+    <h2 text-center class="event_title">{{ dataEvent.title }}</h2>
     
-    <ion-card class="cards-list-demo">
+    <ion-card class="">
         <ion-card-content>
             <ion-row>
                 <ion-col>
@@ -39,11 +35,6 @@
         <ion-card-content>
             {{dataEvent.description}}                
         </ion-card-content>
-        <ion-row >
-            <ion-col>
-                <p>eventarich.me/Wjk13</p>
-            </ion-col>
-        </ion-row>
     </ion-card>
 
 </ion-content>

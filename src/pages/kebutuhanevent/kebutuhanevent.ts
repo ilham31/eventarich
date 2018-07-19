@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController,Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController,Loading, LoadingController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 import { OrderProvider } from '../../providers/order';
@@ -22,15 +22,10 @@ export class KebutuhaneventPage {
   loading: any;
 
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              private toastCtrl: ToastController, 
-              private loadCtrl: LoadingController,
-              public orderprovider : OrderProvider, 
-              public auth: AuthServiceProvider) {
-
-  }
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+              private toastCtrl: ToastController, private loadCtrl: LoadingController,
+              public orderprovider : OrderProvider, public auth: AuthServiceProvider,
+              public alertCtrl : AlertController) {}
 
   // Post order dengan masukan form dan token
   pesan(form : NgForm) {
@@ -46,6 +41,8 @@ export class KebutuhaneventPage {
         }
         this.orderprovider.orderKebutuhan(orderData, this.token).then((result)=>{
           this.loading.dismiss();
+          this.alertSuccess();
+          this.navCtrl.pop();
         },(err) => {
           this.loading.dismiss();
           this.presentToast(err);
@@ -77,6 +74,14 @@ export class KebutuhaneventPage {
     });
 
     toast.present();
+  }
+
+  alertSuccess() {
+    let alert = this.alertCtrl.create({
+      subTitle: "Order berhasil dibuat",
+      buttons: ['Oke']
+    });
+    alert.present();
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading, AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading, AlertController, Events  } from 'ionic-angular';
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { NgForm } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
@@ -31,12 +31,12 @@ export class TambaheventPage {
               private camera: Camera, public actionSheetCtrl: ActionSheetController, 
               public toastCtrl: ToastController, public platform: Platform, 
               public loadCtrl: LoadingController, public eventprov: EventProvider,
-              private alertCtrl : AlertController) {}
+              private alertCtrl : AlertController, private events : Events) {}
 
-  addEvent( form : NgForm) {
+  addEvent(form : NgForm) {
     console.log("selectedleave",this.selectedLeave);
     this.showLoader();
-    this.submitted=true;
+    this.submitted = true;
     if(form.valid) {
       let eventData = {
         title:this.eventName,
@@ -47,6 +47,7 @@ export class TambaheventPage {
       };
 
       this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
+        this.events.publish('event:updated', true);
         this.navCtrl.pop();
         this.loading.dismiss();
         this.alertSuccess();

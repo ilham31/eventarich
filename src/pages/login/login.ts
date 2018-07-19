@@ -19,28 +19,31 @@ export class LoginPage {
     password: '',
   };
 
+  userData: any = [];
+
   submitted = false;
   status = "password";
   look = true;
 
-  token: string;
+  token: any;
   
   loading: any;
   data : any;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public authService: AuthServiceProvider,
-              public loadCtrl: LoadingController,
-              private toastCtrl: ToastController,
-              public storage : Storage,
-             ) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthServiceProvider,
+              public loadCtrl: LoadingController, private toastCtrl: ToastController, public storage : Storage) {}
+  
+  registerPage() {
+    this.navCtrl.push('RegisterPage');
+  }
 
   onLogin(form: NgForm) {
       this.showLoader();
       this.submitted = true;
       if(form.valid) {
         this.authService.login(this.loginProp).then((result) => {
+          this.token = localStorage.getItem('token');
+          this.getUserData(this.token);
           this.navCtrl.setRoot('TabsPage');
           this.loading.dismiss();
           }, (err) => {
@@ -51,11 +54,16 @@ export class LoginPage {
       } else {
         this.loading.dismiss();
         this.presentToast("Form belum terisi");
-      }
     }
+  }
 
-  registerPage() {
-    this.navCtrl.push('RegisterPage');
+  getUserData(token) {
+    this.authService.getUserData(token).then((data) => {
+      let temp: any = data;
+      this.userData = temp.json().events;
+      localStorage.setItem('userID', this.userData[0]._id);
+      localStorage.setItem('userName', this.userData[0].name);
+    });
   }
 
   showPassword(){

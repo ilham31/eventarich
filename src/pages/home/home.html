@@ -22,8 +22,7 @@
     <ion-refresher-content color="eventarich"
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+      refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
     
@@ -34,7 +33,7 @@
         <ion-row>
           <ion-col col-3 class="col_badge">
             <ion-badge class="badge-circle" >
-              28 Sept
+             {{ listEvent.hari }} {{ listEvent.bulan | dateConvert }}
             </ion-badge>  
           </ion-col>
           <ion-col col-9 class="col_content">

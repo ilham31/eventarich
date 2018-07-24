@@ -12,6 +12,9 @@ import { MyApp } from './app.component';
 import { AuthServiceProvider } from '../providers/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+
 
 import { OrderProvider } from '../providers/order';
 import { EventProvider } from '../providers/event';
@@ -42,7 +45,8 @@ import { SearchPipe } from './../pipes/search/search';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider,
     OrderProvider,
-    EventProvider
+    EventProvider,
+    File, FileTransfer
   ]
 })
 export class AppModule {}

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { SearchPipe } from './search/search';
+import { DateConvertPipe } from './date-convert/date-convert';
+
 
 @NgModule({
-	declarations: [SearchPipe],
+	declarations: [SearchPipe, DateConvertPipe],
 	imports: [],
-	exports: [SearchPipe]
+	exports: [SearchPipe, DateConvertPipe]
 })
 
 export class PipesModule {}

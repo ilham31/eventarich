@@ -3,6 +3,8 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { HomePage } from './home';
 
+import { PipesModule } from './../../pipes/pipes.module';
+
 @NgModule({
     declarations: [
         HomePage
@@ -10,6 +12,7 @@ import { HomePage } from './home';
 
     imports: [
         IonicPageModule.forChild(HomePage),
+        PipesModule
     ],
 
     exports: [

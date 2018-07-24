@@ -61,6 +61,7 @@ export class ProfilPage {
       this.rawObject = temp.json();
       this.listEventUser = this.rawObject.events;
       for(var i=0; i<this.listEventUser.length; i++) {
+        console.log(this.listEventUser[i].date_event);
         this.tanggalEvent=this.listEventUser[i].date_event.split("-");
         this.tahun=this.tanggalEvent[0];
         this.bulan=this.tanggalEvent[1];

@@ -28,7 +28,11 @@
     
   <ion-card *ngFor="let listEvent of eventsArray"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
-    <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">        
+    <!-- <div class="divisi" [ngStyle]="{ 'background': 'url(../assets/imgs/contoh.jpg) center'}"></div> -->
+    <!-- <div class="divisi" [ngStyle]="{'background-image' : 'url('+ listEvent.event_image_path +' ) center' | safeImage:'style'}"></div> -->
+    <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)" [style.background-size.vw]="86"></div>
+
+
     <ion-card-content class="footer_card">
         <ion-row>
           <ion-col col-3 class="col_badge">

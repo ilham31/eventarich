@@ -20,6 +20,7 @@ import { OrderProvider } from '../providers/order';
 import { EventProvider } from '../providers/event';
 
 import { SearchPipe } from './../pipes/search/search';
+import { SafeImagePipe } from './../pipes/safe-image/safe-image';
 
 
 @NgModule({

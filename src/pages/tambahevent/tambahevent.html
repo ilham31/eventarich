@@ -7,41 +7,38 @@
 
 <ion-content padding>
 
-  <img class="container" *ngIf = "!base64Image" src="assets/imgs/contoh.jpg">
-  <img class="container" [src]="base64Image">
-  
-  <ion-icon (click)="openGallery()" name="camera" color="eventarich"></ion-icon>
+  <img class="container" [src]='imageURI'>
 
-  <form #tambahEvent="ngForm" (ngSubmit)="addEvent(tambahEvent)" novalidate> 
-  
+  <form #eventAddForm="ngForm" (ngSubmit)="addEvent(eventAddForm)" novalidate> 
+    <ion-icon (click)="openGallery()" name="camera" color="eventarich"></ion-icon>
     <ion-list>
       <ion-item>
         <ion-label color="eventarich" stacked>Judul Event</ion-label>
-        <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="eventName" name="event" #evnt="ngModel"  required></ion-input>
+        <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="eventData.title" name="event" #event="ngModel"  required></ion-input>
       </ion-item>
-      <p ion-text [hidden]="evnt.valid || submitted == false" color="danger" padding-left class="teksWarning">Nama Event harus diisi</p>
+      <p ion-text [hidden]="event.valid || submitted == false" color="danger" padding-left class="teksWarning">Nama Event harus diisi</p>
 
       <ion-item>
           <ion-label color="eventarich" stacked>Tanggal pelaksanaan</ion-label>
-          <ion-datetime class="text-input" placeholder="hari/tanggal/tahun" displayFormat="D/M/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-datetime>
+          <ion-datetime class="text-input" placeholder="hari/tanggal/tahun" displayFormat="D/M/YYYY" [(ngModel)]="eventData.date_event" name="tanggal" #mydate = "ngModel" required></ion-datetime>
       </ion-item>
       <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
 
       <ion-item>
           <ion-label color="eventarich" stacked>Kota</ion-label>
-          <ion-input class="text-input" type="text" placeholder="Kota pelaksanaan event Anda" [(ngModel)]="kota" name="city" #kot="ngModel" required></ion-input>
+          <ion-input class="text-input" type="text" placeholder="Kota pelaksanaan event Anda" [(ngModel)]="eventData.city" name="city" #city="ngModel" required></ion-input>
         </ion-item>
-        <p ion-text [hidden]="kot.valid || submitted == false" color="danger" padding-left class="teksWarning">Kota harus diisi</p>
+        <p ion-text [hidden]="city.valid || submitted == false" color="danger" padding-left class="teksWarning">Kota harus diisi</p>
 
       <ion-item>
           <ion-label color="eventarich" stacked>Deskripsi</ion-label>
-          <ion-textarea rows='3' class="text-input" type="text" placeholder="Deskripsi event Anda" [(ngModel)]="deskripsiEvent" name="deskripsi" #desc="ngModel" required></ion-textarea>
+          <ion-textarea rows='3' class="text-input" type="text" placeholder="Deskripsi event Anda" [(ngModel)]="eventData.description" name="deskripsi" #desc="ngModel" required></ion-textarea>
       </ion-item>
       <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
 
       <ion-item no-lines>
         <ion-label>Kategori Event</ion-label>
-        <ion-select [(ngModel)]="selectedLeave" name="select" #slc = "ngModel" required>
+        <ion-select [(ngModel)]="eventData.categoryevent" name="select" #slc="ngModel" required>
           <ion-option value="5b3f2452636947843ae334fe">Kompetisi</ion-option>
           <ion-option value="5b3f2437636947843ae334e9">Seminar</ion-option>
           <ion-option value="5b3f245c636947843ae33502">Lingkungan</ion-option>

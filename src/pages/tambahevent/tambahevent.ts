@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading, AlertController, Events  } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
 
 import { File } from '@ionic-native/file';
-import { FileTransfer } from '@ionic-native/file-transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+
 
 @IonicPage()
 @Component({
@@ -20,44 +23,33 @@ export class TambaheventPage {
   image : string;
 
   submitted = false;
-  eventName : string = '';
-  myDate = new Date().toISOString.toString();
-  kota : string ='';
-  deskripsiEvent : string ='';
-  base64Image : string;
-  imageUp : any;
+ 
+  imageURI : any = "assets/imgs/contoh.jpg";
 
-  
-  data:any;
-  selectedLeave : any;
+  eventData : any = {
+    title : '',
+    date_event : new Date().toISOString.toString(),
+    city : '',
+    description : '',
+    categoryevent : '',
+    event_image_path : ''
+  };
+
   token: any = localStorage.getItem('token');
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private camera: Camera, public actionSheetCtrl: ActionSheetController, 
-              public toastCtrl: ToastController, public platform: Platform, 
+              public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, 
               public loadCtrl: LoadingController, public eventprov: EventProvider,
               private alertCtrl : AlertController, private events : Events,
-              private transfer: FileTransfer, private file: File) {}
+              private imagePicker : ImagePicker, private base64 : Base64) {}
 
   addEvent(form : NgForm) {
-    console.log("selectedleave",this.selectedLeave);
     this.showLoader();
     this.submitted = true;
-    console.log(this.base64Image);
     if(form.valid) {
-      let eventData = {
-        title:this.eventName,
-        date:this.myDate,
-        city:this.kota,
-        description:this.deskripsiEvent,
-        categoryevent:this.selectedLeave,
-        event_image: "http://eventarich.codepanda.web.id/" + this.imageUp
-      };
-
-      console.log(eventData.date);
-
-      this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
+      console.log(this.eventData);
+      this.eventprov.tambahEvent(this.eventData, this.token).then((result)=>{
         this.events.publish('event:updated', true);
         this.navCtrl.pop();
         this.loading.dismiss();
@@ -65,34 +57,54 @@ export class TambaheventPage {
         console.log("data",result);
       }, (err) => {
         this.loading.dismiss();
+        this.alertGagal(err._body.message);
         console.log(err);
       });
     } else {
-      console.log("form isi dulu")
+      this.loading.dismiss();
+      this.presentToast("Form belum terisi");
     }
   }
 
   openGallery() {
     this.showLoader();
-    const options : CameraOptions = {
-      quality : 100,
-      destinationType : this.camera.DestinationType.DATA_URL,
-      encodingType : this.camera.EncodingType.JPEG,
-      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
+    const options = {
+      quality : 70,
+      maximumImagesCount : 1
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.imageUp.push(this.base64Image);
-      this.imageUp.revese();
+    this.imagePicker.getPictures(options).then((imageData) => {
+      for(var i = 0; i < imageData.length; i++) {
+        this.imageURI = imageData[i];
+        this.base64.encodeFile(imageData[i]).then((base64File : string) => {
+          this.eventData.event_image_path = base64File;
+        }, (err) => {
+          console.log(err);
+        });
+      }
       this.loading.dismiss();
      }, (err) => {
-      // Handle error
       console.log(err);
      });
   }
+
+  // fileTransfering() {
+  //   const fileTransfer: FileTransferObject = this.transfer.create();
+  //   let options: FileUploadOptions = {
+  //     fileKey: 'ionicfile',
+  //     fileName: 'ionicfile',
+  //     chunkedMode: false,
+  //     mimeType: "image/jpeg",
+  //     headers: {}
+  //   }
+
+  //   fileTransfer.upload(this.imageURI, 'http://localhost:3000/events', options).then((data) => {
+  //     console.log(data+" Uploaded Successfully");
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+
+  // }
 
   showLoader() {
     this.loading = this.loadCtrl.create({
@@ -108,5 +120,28 @@ export class TambaheventPage {
       buttons: ['Oke']
     });
     alert.present();
+  }
+
+  alertGagal(err) {
+    let alert = this.alertCtrl.create({
+      subTitle: 'Event gagal dibuat : ' + err,
+      buttons: ['Oke']
+    });
+    alert.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+    
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 }

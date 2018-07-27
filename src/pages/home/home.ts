@@ -5,6 +5,9 @@ import { AuthServiceProvider } from '../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
 
 import { DateConvertPipe } from '../../pipes/date-convert/date-convert';
+import { SafeImagePipe } from '../../pipes/safe-image/safe-image';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @IonicPage()
 @Component({
@@ -12,8 +15,6 @@ import { DateConvertPipe } from '../../pipes/date-convert/date-convert';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  coba: any = 'wa';
 
   variable: boolean;
   event : any;
@@ -28,7 +29,8 @@ export class HomePage {
   
 
   constructor(public navCtrl: NavController, public menuCtrl : MenuController,
-              public auth: AuthServiceProvider, public eventProv : EventProvider ) {
+              public auth: AuthServiceProvider, public eventProv : EventProvider,
+              private sanitizer : DomSanitizer ) {
     
               this.auth.hasLoggedIn().then((value) => {
                 if(value) {
@@ -64,6 +66,12 @@ export class HomePage {
         hari: this.hari
       }
     }
+  }
+
+  makeTrustedImage(item) {
+    const imageString =  JSON.stringify(item).replace(/\\n/g, '');
+    const style = 'url(' + imageString + ')';
+    return this.sanitizer.bypassSecurityTrustStyle(style);
   }
 
   addEvent() {

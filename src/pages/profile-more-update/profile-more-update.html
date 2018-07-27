@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar color="eventarich">
+    <ion-title>Update Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding nolines>
+
+    <form #tambahEvent="ngForm" novalidate> 
+  
+        <ion-list no-padding>
+          <ion-item>
+            <ion-label color="eventarich" stacked>User Name</ion-label>
+            <ion-input class="text-input" type="text" placeholder="" [(ngModel)]="userName" name="event" #evnt="ngModel"  required></ion-input>
+          </ion-item>
+    
+          <ion-item>
+              <ion-label color="eventarich" stacked>Deskripsi</ion-label>
+              <ion-textarea rows="3" class="text-input" type="text" placeholder="" [(ngModel)]="userDescription" name="event" #evnt="ngModel"  required></ion-textarea>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label color="eventarich" stacked>No Telepon</ion-label>
+            <ion-input class="text-input" type="text" placeholder="" [(ngModel)]="kota" name="userPhoneNumber" #kot="ngModel" required></ion-input>
+          </ion-item>
+    
+          <ion-item>
+              <ion-label color="eventarich" stacked>Alamat</ion-label>
+              <ion-textarea rows='3' class="text-input" type="text" placeholder="" [(ngModel)]="userAddress" name="deskripsi" #desc="ngModel" required></ion-textarea>
+          </ion-item>
+    
+        </ion-list>
+        <div id="sesuatu"></div>
+        <button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Buat</button>
+    </form> 
+
+</ion-content>

@@ -8,7 +8,8 @@
   
 <ion-content no-padding>
 
-    <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img>
+    <!-- <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img> -->
+    <div class="divisi" (click)="viewImage()" [style.background]="makeTrustedImage(dataEvent.event_image_path)"></div>
     <h2 text-center class="event_title">{{ dataEvent.title }}</h2>
     
     <ion-card class="">
@@ -16,13 +17,13 @@
             <ion-row>
                 <ion-col>
                     <ion-icon name="calendar" color="eventarich"></ion-icon>
-                    <ion-label>{{date.tanggal}} {{date.bulan}} {{date.tahun}}</ion-label>
+                    <ion-label>{{dataEvent.date_event | dateConvert: 'long'}}</ion-label>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>
                     <ion-icon name="pin" color="eventarich"></ion-icon>
-                    <ion-label>{{dataEvent.city}}, indonesia</ion-label>
+                    <ion-label>{{dataEvent.city}}, Indonesia</ion-label>
                 </ion-col>
             </ion-row>
         </ion-card-content>

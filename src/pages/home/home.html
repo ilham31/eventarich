@@ -28,16 +28,14 @@
     
   <ion-card *ngFor="let listEvent of eventsArray"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
-    <!-- <div class="divisi" [ngStyle]="{ 'background': 'url(../assets/imgs/contoh.jpg) center'}"></div> -->
-    <!-- <div class="divisi" [ngStyle]="{'background-image' : 'url('+ listEvent.event_image_path +' ) center' | safeImage:'style'}"></div> -->
-    <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)" [style.background-size.vw]="86"></div>
+    <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)"></div>
 
 
     <ion-card-content class="footer_card">
         <ion-row>
           <ion-col col-3 class="col_badge">
             <ion-badge class="badge-circle" >
-             {{ listEvent.hari }} {{ listEvent.bulan | dateConvert }}
+             {{ listEvent.date_event | dateConvert: 'short'}}
             </ion-badge>  
           </ion-col>
           <ion-col col-9 class="col_content">

@@ -10,8 +10,15 @@
   <img class="container" [src]='imageURI'>
 
   <form #eventAddForm="ngForm" (ngSubmit)="addEvent(eventAddForm)" novalidate> 
-    <ion-icon (click)="openGallery()" name="camera" color="eventarich"></ion-icon>
+    
     <ion-list>
+      <ion-item no-lines text-center>
+        <button center class="btn open-gallery" (click)="openGallery()">
+          <ion-icon name="camera" color="eventarich">
+            <span>Pilih Foto Event</span>
+          </ion-icon>
+        </button>
+      </ion-item>
       <ion-item>
         <ion-label color="eventarich" stacked>Judul Event</ion-label>
         <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="eventData.title" name="event" #event="ngModel"  required></ion-input>

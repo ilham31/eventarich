@@ -50,22 +50,9 @@ export class HomePage {
       let temp: any = data;
       this.event = temp.json();
       this.eventsArray = this.event.events;
-      this.splitDate();
       console.log("Event", this.eventsArray);
       // console.log("event array",this.eventsArray);
     });
-  }
-
-  splitDate() {
-    for(var i=0; i < this.eventsArray.length; i++) {
-      this.tanggalEvent = this.eventsArray[i].date_event.split("-");
-      this.bulan = this.tanggalEvent[1];
-      this.hari = this.tanggalEvent[2].substring(0,2);
-      this.arrayTanggalEvent = {
-        bulan: this.bulan,
-        hari: this.hari
-      }
-    }
   }
 
   makeTrustedImage(item) {

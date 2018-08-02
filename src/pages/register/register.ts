@@ -50,7 +50,11 @@ export class RegisterPage {
         this.alertSuccess();
       }, (err) => {
         this.loading.dismiss();
-        this.presentToast(err);
+        if(err.status === 409) {
+          this.presentToast('Email sudah digunakan, mohon untuk mengganti dengan yang lebih unik');
+        } else {
+          this.presentToast(err);
+        }
         console.log(err);
       });
     } else {

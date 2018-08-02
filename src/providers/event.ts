@@ -22,11 +22,12 @@ export class EventProvider {
 
   dataEventUser: any;
   updatedStatus: any = true;
-  likedByMe: string[] = [];
+  likedByMe = JSON.parse(localStorage.getItem('likedEvent')) || [];
 
 
   constructor( private http: Http, private storage: Storage, private events: Events ) {
     console.log('Ini daftar likenya', this.likedByMe);
+    console.log('likedbyme', this.likedByMe);
   }
 
   checkUpdated() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, MenuController, IonicPage } from 'ionic-angular';
+import { App, NavController, MenuController, IonicPage, LoadingController, ToastController } from 'ionic-angular';
 
 import { AuthServiceProvider } from '../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
@@ -26,11 +26,14 @@ export class HomePage {
   tahun: any;
   bulan: any;
   hari: any;
+
+  loading : any;
   
 
   constructor(public navCtrl: NavController, public menuCtrl : MenuController,
               public auth: AuthServiceProvider, public eventProv : EventProvider,
-              private sanitizer : DomSanitizer ) {
+              private sanitizer : DomSanitizer, private loadCtrl : LoadingController,
+              private toastCtrl : ToastController ) {
     
               this.auth.hasLoggedIn().then((value) => {
                 if(value) {
@@ -46,12 +49,16 @@ export class HomePage {
   }
 
   loadEvent() {
+    this.showLoader('memuat...');
     this.eventProv.getAllEvent().then((data)=>{
       let temp: any = data;
       this.event = temp.json();
       this.eventsArray = this.event.events;
       console.log("Event", this.eventsArray);
-      // console.log("event array",this.eventsArray);
+      this.loading.dismiss();
+    }, (err) => {
+      this.presentToast('Anda tidak terhubung Internet');
+      this.loading.dismiss();
     });
   }
 
@@ -94,6 +101,29 @@ export class HomePage {
       this.loadEvent();
       refresher.complete();
     }, 2000);
+  }
+
+  showLoader(content) {
+    this.loading = this.loadCtrl.create({
+      content: content
+    });
+
+    this.loading.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
+    
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
 }

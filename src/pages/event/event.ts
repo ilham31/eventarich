@@ -43,6 +43,7 @@ export class EventPage {
     this.eventLiked = this.eventProvider.hasLiked(this.navParams.data._id);
     this.loading.dismiss();
     // console.log(this.token);
+    console.log('daftar like', JSON.parse(localStorage.getItem('likedEvent')));
   }
   
 
@@ -52,9 +53,10 @@ export class EventPage {
       console.log('Udah di like')
     } else {
       this.eventProvider.likeEvent(this.token, eventId).then((res)=> {
-        this.eventProvider.addLiked(eventId);
         this.eventLiked = true;
         this.likesCounter = this.likesCounter + 1;
+        this.eventProvider.addLiked(eventId);
+        this.addNewLikedEvent(eventId);
       });
       console.log('Dilike');
     }
@@ -64,6 +66,12 @@ export class EventPage {
     const imageString =  JSON.stringify(item).replace(/\\n/g, '');
     const style = 'url(' + imageString + ')';
     return this.sanitizer.bypassSecurityTrustStyle(style);
+  }
+
+  addNewLikedEvent(eventId) {
+    var temp = JSON.parse(localStorage.getItem('likedEvent')) || [];
+    temp.push(eventId);
+    localStorage.setItem('likedEvent', JSON.stringify(temp));
   }
 
   viewImage() {

@@ -27,7 +27,6 @@ export class EventProvider {
 
   constructor( private http: Http, private storage: Storage, private events: Events ) {
     console.log('Ini daftar likenya', this.likedByMe);
-    console.log('likedbyme', this.likedByMe);
   }
 
   checkUpdated() {

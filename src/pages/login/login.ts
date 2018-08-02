@@ -61,6 +61,7 @@ export class LoginPage {
     this.authService.getUserData(token).then((data) => {
       let temp: any = data;
       this.userData = temp.json().events;
+      console.log(this.userData);
       localStorage.setItem('userID', this.userData[0]._id);
       localStorage.setItem('userName', this.userData[0].name);
     });

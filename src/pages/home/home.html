@@ -28,7 +28,12 @@
     
   <ion-card *ngFor="let listEvent of eventsArray"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
-    <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)"></div>
+    <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)">
+      <div class="like">
+        <ion-icon id="like-love" name="custom-heart" color="eventarich"></ion-icon>
+        <span id="like-counter">100 likes</span>
+      </div>
+    </div>
 
 
     <ion-card-content class="footer_card">

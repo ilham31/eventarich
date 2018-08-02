@@ -12,12 +12,10 @@
   <form #eventAddForm="ngForm" (ngSubmit)="addEvent(eventAddForm)" novalidate> 
     
     <ion-list>
-      <ion-item no-lines text-center>
-        <button center class="btn open-gallery" (click)="openGallery()">
-          <ion-icon name="camera" color="eventarich">
-            <span>Pilih Foto Event</span>
-          </ion-icon>
-        </button>
+      <ion-item no-lines text-center (click)="openGallery()">
+        <ion-icon class="button-open-gallery" name="camera" color="eventarich">
+          <span>Pilih Gambar Event</span>
+        </ion-icon>
       </ion-item>
       <ion-item>
         <ion-label color="eventarich" stacked>Judul Event</ion-label>

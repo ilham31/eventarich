@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import{ AuthServiceProvider } from '../../providers/auth-service';
+import { AuthServiceProvider } from '../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
 
 

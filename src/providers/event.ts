@@ -22,9 +22,11 @@ export class EventProvider {
 
   dataEventUser: any;
   updatedStatus: any = true;
+  likedByMe: string[] = [];
+
 
   constructor( private http: Http, private storage: Storage, private events: Events ) {
-    
+    console.log('Ini daftar likenya', this.likedByMe);
   }
 
   checkUpdated() {
@@ -39,6 +41,15 @@ export class EventProvider {
     // console.log(this.updatedStatus);
   }
   
+
+  hasLiked(eventId: string): boolean {
+    return (this.likedByMe.indexOf(eventId) > -1);
+  };
+
+  addLiked(eventId: string): void {
+    this.likedByMe.push(eventId);
+  };
+  
   // Post event baru
   tambahEvent(data, token) {
     return new Promise((resolve, reject) => {
@@ -47,7 +58,21 @@ export class EventProvider {
       headers.append('Authorization','Bearer '+ token);
       this.http.post(apiUrl+'/events', JSON.stringify(data), {headers: headers}).subscribe(res => {
         if(res.status == 200) {
-          console.log(res);
+          resolve(res);
+        }  
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
+// Like Event
+  likeEvent(token, eventId) {
+    return new Promise((resolve, reject) => {
+      var headers = new Headers();
+      // headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ token);
+      this.http.post(apiUrl+'/events/like/' + eventId, JSON.stringify(eventId), {headers: headers}).subscribe(res => {
+        if(res.status == 200) {
           resolve(res);
         }  
       }, (err) => {
@@ -112,7 +137,6 @@ export class EventProvider {
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization','Bearer '+ token);
       this.http.delete(apiUrl+'/events/delete/' + eventId, {headers: headers}).subscribe(res => {
-          console.log(res);
           if(res.status == 200) {
             resolve(res);
           }
@@ -121,21 +145,6 @@ export class EventProvider {
         });
     });
   }
-
-  favouriteEvent(data) {
-    return new Promise((resolve, reject) => {
-      var headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      this.http.post(apiUrl+'/events', JSON.stringify(data), {headers: headers})
-        .subscribe(res => {
-          console.log(res);
-          resolve(res.json());
-         }, (err) => {
-          reject(err);
-        });
-    });
-  }
-
   
 }
 

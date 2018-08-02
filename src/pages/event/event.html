@@ -11,6 +11,15 @@
     <!-- <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img> -->
     <div class="divisi" (click)="viewImage()" [style.background]="makeTrustedImage(dataEvent.event_image_path)"></div>
     <h2 text-center class="event_title">{{ dataEvent.title }}</h2>
+    <div class="row like-section">
+        <div align="center" class="col-6 icon">
+            <ion-icon (click)="likeEvent(dataEvent._id)" *ngIf="!eventLiked" name="custom-heart-empty" color="eventarich"></ion-icon>
+            <ion-icon *ngIf="eventLiked" name="custom-heart" color="eventarich"></ion-icon>
+        </div>
+        <div align="center" class="col-6 counter">
+            <p>Disukai {{likesCounter}} orang</p>
+        </div>
+    </div>
     
     <ion-card class="">
         <ion-card-content>
@@ -33,8 +42,8 @@
         <ion-card-header>
             Deskripsi event
         </ion-card-header>  
-        <ion-card-content>
-            {{dataEvent.description}}                
+        <ion-card-content class="description-content">
+            <p>{{dataEvent.description | breaklinePipe}}</p>
         </ion-card-content>
     </ion-card>
 

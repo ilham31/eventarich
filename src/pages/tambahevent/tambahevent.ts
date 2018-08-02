@@ -50,6 +50,7 @@ export class TambaheventPage {
     if(form.valid) {
       console.log(this.eventData);
       this.eventprov.tambahEvent(this.eventData, this.token).then((result)=>{
+        console.log('masuk sini');
         this.events.publish('event:updated', true);
         this.navCtrl.pop();
         this.loading.dismiss();
@@ -84,6 +85,7 @@ export class TambaheventPage {
       }
       this.loading.dismiss();
      }, (err) => {
+      this.loading.dismiss();
       console.log(err);
      });
   }

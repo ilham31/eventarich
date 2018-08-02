@@ -9,6 +9,7 @@ import { EventProvider } from '../../providers/event';
 import { AuthServiceProvider } from '../../providers/auth-service';
 
 import { DateConvertPipe } from './../../pipes/date-convert/date-convert';
+import { BreaklinePipe } from '../../pipes/breakline/breakline';
 
 @IonicPage()
 @Component({
@@ -29,27 +30,34 @@ export class EventPage {
   date:any;
 
   loading: any;
+  eventLiked: any = false;
+  likesCounter : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public EventProvider : EventProvider, public authService : AuthServiceProvider,
+              public eventProvider : EventProvider, public authService : AuthServiceProvider,
               private loadCtrl : LoadingController, private sanitizer : DomSanitizer,
               private photoView : PhotoViewer) {
     this.showLoader();
     this.dataEvent = this.navParams.data;
-    console.log("Data Event", this.dataEvent);
+    this.likesCounter = this.navParams.data.likes;
+    this.eventLiked = this.eventProvider.hasLiked(this.navParams.data._id);
     this.loading.dismiss();
+    // console.log(this.token);
   }
   
-  favouriteEvent(item) {
-   let favouriteData = {
-      id : this.getIdUser,
-      idEvent : this.EventId 
-   } 
-   this.EventProvider.favouriteEvent(favouriteData).then((result)=>{
-    console.log(result)
-    },(err)=>{
-    console.log(err)
-   });
+
+  likeEvent(eventId) {
+    if(this.eventProvider.hasLiked(eventId)) {
+      this.eventLiked = true;
+      console.log('Udah di like')
+    } else {
+      this.eventProvider.likeEvent(this.token, eventId).then((res)=> {
+        this.eventProvider.addLiked(eventId);
+        this.eventLiked = true;
+        this.likesCounter = this.likesCounter + 1;
+      });
+      console.log('Dilike');
+    }
   }
   
   makeTrustedImage(item) {

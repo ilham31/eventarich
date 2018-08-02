@@ -29,13 +29,24 @@ page-tambahevent {
         height: 25vw;
     }
 
-    .btn {
-        margin: 0 auto;
-        width: 50%;
-    }
-    .open-gallery {
-        margin : 2vw;
-        padding : 3vw;
-        border: red 1px;
+    .button-open-gallery {
+        color: white;
+        background-color: #FF3080;
+        font-size : 4vw;
+
+        overflow: hidden;
+
+        border-style: solid;
+        border-width: 0;
+        outline: none;
+        border-radius : 1.2vw;
+
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        padding : 2.5vw 2vw 2.5vw 2vw;
+
+        :focus {
+            background-color: rgb(204, 28, 96);
+        }
     }
 }

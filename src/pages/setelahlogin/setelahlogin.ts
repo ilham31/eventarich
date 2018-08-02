@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, MenuController } from 'ionic-angular';
+
 import { EventProvider } from '../../providers/event';
 import { AuthServiceProvider } from '../../providers/auth-service';
+
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeImagePipe } from './../../pipes/safe-image/safe-image';
+import { DateConvertPipe } from './../../pipes/date-convert/date-convert';
+import { TopEventSortPipe } from './../../pipes/top-event-sort/top-event-sort';
 
 
 @IonicPage()

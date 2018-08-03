@@ -49,6 +49,7 @@ export class KebutuhaneventPage {
           console.log(err);
         });
     } else {
+      this.loading.dismiss();
       this.presentToast("Form tidak valid");
     }
   }

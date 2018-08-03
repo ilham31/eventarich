@@ -38,12 +38,14 @@ export class ProfilPage {
     this.loadUserEvent(this.token);
   }
 
-  ionViewDidLoad(){
+  ionViewWillEnter(){
+    this.loadProfile();
   }
 
   // Load data User
   loadProfile() {
     this.namaUser = localStorage.getItem('userName');
+    this.deskripsi = localStorage.getItem('userDescription');
   }
 
   checkArray() {

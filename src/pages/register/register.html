@@ -24,7 +24,7 @@
 
             <ion-item>
                 <ion-label color="dark" stacked>No HP</ion-label>
-                <ion-input class="text-input" #hp="ngModel" [(ngModel)]="phone_number" name="phone" [ngModelOptions]="{standalone: true}" type="number" max="12" required></ion-input>
+                <ion-input class="text-input" #hp="ngModel" [(ngModel)]="phone_number" name="phone" [ngModelOptions]="{standalone: true}" type="tel" maxlength="12" required></ion-input>
             </ion-item>
             <p ion-text [hidden]="hp.valid || submitted == false" color="danger" padding-left class="teksWarning">Nomor Handphone harus diisi</p>
 

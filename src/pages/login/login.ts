@@ -64,6 +64,9 @@ export class LoginPage {
       console.log(this.userData);
       localStorage.setItem('userID', this.userData[0]._id);
       localStorage.setItem('userName', this.userData[0].name);
+      localStorage.setItem('userAddress', this.userData[0].address);
+      localStorage.setItem('userPhone', this.userData[0].phone_number);
+      localStorage.setItem('userDescription', this.userData[0].description);
       localStorage.setItem('likedEvent', JSON.stringify(this.userData[0].liked_event));
     });
   }

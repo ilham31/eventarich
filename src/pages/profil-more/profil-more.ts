@@ -32,6 +32,10 @@ export class ProfilMorePage {
     this.loading.dismiss();
   }
 
+  updateProfile() {
+    this.navCtrl.push('ProfileMoreUpdatePage');
+  }
+
   showLoader() {
     this.loading = this.loadCtrl.create({
       content: 'memuat..'

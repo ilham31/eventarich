@@ -70,6 +70,23 @@ export class AuthServiceProvider {
       });
   }
 
+  updateProfile(credentials, token) {
+    return new Promise((resolve, reject) => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization','Bearer '+ token);
+        this.http.post(apiUrl+'/profiles/edit', JSON.stringify(credentials), {headers: headers})
+          .subscribe(res => {
+            if(res.status == 200) {
+              resolve(res);
+            }
+
+           }, (err) => {
+            reject(err);
+          });
+    });
+  }
+
   getUserData(token) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();

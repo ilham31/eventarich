@@ -8,44 +8,34 @@ import { isDefaultChangeDetectionStrategy } from '@angular/core/src/change_detec
   templateUrl: 'filter.html',
 })
 export class FilterPage {
-  listFilter : any = [];
-  tanggalFilter : any = [];
+  listFilter : any[]=[];
+  tanggalFilter:any[]=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  rentang : boolean = false;
+
+  kompetisi : boolean =false;
+  seminar : boolean =false;
+  lingkungan : boolean =false;
+  expo : boolean =false;
+  olahraga : boolean =false;
+  bazaar : boolean =false;
+  seni : boolean =false;
+  sosial : boolean =false;
+  data : any;
+
+  tanggalBawah: string;
+  tanggalAtas : string;
 
   dualValue2: any = {
     upper:12,
     lower:1
   }
-    
-  //   kompetisi : boolean =false;
-  //   seminar : boolean =false;
-  //   lingkungan : boolean =false;
-  //   expo : boolean =false;
-  //   olahraga : boolean =false;
-  //   bazaar : boolean =false;
-  //   seni : boolean =false;
-  //   sosial : boolean =false;
-  //   data : any;
-  //   tanggalBawah: string;
-  //   tanggalAtas : string;
-  //     ionViewDidLoad() {
-  //   console.log('ionViewDidLoad FilterPage');
-  // }
-    
-  kompetisi : boolean = false;
-  seminar : boolean = false;
-  lingkungan : boolean = false;
-  expo : boolean = false;
-  olahraga : boolean = false;
-  bazaar : boolean = false;
-  seni : boolean = false;
-  sosial : boolean = false;
-  data : any;
-  tanggalBawah: string;
-  tanggalAtas : string;
-  rentang : boolean;
-  
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) 
+  {
+    localStorage.removeItem('filter');
+  }
+
   cariEvent() {   
     if(this.kompetisi==true) {
       this.listFilter.push("Kompetisi");
@@ -91,15 +81,14 @@ export class FilterPage {
     {
       console.log("tanpa tanggal")
       this.tanggalBawah="0";
-      this.tanggalAtas="0";
       this.tanggalFilter.push(this.tanggalBawah);
-      this.tanggalFilter.push(this.tanggalAtas);
     }
     
     localStorage.setItem('filter', "true");
     // this.backToSearch(this.listFilter, this.tanggalFilter);
     this.navCtrl.getPrevious().data.list = this.listFilter;
     this.navCtrl.getPrevious().data.tanggal = this.tanggalFilter;
+    this.navCtrl.getPrevious().data.rentang = this.rentang;
     this.navCtrl.pop();
     console.log("list",this.listFilter,this.tanggalFilter)
   }

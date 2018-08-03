@@ -24,7 +24,7 @@ export class SearchPage {
   eventsArray:any = [];
   showEvent : any = [];
   eventFiltered : any = [];
-
+  rentang : boolean
   queryText: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public eventProv:EventProvider) {
@@ -33,12 +33,13 @@ export class SearchPage {
 
   ionViewWillEnter()
   {
-    this.allEvent=this.loadEvent();
+    this.loadEvent();
     this.dataFilter=this.navParams.get('list'); //ngambil data filter dari halaman filter
     this.dataTanggal=this.navParams.get('tanggal');//ngambil data tanggal dari range di halaman filter, index 0 angka paling bawah,index 1 yang tinggi
+    this.rentang=this.navParams.get('rentang')
     console.log("filter data",this.dataFilter);
     console.log("filter tanggal",this.dataTanggal);
-    
+    console.log('rentang',this.rentang)
     console.log("localstorage filter",localStorage.getItem('filter'));
   }
 
@@ -53,11 +54,11 @@ export class SearchPage {
       if(filter)
       {
 
-          console.log("masuk if")
-              console.log("masuk if",this.eventsArray[0])
+          
+              console.log("masuk if")
               for(var j =0;j<this.eventsArray.length;j++)   //cek semua event
               {
-                console.log("masuk for 1",this.eventsArray[j]);
+                console.log("masuk for ",this.eventsArray[j]);
                 this.tanggalCut=this.eventsArray[j].date_event.split('-'); //misahin tanggal buat ambil bulannya doang
                 this.tanggal=this.tanggalCut[1];//nyimpen tanggal yg udah di cut
                 console.log("tanggal",this.tanggal);
@@ -65,28 +66,28 @@ export class SearchPage {
                 {
                   console.log("category event",this.eventsArray[j].categoryevent.name)
                   console.log("tanggalbawah",this.dataTanggal[0],"& tanggal atas",this.dataTanggal[1])
-                  if(this.dataTanggal[1]&&this.dataTanggal[0]==0) //tanpa tanggal
+                  if(this.rentang==false) //tanpa tanggal
                   {
-                    console.log("tanpa tanggal")
-                    if(this.eventsArray[j].categoryevent.name==this.dataFilter[i]) //kalo categoryname filter==datafilter   
-                    {
-                      console.log("sama",this.dataFilter[i],"=",this.eventsArray[j].categoryevent.name);    //kalo sama tar print gini
-                      console.log("sama dengan filter",this.eventsArray[j]);
-                      this.eventFiltered.push(this.eventsArray[j]);
-                      
-                    }
-                    else
-                    {
-                      console.log("ga sama")
-                    }
+                      console.log("tanpa tanggal")
+                      if(this.eventsArray[j].categoryevent.name==this.dataFilter[i]) //kalo categoryname filter==datafilter   
+                      {
+                        console.log("sama",this.dataFilter[i],"=",this.eventsArray[j].categoryevent.name);    //kalo sama tar print gini
+                        console.log("sama dengan filter",this.eventsArray[j]);
+                        this.eventFiltered.push(this.eventsArray[j]);
+                        
+                      }
+                      else
+                      {
+                        console.log("ga sama")
+                      }
                   }
-                  else
+                  else if(this.rentang==true)
                   {
-                    console.log("dengan tanggal")
-                    if(this.eventsArray[j].categoryevent.name==this.dataFilter[i] || (this.tanggal<=this.dataTanggal[1]&&this.tanggal>=this.dataTanggal[0])) //kalo categoryname filter==datafilter atau tanggal bawah < ttanggal yg udah di cut < tanggal atas  
+                    console.log(" masuk dengan tanggal")
+                    if(this.tanggal<=this.dataTanggal[1]&&this.tanggal>=this.dataTanggal[0]) //kalo categoryname filter==datafilter atau tanggal bawah < ttanggal yg udah di cut < tanggal atas  
                     {
                       console.log("sama",this.dataFilter[i],"=",this.eventsArray[j].categoryevent.name);    //kalo sama tar print gini
-                      console.log("sama dengan filter",this.eventsArray[j]);
+                      console.log("sama dengan filter dengan tanggal",this.eventsArray[j]);
                       this.eventFiltered.push(this.eventsArray[j]);
                       
                     }
@@ -115,8 +116,10 @@ export class SearchPage {
     
   }
 
-  ionViewDidLeave(){
+  ionViewWillLeave(){
     localStorage.removeItem('filter');
+    this.showEvent.length =0
+    
   }
   
   filter() {

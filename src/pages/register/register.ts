@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 
 import { AuthServiceProvider } from '../../providers/auth-service';
 import { NgForm } from '@angular/forms';
@@ -27,10 +27,12 @@ export class RegisterPage {
               public navParams: NavParams,
               public authService: AuthServiceProvider,
               public loadCtrl: LoadingController,
-              private toastCtrl: ToastController
+              private toastCtrl: ToastController,
+              private alertCtrl: AlertController
             ) {}
 
   doSignup(form: NgForm) {
+    this.showLoaderLoad();
     this.submitted = true;
     if(form.valid) {
       let regData = { 
@@ -42,15 +44,21 @@ export class RegisterPage {
       };
       // this.showLoader();
       this.authService.signup(regData).then((result) => {
+        console.log('user Created');
         this.loading.dismiss();
         this.navCtrl.push('LoginPage');
+        this.alertSuccess();
       }, (err) => {
         this.loading.dismiss();
-        this.presentToast(err);
+        if(err.status === 409) {
+          this.presentToast('Email sudah digunakan, mohon untuk mengganti dengan yang lebih unik');
+        } else {
+          this.presentToast(err);
+        }
         console.log(err);
       });
     } else {
-      this.presentToast("form belum terisi");
+      this.presentToast("Form belum terisi");
     }
   }
 
@@ -66,13 +74,23 @@ export class RegisterPage {
     console.log(this.status);
   }
 
-  showLoader() {
+  showLoaderLoad() {
     this.loading = this.loadCtrl.create({
       content: 'memuat....'
     });
 
     this.loading.present();
   }
+
+  alertSuccess() {
+    let alert = this.alertCtrl.create({
+      title: 'Anda Sudah Terdaftar',
+      subTitle: 'Silahkan lakukan login pertama Anda!',
+      buttons: ['Oke']
+    });
+    alert.present();
+  }
+  
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({

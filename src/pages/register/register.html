@@ -24,13 +24,13 @@
 
             <ion-item>
                 <ion-label color="dark" stacked>No HP</ion-label>
-                <ion-input class="text-input" #hp="ngModel" [(ngModel)]="phone_number" name="phone" [ngModelOptions]="{standalone: true}" type="number" max="12" required></ion-input>
+                <ion-input class="text-input" #hp="ngModel" [(ngModel)]="phone_number" name="phone" [ngModelOptions]="{standalone: true}" type="tel" maxlength="12" required></ion-input>
             </ion-item>
             <p ion-text [hidden]="hp.valid || submitted == false" color="danger" padding-left class="teksWarning">Nomor Handphone harus diisi</p>
 
             <ion-item>
                 <ion-label color="dark" stacked>Alamat</ion-label>
-                <ion-input class="text-input"  #alamat="ngModel" [(ngModel)]="address" name="Address" type="text" required></ion-input>
+                <ion-textarea class="text-input" rows="2" #alamat="ngModel" [(ngModel)]="address" name="Address" type="text" required></ion-textarea>
             </ion-item>
             <p ion-text [hidden]="alamat.valid || submitted == false" color="danger" padding-left class="teksWarning">Alamat harus diisi</p>
            
@@ -43,7 +43,7 @@
             <p ion-text [hidden]="pwd.valid || submitted == false" color="danger" padding-left class="teksWarning">Password harus diisi</p>
         </ion-list>
 
-        <button class="buttonReg" ion-button no-margin full color="eventarich" type="submit">Daftar</button>
+        <button class="button_bottom" ion-button no-margin full color="eventarich" type="submit">Daftar</button>
     </form>    
         
 </ion-content>

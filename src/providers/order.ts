@@ -6,7 +6,9 @@ import { Storage } from '@ionic/storage';
 
 import { AuthServiceProvider } from './auth-service';
 
-let apiUrl = 'http://localhost:3000';
+let apiUrl = 'http://eventarich.codepanda.web.id';
+// let apiUrl = 'http://localhost:3000';
+
 
 @Injectable()
 export class OrderProvider {
@@ -44,6 +46,22 @@ export class OrderProvider {
       this.http.get(apiUrl + "/orders", {headers: headers}).subscribe(res => {
         console.log("get order",res);
         resolve(res);
+        }, (err) => {
+        reject(err);
+      });
+    });
+  }
+
+  deleteOrder(token, orderId) {
+    return new Promise((resolve,reject)=>{
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization','Bearer '+ token);
+      this.http.delete(apiUrl + "/orders/" + orderId, {headers: headers}).subscribe(res => {
+        console.log(res);
+        if(res.status == 200) {
+          resolve(res);
+        }
         }, (err) => {
         reject(err);
       });

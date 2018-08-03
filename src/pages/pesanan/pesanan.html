@@ -8,6 +8,16 @@
 
 
 <ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content color="eventarich"
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+
     <ion-grid>
       <ion-row justify-content-center align-items-center style="height: 100%">
         <ion-col col-11>
@@ -21,29 +31,27 @@
 
   <h6>List Pesanan :</h6>
   <ion-list>
-
-    <ion-item-sliding #item *ngFor="let listorder of dataOrder;let i = index;">
+    <ion-item no-lines padding text-center *ngIf="orderData == 0">
+      <strong>Tidak ada Order untuk ditampilkan</strong>
+    </ion-item>
+    <ion-item-sliding #item *ngFor="let listOrder of orderData">
       <ion-item class="order_item" no-padding>
-
         <ion-row>
           <ion-col>
             <div class="order_item_attribute">
-              <h2>{{listorder.category.name}}</h2>
-              <p><small >Untuk tanggal : {{listorder.date.substring(0,10)}}</small></p>
+              <h2>{{ listOrder.category.name }}</h2>
+              <p><small>Untuk tanggal : {{ listOrder.date }}</small></p>
             </div>
           </ion-col>
         </ion-row>
-
       </ion-item>
       <ion-item-options class="order_option" side="right">
-        <button ion-button color="danger" (click)="unread(item)">
+        <button ion-button color="danger" (click)="deleteOrderId(listOrder._id)">
           <ion-icon name="trash"></ion-icon>
           Batal
         </button>
       </ion-item-options>
     </ion-item-sliding>
-
-    
 
   </ion-list>
 </ion-content>

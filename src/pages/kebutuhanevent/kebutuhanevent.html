@@ -36,13 +36,13 @@
       
       <ion-item no-padding>
         <ion-label stacked color="dark">Deskripsi pesanan</ion-label>
-        <ion-textarea type="text" color="eventarich" [(ngModel)]="deskripsiPesanan" name="deskripsi" #desc="ngModel" required></ion-textarea>
+        <ion-textarea rows="4" type="text" color="eventarich" [(ngModel)]="deskripsiPesanan" name="deskripsi" #desc="ngModel" required></ion-textarea>
       </ion-item>
       <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
 
       <ion-item no-padding>
         <ion-label stacked color="dark">Alamat Pemesanan</ion-label>
-        <ion-input type="text" [(ngModel)]="alamatUser" name="alamatPesanan" #add="ngModel" required></ion-input>
+        <ion-textarea rows="2" type="text" [(ngModel)]="alamatUser" name="alamatPesanan" #add="ngModel" required></ion-textarea>
       </ion-item>
       <p ion-text [hidden]="add.valid || submitted == false" color="danger" padding-left class="teksWarning">Alamat harus diisi</p>
     </ion-list>

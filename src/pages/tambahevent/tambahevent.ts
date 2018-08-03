@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading  } from 'ionic-angular';
-import { Camera,CameraOptions } from '@ionic-native/camera';
-import { NgForm } from '@angular/forms';
+import { IonicPage, NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading, AlertController, Events  } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { NgForm, FormGroup } from '@angular/forms';
 import { AuthServiceProvider } from './../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
+
+import { File } from '@ionic-native/file';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+
 
 @IonicPage()
 @Component({
@@ -17,55 +23,90 @@ export class TambaheventPage {
   image : string;
 
   submitted = false;
-  eventName : string = '';
-  myDate = new Date().toISOString.toString();
-  kota : string ='';
-  deskripsiEvent : string ='';
+ 
+  imageURI : any = "assets/imgs/contoh.jpg";
 
-  
-  data:any;
-  selectedLeave : any;
+  eventData : any = {
+    title : '',
+    date_event : new Date().toISOString.toString(),
+    city : '',
+    description : '',
+    categoryevent : '',
+    event_image_path : ''
+  };
+
   token: any = localStorage.getItem('token');
 
-  constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams,
-    private camera: Camera, 
-    public actionSheetCtrl: ActionSheetController, 
-    public toastCtrl: ToastController, 
-    public platform: Platform, 
-    public loadCtrl: LoadingController,
-    public eventprov: EventProvider,
- ) {
 
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, 
+              public loadCtrl: LoadingController, public eventprov: EventProvider,
+              private alertCtrl : AlertController, private events : Events,
+              private imagePicker : ImagePicker, private base64 : Base64) {}
 
-
-  addEvent( form : NgForm) {
-    console.log("selectedleave",this.selectedLeave);
+  addEvent(form : NgForm) {
     this.showLoader();
-    this.submitted=true;
+    this.submitted = true;
     if(form.valid) {
-      let eventData = {
-        title:this.eventName,
-        date:this.myDate,
-        city:this.kota,
-        description:this.deskripsiEvent,
-        categoryevent:this.selectedLeave
-      };
-
-      this.eventprov.tambahEvent(eventData, this.token).then((result)=>{
+      console.log(this.eventData);
+      this.eventprov.tambahEvent(this.eventData, this.token).then((result)=>{
+        console.log('masuk sini');
+        this.events.publish('event:updated', true);
         this.navCtrl.pop();
         this.loading.dismiss();
+        this.alertSuccess();
         console.log("data",result);
       }, (err) => {
         this.loading.dismiss();
+        this.alertGagal(err._body.message);
         console.log(err);
       });
     } else {
-      console.log("form isi dulu")
+      this.loading.dismiss();
+      this.presentToast("Form belum terisi");
     }
   }
+
+  openGallery() {
+    this.showLoader();
+    const options = {
+      quality : 70,
+      maximumImagesCount : 1
+    }
+
+    this.imagePicker.getPictures(options).then((imageData) => {
+      for(var i = 0; i < imageData.length; i++) {
+        this.imageURI = imageData[i];
+        this.base64.encodeFile(imageData[i]).then((base64File : string) => {
+          this.eventData.event_image_path = base64File;
+        }, (err) => {
+          console.log(err);
+        });
+      }
+      this.loading.dismiss();
+     }, (err) => {
+      this.loading.dismiss();
+      console.log(err);
+     });
+  }
+
+  // fileTransfering() {
+  //   const fileTransfer: FileTransferObject = this.transfer.create();
+  //   let options: FileUploadOptions = {
+  //     fileKey: 'ionicfile',
+  //     fileName: 'ionicfile',
+  //     chunkedMode: false,
+  //     mimeType: "image/jpeg",
+  //     headers: {}
+  //   }
+
+  //   fileTransfer.upload(this.imageURI, 'http://localhost:3000/events', options).then((data) => {
+  //     console.log(data+" Uploaded Successfully");
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+
+  // }
 
   showLoader() {
     this.loading = this.loadCtrl.create({
@@ -75,83 +116,34 @@ export class TambaheventPage {
     this.loading.present();
   }
 
-  
-  // uploadPicture() {
+  alertSuccess() {
+    let alert = this.alertCtrl.create({
+      subTitle: "Event berhasil dibuat",
+      buttons: ['Oke']
+    });
+    alert.present();
+  }
+
+  alertGagal(err) {
+    let alert = this.alertCtrl.create({
+      subTitle: 'Event gagal dibuat : ' + err,
+      buttons: ['Oke']
+    });
+    alert.present();
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: true
+    });
     
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     title: 'Pilihan',
-  //     buttons: [
-  //       {
-  //         text: 'Ambil Gambar Baru',
-  //         role: 'ambilGambar',
-  //         handler: () => {
-  //           this.takePicture();
-  //         }
-  //       },
-  //       {
-  //         text: 'Pilih Dari Galleri',
-  //         role: 'gallery',
-  //         handler: () => {
-  //           this.getPhotoFromGallery();
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   actionSheet.present();
-  // }
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
 
-
-  // async takePicture(){
-  //   try {
-  //     const options : CameraOptions = {
-  //       quality: 50, //to reduce img size
-  //       targetHeight: 600,
-  //       targetWidth: 600,
-  //       destinationType: this.camera.DestinationType.DATA_URL, //to make it base64 image
-  //       encodingType: this.camera.EncodingType.JPEG,
-  //       mediaType:this.camera.MediaType.PICTURE,
-  //       correctOrientation: true
-  //     }
-
-  //     const result =  await this.camera.getPicture(options);
-
-  //     this.image = 'data:image/jpeg;base64,' + result;
-
-     
-      
-
-
-  //   }
-  //   catch (e) {
-  //     console.error(e);
-  //     alert("error");
-  //   }
-
-  // }
-
-  // getPhotoFromGallery(){
-  //   this.camera.getPicture({
-  //       destinationType: this.camera.DestinationType.DATA_URL,
-  //       sourceType     : this.camera.PictureSourceType.PHOTOLIBRARY,
-  //       targetWidth: 600,
-  //       targetHeight: 600
-  //   }).then((imageData) => {
-  //     // this.base64Image = imageData;
-  //     // this.uploadFoto();
-  //     this.image = 'data:image/jpeg;base64,' + imageData;
-      
-  // //     // const picture = storage().ref('picture/profileDonatur/'+ this.id_donatur);
-  // //     // picture.putString(this.image, 'data_url');
-      
-  // //     // storage().ref().child('picture/profileDonatur/'+ this.id_donatur).getDownloadURL().then(url =>{
-  // //     //   // ini kedata base
-  // //     //   this.db.object('/donatur/'+ this.id_donatur).update({
-  // //     //   image: url })
-  // //     // })
-
-  //     }, (err) => {
-  //        alert("error");
-        
-  //   });
-  // }
+    toast.present();
+  }
 }

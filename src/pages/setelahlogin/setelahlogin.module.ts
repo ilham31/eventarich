@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { SetelahloginPage } from './setelahlogin';
-import { AuthServiceProvider } from '../../providers/auth-service';
+import { PipesModule } from './../../pipes/pipes.module';
+
 
 
 @NgModule({
@@ -12,15 +13,12 @@ import { AuthServiceProvider } from '../../providers/auth-service';
 
     imports: [
         IonicPageModule.forChild(SetelahloginPage),
+        PipesModule
     ],
 
     exports: [
         SetelahloginPage
     ],
-
-    providers: [
-        AuthServiceProvider
-    ]
 })
 
 export class SetelahloginPageModule {}

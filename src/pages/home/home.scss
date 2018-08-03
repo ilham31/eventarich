@@ -18,6 +18,34 @@ page-home {
     
     }
 
+    .divisi {
+        width: 100%;
+        height: 60vw;
+        background-size : 86vw !important;
+        position: relative;
+        .like {
+            background : 2vw white;
+            right: 2vw;
+            bottom: -1vw;
+            padding: 0.8vw;
+            position: absolute;
+
+            #like-love {
+                font-size : 7vw;
+                display: inline-block;
+                vertical-align: middle;
+            }
+    
+            #like-counter {
+                color: map-get($colors, eventarich);
+                font-weight: bold;
+                font-size : 1vw;
+                display: inline-block;
+                vertical-align: middle;            
+            }
+        }
+    }
+
     ion-card {
         .footer_card {
             padding: 10px;

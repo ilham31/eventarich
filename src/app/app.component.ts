@@ -3,9 +3,8 @@ import { IonicPage, Platform, NavController, MenuController, Nav, Events } from 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-import { AuthServiceProvider } from '../providers/auth-service'
 
-
+import { AuthServiceProvider } from '../providers/auth-service';
 
 export interface PageInterface {
   title: string;
@@ -29,17 +28,18 @@ export class MyApp {
   tes:any;
   tabBarElement: any;
 
-  rootPage:any = 'TabsPage';
+  rootPage:any;
+
   @ViewChild('nav') nav: Nav;
 
   pagesNotLoggedIn: PageInterface[] = [
-    { title: 'Home', pageName: 'HomePage', color: 'eventarich', index: 0, icon: 'home'},
+    { title: 'Home', pageName: 'TabsPage', color: 'eventarich', index: 0, icon: 'home'},
     { title: 'Vendor Kami', pageName: 'VendorkamiPage', color: 'eventarich', index: 1, icon: 'body'},
     { title: 'Login', pageName: 'LoginPage', color: 'eventarich', index: 2, icon: 'person'},
   ];
 
   pagesLoggedIn: PageInterface[] = [
-    { title: 'Home', pageName: 'SetelahloginPage', color: 'eventarich', index: 0, icon: 'home'},
+    { title: 'Home', pageName: 'TabsPage', color: 'eventarich', index: 0, icon: 'home'},
     { title: 'Kebutuhan Event', pageName: 'PesananPage', color: 'eventarich', index: 1, icon: 'cube'},
     { title: 'Vendor Kami', pageName: 'VendorkamiPage', color: 'eventarich', index: 2, icon: 'body'},
     { title: 'Profil', pageName: 'ProfilPage', color: 'eventarich', index: 3, icon: 'person'},
@@ -61,6 +61,11 @@ export class MyApp {
     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
 
     this.auth.hasLoggedIn().then((hasLoggedIn) => {
+      if(hasLoggedIn == false) {
+        this.rootPage = 'HomePage';
+      } else {
+        this.rootPage = 'TabsPage';
+      }
       this.enableMenu(hasLoggedIn === true);
     });
 

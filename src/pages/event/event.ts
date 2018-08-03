@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SetelahloginPage} from '../setelahlogin/setelahlogin'
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+
+import { SetelahloginPage } from '../setelahlogin/setelahlogin';
+
 import { EventProvider } from '../../providers/event';
 import { AuthServiceProvider } from '../../providers/auth-service';
+
+import { DateConvertPipe } from './../../pipes/date-convert/date-convert';
+import { BreaklinePipe } from '../../pipes/breakline/breakline';
 
 @IonicPage()
 @Component({
@@ -12,68 +19,77 @@ import { AuthServiceProvider } from '../../providers/auth-service';
 export class EventPage {
   token: any = localStorage.getItem("token");
   data:any;
-  nama:any;
+  eventDetail:any = [];
   getIdUser : any;
   id : any;
   idEvent : any;
   EventId : any;
   dataEvent : any;
-  tanggalEvent;
-  hari :any;
-  bulan : any;
-  tahun : any;
+  
   category : any;
   date:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public EventProvider : EventProvider,public authService : AuthServiceProvider) {
-    this.loadProfile();
-    this.dataEvent=this.navParams.data;
-    this.tanggal(this.dataEvent);
-  }
+  loading: any;
+  eventLiked: any = false;
+  likesCounter : any;
 
-  ionViewDidLoad() {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public eventProvider : EventProvider, public authService : AuthServiceProvider,
+              private loadCtrl : LoadingController, private sanitizer : DomSanitizer,
+              private photoView : PhotoViewer) {
+    this.showLoader();
+    this.dataEvent = this.navParams.data;
+    this.likesCounter = this.navParams.data.likes;
+    this.eventLiked = this.eventProvider.hasLiked(this.navParams.data._id);
+    this.loading.dismiss();
+    // console.log(this.token);
+    console.log('daftar like', JSON.parse(localStorage.getItem('likedEvent')));
   }
+  
 
-  tanggal(dataevent) {
-    this.tanggalEvent=dataevent.date_event.split("-");
-    this.tahun=this.tanggalEvent[0];
-    this.bulan=this.tanggalEvent[1];
-    this.hari=this.tanggalEvent[2].substring(0,2);
-    this.date={
-      tanggal:this.hari,
-      bulan:this.bulan,
-      tahun:this.tahun
+  likeEvent(eventId) {
+    if(this.eventProvider.hasLiked(eventId)) {
+      this.eventLiked = true;
+      console.log('Udah di like')
+    } else {
+      this.eventProvider.likeEvent(this.token, eventId).then((res)=> {
+        this.eventLiked = true;
+        this.likesCounter = this.likesCounter + 1;
+        this.eventProvider.addLiked(eventId);
+        this.addNewLikedEvent(eventId);
+      });
+      console.log('Dilike');
     }
-    console.log("date",this.date);
-    console.log("tanggal",this.tanggalEvent);
-    console.log("data event yang dikirim",this.dataEvent)
-    console.log("tanggal",this.hari,this.bulan,this.tahun); 
+  }
+  
+  makeTrustedImage(item) {
+    const imageString =  JSON.stringify(item).replace(/\\n/g, '');
+    const style = 'url(' + imageString + ')';
+    return this.sanitizer.bypassSecurityTrustStyle(style);
   }
 
-  back() {
-    this.navCtrl.pop();
+  addNewLikedEvent(eventId) {
+    var temp = JSON.parse(localStorage.getItem('likedEvent')) || [];
+    temp.push(eventId);
+    localStorage.setItem('likedEvent', JSON.stringify(temp));
   }
-  
-  loadProfile() {
-    this.authService.getUserData(this.token).then((data)=> {
-      this.data = data;
-      this.nama = this.data.events[0].name;
-      this.getIdUser = this.data.events[0].userId;
-      console.log("data profil",this.data);
-      console.log("profil",this.data.events[0].name);
+
+  viewImage() {
+    var options = {
+      share: true, // default is false
+      closeButton: false, // default is true
+      copyToReference: true // default is false
+    };
+
+    this.photoView.show(this.dataEvent.event_image_path, 'Event Image', options);
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
     });
-  }
-  
-  favouriteEvent(item) {
-   let favouriteData = {
-      id : this.getIdUser,
-      idEvent : this.EventId 
-   } 
-   this.EventProvider.favouriteEvent(favouriteData).then((result)=>{
-    console.log(result)
-    },(err)=>{
-    console.log(err)
-   });
+
+    this.loading.present();
   }
 
 

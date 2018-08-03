@@ -18,15 +18,17 @@
   <ion-img src="assets/imgs/contoh.jpg" width="360" height="250" ></ion-img>
   
   <div class="profile-desc">
-    <h1 text-center ion-text color="eventarich">{{nama}}</h1>
-    <p text-center>Official Account BEM - G</p>
+    <h1 text-center ion-text color="eventarich">{{ namaUser }}</h1>
+    <p text-center>{{ deskripsi }}</p>
   </div>
 
+
   <ion-list>
-      <ion-item-sliding no-padding *ngFor="let listEvent of dataEvent">
+      <h4 padding text-center *ngIf="eventArrayStatus">Tidak ada Event untuk ditampilkan, Ayo buat segera!</h4>
+      <ion-item-sliding *ngFor="let eventUser of listEventUser" no-padding>
         
         <ion-item class="card-item" no-lines>
-          <ion-card   (click)="lihatEvent(listEvent)">
+          <ion-card>
 
             <ion-card-content class="footer_card">
                 <ion-row>
@@ -37,9 +39,9 @@
                   </ion-col>
                   <ion-col col-9 class="col_content">
                     <div class="card_content">
-                      <h2 id="event_title">{{listEvent.title}}</h2>
-                      <h5 id="hashtag_event">#{{listEvent.categoryevent.name}}</h5>
-                      <h5 id="tanggal_event">{{listEvent.date_event.substring(0,10)}}</h5>
+                      <h2 id="event_title">{{eventUser.title}}</h2>
+                      <h5 id="hashtag_event">#{{eventUser.categoryevent.name}}</h5>
+                      <h5 id="tanggal_event">{{date.tanggal}} {{date.bulan}} {{date.tahun}}</h5>
                       <!-- <h3 id="organizer_event" >BEM-G</h3> -->
                     </div>
                   </ion-col>
@@ -56,7 +58,7 @@
         </ion-item>   
 
         <ion-item-options class="order_option" side="right">
-          <button ion-button color="danger" (click)="unread(item)">
+          <button ion-button color="danger" (click)="deleteEventId(eventUser._id)">
             <ion-icon name="trash"></ion-icon>
             Hapus
           </button>

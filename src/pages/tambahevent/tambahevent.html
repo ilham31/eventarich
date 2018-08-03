@@ -7,41 +7,43 @@
 
 <ion-content padding>
 
-  <img class="container" src="assets/imgs/contoh.jpg">
-  
-  <ion-icon (click)="uploadPicture()" name="camera" color="eventarich"></ion-icon>
+  <img class="container" [src]='imageURI'>
 
-<form #tambahEvent="ngForm" (ngSubmit)="addEvent(tambahEvent)" novalidate> 
- 
-<ion-list>
-  <ion-item>
-      <ion-label color="eventarich" stacked>Judul Event</ion-label>
-      <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="eventName" name="event" #evnt="ngModel"  required></ion-input>
-    </ion-item>
-    <p ion-text [hidden]="evnt.valid || submitted == false" color="danger" padding-left class="teksWarning">Nama Event harus diisi</p>
-
-
-    <ion-item>
-        <ion-label color="eventarich" stacked>Tanggal pelaksanaan</ion-label>
-        <ion-datetime class="text-input" placeholder="hari/tanggal/tahun" displayFormat="D/M/YYYY" [(ngModel)]="myDate" name="tanggal" #mydate = "ngModel" required></ion-datetime>
-    </ion-item>
-    <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
-
-
-    <ion-item>
-       <ion-label color="eventarich" stacked>Kota</ion-label>
-       <ion-input class="text-input" type="text" placeholder="Bogor" [(ngModel)]="kota" name="city" #kot="ngModel" required></ion-input>
-     </ion-item>
-     <p ion-text [hidden]="kot.valid || submitted == false" color="danger" padding-left class="teksWarning">Kota harus diisi</p>
+  <form #eventAddForm="ngForm" (ngSubmit)="addEvent(eventAddForm)" novalidate> 
+    
+    <ion-list>
+      <ion-item no-lines text-center (click)="openGallery()">
+        <ion-icon class="button-open-gallery" name="camera" color="eventarich">
+          <span>Pilih Gambar Event</span>
+        </ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label color="eventarich" stacked>Judul Event</ion-label>
+        <ion-input class="text-input" type="text" placeholder="Event Name" [(ngModel)]="eventData.title" name="event" #event="ngModel"  required></ion-input>
+      </ion-item>
+      <p ion-text [hidden]="event.valid || submitted == false" color="danger" padding-left class="teksWarning">Nama Event harus diisi</p>
 
       <ion-item>
-         <ion-label color="eventarich" stacked>Deskripsi</ion-label>
-         <ion-input class="text-input" type="text" placeholder="Donor darah merah" [(ngModel)]="deskripsiEvent" name="deskripsi" #desc="ngModel" required></ion-input>
-     </ion-item>
-     <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
-     <ion-item class="item-leave-height" no-lines no-padding>
-      <ion-label>Kategori Event</ion-label>
-      <ion-select [(ngModel)]="selectedLeave" name="select" #slc = "ngModel" required>
+          <ion-label color="eventarich" stacked>Tanggal pelaksanaan</ion-label>
+          <ion-datetime class="text-input" placeholder="hari/tanggal/tahun" displayFormat="D/M/YYYY" [(ngModel)]="eventData.date_event" name="tanggal" #mydate = "ngModel" required></ion-datetime>
+      </ion-item>
+      <p ion-text [hidden]="mydate.valid || submitted == false" color="danger" padding-left class="teksWarning">Tanggal harus diisi</p>
+
+      <ion-item>
+          <ion-label color="eventarich" stacked>Kota</ion-label>
+          <ion-input class="text-input" type="text" placeholder="Kota pelaksanaan event Anda" [(ngModel)]="eventData.city" name="city" #city="ngModel" required></ion-input>
+        </ion-item>
+        <p ion-text [hidden]="city.valid || submitted == false" color="danger" padding-left class="teksWarning">Kota harus diisi</p>
+
+      <ion-item>
+          <ion-label color="eventarich" stacked>Deskripsi</ion-label>
+          <ion-textarea rows='3' class="text-input" type="text" placeholder="Deskripsi event Anda" [(ngModel)]="eventData.description" name="deskripsi" #desc="ngModel" required></ion-textarea>
+      </ion-item>
+      <p ion-text [hidden]="desc.valid || submitted == false" color="danger" padding-left class="teksWarning">Deskripsi harus diisi</p>
+
+      <ion-item no-lines>
+        <ion-label>Kategori Event</ion-label>
+        <ion-select [(ngModel)]="eventData.categoryevent" name="select" #slc="ngModel" required>
           <ion-option value="5b3f2452636947843ae334fe">Kompetisi</ion-option>
           <ion-option value="5b3bbc70c58fd233b41aab4e">Seminar</ion-option>
           <ion-option value="5b3f245c636947843ae33502">Lingkungan</ion-option>
@@ -50,12 +52,12 @@
           <ion-option value="5b3f247f636947843ae3351e">Bazaar</ion-option>
           <ion-option value="5b3f2487636947843ae33521">Seni</ion-option>
           <ion-option value="5b3f248f636947843ae33527">Sosial</ion-option>
-      </ion-select>
-  </ion-item>
+        </ion-select>
+      </ion-item>
 
-</ion-list>
-<div id="sesuatu"></div>
-<button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Buat</button>
-</form> 
+    </ion-list>
+    <div id="sesuatu"></div>
+    <button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Buat</button>
+  </form> 
 
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import{ AuthServiceProvider } from '../../providers/auth-service';
+import { AuthServiceProvider } from '../../providers/auth-service';
 import { EventProvider } from '../../providers/event';
 
 
@@ -11,46 +11,102 @@ import { EventProvider } from '../../providers/event';
   templateUrl: 'profil.html',
 })
 export class ProfilPage {
-  token: any = localStorage.getItem("token");
-  data:any;
-  nama:any;
-  dataEvent : any;
-  event:any;
+  token: any;
+  namaUser:any;
+
+  listEventUser: any = [];
+  rawObject : any;
+  eventId:any;
+  deskripsi:any;
+  
   tanggalEvent : any;
   tahun:any;
   bulan:any;
   hari:any;
-  date:any=[]
-  constructor(public navCtrl: NavController, public navParams: NavParams,private storage : Storage,public authService: AuthServiceProvider,public eventProv : EventProvider) {
+  date:any=[];
+
+  eventArrayStatus: any;
+  successStatus: any;
+  loading: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private storage : Storage, public authService: AuthServiceProvider,
+              public eventProv : EventProvider, public alertCtrl : AlertController,
+              private events : Events, private loadCtrl : LoadingController) {
+    this.showLoader();
     this.loadProfile();
-    this.loadUserEvent();
+    this.token = localStorage.getItem('token');
+    this.loadUserEvent(this.token);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilPage');
+  ionViewWillEnter(){
+    this.loadProfile();
   }
 
   // Load data User
   loadProfile() {
-    this.authService.getUserData(this.token).then((data)=> {
-      let temp: any = data;
-      this.data = temp.json();
-      this.nama = this.data.events[0].name;
-      console.log("data profil",this.data);
-      console.log("profil",this.data.events[0].name);
-    });
+    this.namaUser = localStorage.getItem('userName');
+    this.deskripsi = localStorage.getItem('userDescription');
+  }
+
+  checkArray() {
+    if(this.listEventUser <= 0) {
+      this.eventArrayStatus = true;
+    } else {
+      this.eventArrayStatus = false;
+    }
   }
 
   // Load user yang sudah dibuat event
-  loadUserEvent() {
-    this.eventProv.getEventIdUser(this.token).then((data)=>{
-      let temp: any = data;
-      this.event = temp.json();
-      this.dataEvent =this.event.events;
-      
-      console.log("event by user", this.event);
-      console.log("data event",this.dataEvent);
+  loadUserEvent(token) {
+    this.eventProv.getEventIdUser(token).then((data)=>{
+      let temp : any = data;
+      this.rawObject = temp.json();
+      this.listEventUser = this.rawObject.events;
+      for(var i=0; i<this.listEventUser.length; i++) {
+        console.log(this.listEventUser[i].date_event);
+        this.tanggalEvent=this.listEventUser[i].date_event.split("-");
+        this.tahun=this.tanggalEvent[0];
+        this.bulan=this.tanggalEvent[1];
+        this.hari=this.tanggalEvent[2].substring(0,2);
+        this.date={
+          tanggal:this.hari,
+          bulan:this.bulan,
+          tahun:this.tahun
+        }
+      }
+
+      this.checkArray();
+      this.loading.dismiss();
+      console.log('Status array', this.eventArrayStatus);
     });
+  }
+
+  deleteEventId(eventId) {
+    this.showLoader();
+    this.eventProv.deleteEvent(this.token, eventId).then((data)=> {
+      this.events.publish('event:updated', true);
+      this.loadUserEvent(this.token);
+      this.loading.dismiss();
+      this.checkArray();
+      this.alertSuccess();
+    });
+  }
+
+  showLoader() {
+    this.loading = this.loadCtrl.create({
+      content: 'memuat..'
+    });
+
+    this.loading.present();
+  }
+
+  alertSuccess() {
+    let alert = this.alertCtrl.create({
+      subTitle: 'Event Anda sudah terhapus',
+      buttons: ['Oke']
+    });
+    alert.present();
   }
 
   goProfileMore() {

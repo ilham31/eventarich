@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar color="eventarich">
+    <ion-title>Update Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding nolines>
+
+    <form #updateForm="ngForm" (ngSubmit)="profileUpdate(updateForm)" novalidate> 
+  
+        <ion-list no-padding>
+          <ion-item>
+            <ion-label color="eventarich" stacked>Nama Display</ion-label>
+            <ion-input class="text-input" type="text" [(ngModel)]="username" name="username" required>{{username}}</ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label color="eventarich" stacked>Deskripsi</ion-label>
+            <ion-textarea rows="3" class="text-input" type="text" [(ngModel)]="description" name="description" required>{{description}}</ion-textarea>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label color="eventarich" stacked>No Telepon</ion-label>
+            <ion-input class="text-input" [(ngModel)]="phone_number" name="phone_number" [ngModelOptions]="{standalone: true}" type="tel" maxlength="12" required>{{phone_number}}</ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label color="eventarich" stacked>Alamat</ion-label>
+            <ion-textarea rows='3' class="text-input" type="text" [(ngModel)]="address" name="address" required>{{address}}</ion-textarea>
+          </ion-item>
+
+        </ion-list>
+        <div id="sesuatu"></div>
+        <button ion-button full ion-button color="eventarich" type="submit" class="button_bottom">Ubah</button>
+    </form> 
+
+</ion-content>

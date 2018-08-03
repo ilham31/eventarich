@@ -5,19 +5,12 @@ page-tambahevent {
     .teksWarning{
         font-size: 0.8em;
     }
-    ion-icon{
-        
-        padding-left: 250px;
-    }
-    
+
     .container {
         display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-       }
-       ion-icon {
-        font-size: 40px; //Preferred size here
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
     }
     ion-header ion-icon.back-button-icon.icon {
         color: map-get($colors, eventarich);
@@ -33,6 +26,27 @@ page-tambahevent {
           }
     }
     #sesuatu{
-        height: 10vw;
+        height: 25vw;
+    }
+
+    .button-open-gallery {
+        color: white;
+        background-color: #FF3080;
+        font-size : 4vw;
+
+        overflow: hidden;
+
+        border-style: solid;
+        border-width: 0;
+        outline: none;
+        border-radius : 1.2vw;
+
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+        padding : 2.5vw 2vw 2.5vw 2vw;
+
+        :focus {
+            background-color: rgb(204, 28, 96);
+        }
     }
 }

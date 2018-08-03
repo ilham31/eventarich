@@ -17,14 +17,30 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content color="eventarich"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+    
   <ion-card *ngFor="let listEvent of eventsArray"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
-    <img class="displayed"  height="200 px" width="244 px" img src="assets/imgs/contoh.jpg">        
+    <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)">
+      <div class="like">
+        <ion-icon id="like-love" name="custom-heart" color="eventarich"></ion-icon>
+        <span id="like-counter">{{listEvent.likes}} likes</span>
+      </div>
+    </div>
+
+
     <ion-card-content class="footer_card">
         <ion-row>
           <ion-col col-3 class="col_badge">
             <ion-badge class="badge-circle" >
-              28 Sept
+             {{ listEvent.date_event | dateConvert: 'short'}}
             </ion-badge>  
           </ion-col>
           <ion-col col-9 class="col_content">

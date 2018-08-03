@@ -22,14 +22,14 @@
   <h6>List Pesanan :</h6>
   <ion-list>
 
-    <ion-item-sliding #item>
+    <ion-item-sliding #item *ngFor="let listorder of dataOrder;let i = index;">
       <ion-item class="order_item" no-padding>
 
         <ion-row>
           <ion-col>
             <div class="order_item_attribute">
-              <h2>Pesan Logistik</h2>
-              <p><small>Untuk tanggal : 25 Agustus 2018</small></p>
+              <h2>{{listorder.category.name}}</h2>
+              <p><small >Untuk tanggal : {{listorder.date.substring(0,10)}}</small></p>
             </div>
           </ion-col>
         </ion-row>

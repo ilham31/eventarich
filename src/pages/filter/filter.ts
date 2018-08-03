@@ -8,7 +8,6 @@ import { isDefaultChangeDetectionStrategy } from '@angular/core/src/change_detec
   templateUrl: 'filter.html',
 })
 export class FilterPage {
-<<<<<<< HEAD
   listFilter : any = [];
   tanggalFilter : any = [];
 
@@ -17,34 +16,6 @@ export class FilterPage {
   dualValue2: any = {
     upper:12,
     lower:1
-=======
-  list : any[]=[];
-  tanggal:any[]=[];
-  rentang : boolean = false;
-    kompetisi : boolean =false;
-    seminar : boolean =false;
-    lingkungan : boolean =false;
-    expo : boolean =false;
-    olahraga : boolean =false;
-    bazaar : boolean =false;
-    seni : boolean =false;
-    sosial : boolean =false;
-    data : any;
-    tanggalBawah: string;
-    tanggalAtas : string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-    
-  }
-  dualValue2: any = {
-    upper:12,
-    lower:1
-    }
-    
-    
-      ionViewDidLoad() {
-    console.log('ionViewDidLoad FilterPage');
->>>>>>> 99bb5fa5fd31d2c618dc0d8ae94531385fe4bb69
   }
     
   //   kompetisi : boolean =false;
@@ -73,6 +44,7 @@ export class FilterPage {
   data : any;
   tanggalBawah: string;
   tanggalAtas : string;
+  rentang : boolean;
   
   cariEvent() {   
     if(this.kompetisi==true) {
@@ -92,26 +64,38 @@ export class FilterPage {
     } else if(this.sosial==true) {
       this.listFilter.push("Sosial");
     } 
-     
-    if(this.dualValue2.lower <= 9) {
-      this.tanggalBawah = "0" + this.dualValue2.lower;
-      console.log("date append", this.tanggalBawah);
-      this.tanggalFilter.push(this.tanggalBawah);
-    } else {
-      this.tanggalBawah = this.dualValue2.lower.toString();
-      this.tanggalFilter.push(this.tanggalBawah);
-    }
-     
-     
-    if(this.dualValue2.upper<=9)
+    if(this.rentang==true)
     {
-    this.tanggalAtas="0"+this.dualValue2.upper
-    this.tanggalFilter.push(this.tanggalAtas);
+        console.log("dengan tanggal")
+      if(this.dualValue2.lower <= 9) {
+        this.tanggalBawah = "0" + this.dualValue2.lower;
+        console.log("date append", this.tanggalBawah);
+        this.tanggalFilter.push(this.tanggalBawah);
+      } else {
+        this.tanggalBawah = this.dualValue2.lower.toString();
+        this.tanggalFilter.push(this.tanggalBawah);
+      }
+       
+       
+      if(this.dualValue2.upper<=9)
+      {
+      this.tanggalAtas="0"+this.dualValue2.upper
+      this.tanggalFilter.push(this.tanggalAtas);
+      }
+      else{
+      this.tanggalAtas = this.dualValue2.upper.toString()
+      this.tanggalFilter.push(this.tanggalAtas);
+      }
     }
-    else{
-    this.tanggalAtas = this.dualValue2.upper.toString()
-    this.tanggalFilter.push(this.tanggalAtas);
+    else
+    {
+      console.log("tanpa tanggal")
+      this.tanggalBawah="0";
+      this.tanggalAtas="0";
+      this.tanggalFilter.push(this.tanggalBawah);
+      this.tanggalFilter.push(this.tanggalAtas);
     }
+    
     localStorage.setItem('filter', "true");
     // this.backToSearch(this.listFilter, this.tanggalFilter);
     this.navCtrl.getPrevious().data.list = this.listFilter;

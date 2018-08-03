@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventProvider } from '../../providers/event';
 
-import { SearchPipe } from '../../pipes/search/search';
+import {SearchPipe} from '../../pipes/search/search'
 
 @IonicPage()
 @Component({

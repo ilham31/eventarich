@@ -23,10 +23,10 @@
   </div>
 
   <ion-list>
-      <ion-item-sliding no-padding>
+      <ion-item-sliding no-padding *ngFor="let listEvent of dataEvent">
         
         <ion-item class="card-item" no-lines>
-          <ion-card *ngFor="let listEvent of dataEvent"  (click)="lihatEvent(listEvent)">
+          <ion-card   (click)="lihatEvent(listEvent)">
 
             <ion-card-content class="footer_card">
                 <ion-row>
@@ -39,7 +39,7 @@
                     <div class="card_content">
                       <h2 id="event_title">{{listEvent.title}}</h2>
                       <h5 id="hashtag_event">#{{listEvent.categoryevent.name}}</h5>
-                      <h5 id="tanggal_event">{{date.tanggal}} {{date.bulan}} {{date.tahun}}</h5>
+                      <h5 id="tanggal_event">{{listEvent.date_event.substring(0,10)}}</h5>
                       <!-- <h3 id="organizer_event" >BEM-G</h3> -->
                     </div>
                   </ion-col>

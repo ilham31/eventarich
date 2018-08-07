@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { PipesModule } from '../../pipes/pipes.module';
+import { DateConvertPipe } from '../../pipes/date-convert/date-convert';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,10 @@ import { PipesModule } from '../../pipes/pipes.module';
 
     exports: [
         SearchPage,
+    ],
+
+    providers: [
+        DateConvertPipe
     ]
 })
 

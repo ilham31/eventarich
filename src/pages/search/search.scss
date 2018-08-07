@@ -5,4 +5,84 @@ page-search {
         left : 6px;
         font-size: 20px;
     }
+
+    .no-event {
+        margin-top : 100vw;
+    }
+
+    ion-card.cards-list-demo ion-card-header {
+        color: map-get($colors, primary);
+    }
+
+    ion-card-content {
+
+        .badge-circle{
+            position: relative;
+            display: inline-block;
+            width: 80%;
+            height: 0;
+            padding: 40% 0;
+            border-radius: 50%;
+            text-align: center;
+            line-height:0;
+        }
+
+    }
+
+    .divisi {
+        width: 100%;
+        height: 60vw;
+        background-size : 86vw !important;
+        position: relative;
+        .like {
+            background : 2vw white;
+            right: 2vw;
+            bottom: -1vw;
+            padding: 0.8vw;
+            position: absolute;
+
+            #like-love {
+                font-size : 7vw;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            #like-counter {
+                color: map-get($colors, eventarich);
+                font-weight: bold;
+                font-size : 1vw;
+                display: inline-block;
+                vertical-align: middle;            
+            }
+        }
+    }
+
+    ion-card {
+        .footer_card {
+            padding: 10px;
+            
+            .card_content {
+                display: inline-block;
+                width: auto;
+                margin-left: -3%;
+                #event_title {
+                    font-weight: 700;
+                }
+                // #organizer_event {
+
+                // }
+                #hashtag_event {
+                    font-size: 3vw;
+                }
+            }
+            .col_badge {
+                // border: solid;
+            }
+            .col_content {
+                // border: solid;
+            }
+
+        }
+    }
+
 }

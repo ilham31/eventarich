@@ -57,7 +57,7 @@ export class HomePage {
       console.log("Event", this.eventsArray);
       this.loading.dismiss();
     }, (err) => {
-      this.presentToast('Anda tidak terhubung Internet');
+      this.presentToast('Anda tidak terhubung kepada Kami, silahkan lakukan refresh');
       this.loading.dismiss();
     });
   }

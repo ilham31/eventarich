@@ -23,7 +23,9 @@ export class DateConvertPipe implements PipeTransform {
     date.bulan = temp[1];
     date.tanggal = temp[2].substring(0,2);
     
-    if(type === 'short') {
+    if(type === 'justBulan' ) {
+      return date.bulan;
+    } else if(type === 'short') {
       switch(date.bulan) {
         case '01': { 
           date.bulan = 'JAN';

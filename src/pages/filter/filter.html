@@ -8,81 +8,26 @@
 
 
 <ion-content padding>
-<p ion-text color="eventarich">Jenis Acara</p> 
+    <p ion-text color="eventarich">Jenis Acara</p> 
 
-<ion-grid>
-      <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Kompetisi</ion-label>
-                <ion-checkbox [(ngModel)]="kompetisi"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Seminar</ion-label>
-                <ion-checkbox [(ngModel)]="seminar"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Lingkungan</ion-label>
-                <ion-checkbox [(ngModel)]="lingkungan"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Expo</ion-label>
-                <ion-checkbox [(ngModel)]="expo"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Olahraga</ion-label>
-                <ion-checkbox [(ngModel)]="olahraga"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Bazaar</ion-label>
-                <ion-checkbox [(ngModel)]="bazaar"></ion-checkbox>
-              </ion-item>
-        </ion-col>  
-      </ion-row>
-      <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Seni</ion-label>
-                <ion-checkbox [(ngModel)]="seni"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label color="eventarich" class="my-label">Sosial</ion-label>
-                <ion-checkbox [(ngModel)]="sosial"></ion-checkbox>
-              </ion-item>
-        </ion-col>
-    </ion-row>
-</ion-grid>
-
-
-
-<ion-list>
-    <ion-item>
-        <ion-label><p ion-text color="eventarich">Rentang Waktu</p></ion-label>
-        <ion-toggle [(ngModel)]="rentang"></ion-toggle>
-    </ion-item>
-    <ion-item>
-        <ion-range *ngIf="rentang" dualKnobs="true" [(ngModel)]="dualValue2" min="1" max="12" step="1" snaps="true" color="eventarich"></ion-range>  
-      </ion-item>
-</ion-list>
-<ion-footer no-shadow>
-    <button ion-button full ion-button color="eventarich" (click)="cariEvent()">Cari</button>
-
-</ion-footer>
+    <ion-list no-padding>
+        <ion-item no-lines *ngFor="let category of categories; let i = index">
+            <ion-label color="eventarich" class="my-label">{{ category.categoryName }}</ion-label>
+            <ion-checkbox [(ngModel)]="checkedCategory[i]"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+    
+    <ion-list class="rentang-waktu" no-lines>
+        <ion-item>
+            <ion-label ion-text color="eventarich">Rentang Waktu</ion-label>
+            <ion-toggle [(ngModel)]="rentang"></ion-toggle>
+        </ion-item>
+        <ion-item *ngIf="rentang">
+            <ion-label color="eventarich">Dari bulan ke- {{dualValue2.lower}} sampai {{dualValue2.upper}}</ion-label>
+            <ion-range dualKnobs="true" pin="true" [(ngModel)]="dualValue2" min="1" max="12" step="1" snaps="true" color="eventarich"></ion-range> 
+        </ion-item>
+    </ion-list>
+    
+    <button ion-button full ion-button color="eventarich" class="button_bottom" (click)="cariEvent()">Cari</button>
 
 </ion-content>

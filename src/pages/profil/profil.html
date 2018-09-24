@@ -34,7 +34,7 @@
                 <ion-row>
                   <ion-col col-3 class="col_badge">
                     <ion-badge class="badge-circle" >
-                      28 Sept
+                      {{ eventUser.date_event | dateConvert: 'short'}}
                     </ion-badge>  
                   </ion-col>
                   <ion-col col-9 class="col_content">
@@ -42,13 +42,12 @@
                       <h2 id="event_title">{{eventUser.title}}</h2>
                       <h5 id="hashtag_event">#{{eventUser.categoryevent.name}}</h5>
                       <h5 id="tanggal_event">{{date.tanggal}} {{date.bulan}} {{date.tahun}}</h5>
-                      <!-- <h3 id="organizer_event" >BEM-G</h3> -->
                     </div>
                   </ion-col>
                   <ion-col   >
                     <div class="like">
                         <ion-icon ios="ios-heart" md="md-heart" color="eventarich" id="icon_like"></ion-icon>
-                        <p id="jumlah" ion-text color="eventarich">200 like</p>
+                        <p id="jumlah" ion-text color="eventarich">{{eventUser.likes}} likes</p>
                     </div> 
                   </ion-col>
                 </ion-row>

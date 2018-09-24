@@ -28,7 +28,7 @@
     </ion-refresher-content>
   </ion-refresher>
     
-  <ion-card *ngFor="let listEvent of eventsArray"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
+  <ion-card *ngFor="let listEvent of eventsArray | search: queryText"  (click)="lihatEvent(listEvent)" class="cards-list-demo">
 
     <div class="divisi" [style.background]="makeTrustedImage(listEvent.event_image_path)">
       <div class="like">

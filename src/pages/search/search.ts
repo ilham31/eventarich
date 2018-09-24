@@ -62,20 +62,22 @@ export class SearchPage {
       let temp : any = event;
       this.allEvent = temp.json();
       this.tempArray = this.allEvent.events;
-      console.log(this.tempArray);
+      console.log('list event filter', this.listEventFilter);
       if(this.listEventFilter || this.listEventDateFilter) {
         this.tempArray.forEach(element => {
-          let eventMonth = this.dateConvert.transform(element.date_event, 'justBulan');
-          console.log(this.listEventFilter);
+          let eventMonth = Number(this.dateConvert.transform(element.date_event, 'justBulan'));
+          console.log(eventMonth);
           if(eventMonth >= this.listEventDateFilter.lower && eventMonth <= this.listEventDateFilter.upper) {
             this.eventsArray.push(element);
-            if(this.listEventFilter.indexOf(element.categoryevent.name) != -1) {
-              console.log('Ada');
-              this.eventsArray.pop(element);
-              this.eventsArray.push(element);
-            } else {
-              this.eventsArray.pop(element);
-              console.log('Bukan ' + this.listEventFilter);
+            if(this.listEventFilter.length != 0) {
+              if(this.listEventFilter.indexOf(element.categoryevent.name) != -1) {
+                console.log('Ada');
+                this.eventsArray.pop(element);
+                this.eventsArray.push(element);
+              } else {
+                this.eventsArray.pop(element);
+                console.log('Bukan ' + this.listEventFilter);
+              }
             }
           } else {
             console.log('Tidak ada Event');

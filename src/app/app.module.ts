@@ -14,7 +14,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
-import { ImagePicker } from '@ionic-native/image-picker';
+// import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 
@@ -51,7 +51,7 @@ import { SafeImagePipe } from './../pipes/safe-image/safe-image';
     OrderProvider,
     EventProvider,
     File, FileTransfer,
-    ImagePicker,
+    // ImagePicker,
     Base64,
     PhotoViewer
   ]

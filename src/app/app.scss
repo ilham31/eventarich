@@ -91,6 +91,22 @@ ion-list {
     }
 }
 
+.codepanda-area {
+    .codepanda-logo {
+        margin: 0 auto;
+        width: 50%;
+    }
+
+    img {
+        height: 10vw;
+        width : auto;
+    }
+
+    span {
+        font-size : 1vw;
+    }
+}
+
 ion-icon {
     &[class*="custom-"] {
         mask-size: contain;

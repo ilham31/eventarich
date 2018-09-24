@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 
-let apiUrl = 'http://eventarich.codepanda.web.id';
+let apiUrl = 'http://149.56.36.130';
 
 // let apiUrl = 'http://localhost:3000';
 

@@ -81,6 +81,11 @@ export class MyApp {
     this.tabBarElement.style.display = 'flex';
   }
 
+  about() {
+    this.nav.push('AboutCodepandaPage');
+    this.menuCtrl.close();
+  }
+
 
   initApp() {
     this.platform.ready().then(() => {

@@ -21,7 +21,7 @@
         <ion-header>
             <ion-toolbar class="lebar-menu" color="eventarich">
                 <ion-item id="event_title" no-lines>
-                    <h1>eventarich</h1>
+                    <h1>Menu</h1>
                 </ion-item>
             </ion-toolbar>
         </ion-header>
@@ -33,6 +33,16 @@
                 </button>
             </ion-list>
         </ion-content>
+        <ion-footer (click)="about()" class="codepanda-area">
+            <ion-toolbar>
+                <div class="center" style="text-align: center; vertical-align: middle;">
+                    <span>Made with &hearts; by</span>
+                </div>
+                <div class="codepanda-logo">
+                    <img src="assets/imgs/logo-codepanda-flat.png" alt="Made with Love by Codepanda">
+                </div>
+            </ion-toolbar>
+        </ion-footer>
     </ion-menu>
 
     <ion-nav [root]="rootPage" #nav swipeBackEnabled="true"></ion-nav>

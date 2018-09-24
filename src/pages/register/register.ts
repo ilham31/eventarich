@@ -59,6 +59,7 @@ export class RegisterPage {
       });
     } else {
       this.presentToast("Form belum terisi");
+      this.loading.dismiss();
     }
   }
 

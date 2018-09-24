@@ -7,7 +7,7 @@ import { EventProvider } from '../../providers/event';
 
 import { File } from '@ionic-native/file';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { ImagePicker } from '@ionic-native/image-picker';
+// import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 
 
@@ -42,7 +42,7 @@ export class TambaheventPage {
               public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, 
               public loadCtrl: LoadingController, public eventprov: EventProvider,
               private alertCtrl : AlertController, private events : Events,
-              private imagePicker : ImagePicker, private base64 : Base64) {}
+              private camera : Camera, private base64 : Base64) {}
 
   addEvent(form : NgForm) {
     this.showLoader();
@@ -70,19 +70,22 @@ export class TambaheventPage {
   openGallery() {
     this.showLoader();
     const options = {
-      quality : 70,
-      maximumImagesCount : 1
+      quality : 100,
+      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+      destinationType: this.camera.DestinationType.DATA_URL
     }
 
-    this.imagePicker.getPictures(options).then((imageData) => {
-      for(var i = 0; i < imageData.length; i++) {
-        this.imageURI = imageData[i];
-        this.base64.encodeFile(imageData[i]).then((base64File : string) => {
-          this.eventData.event_image_path = base64File;
-        }, (err) => {
-          console.log(err);
-        });
-      }
+    this.camera.getPicture(options).then((imageData) => {
+      // for(var i = 0; i < imageData.length; i++) {
+      //   this.imageURI = imageData[i];
+      //   this.base64.encodeFile(imageData[i]).then((base64File : string) => {
+      //     this.eventData.event_image_path = base64File;
+      //   }, (err) => {
+      //     console.log(err);
+      //   });
+      // }
+      this.imageURI = 'data:image/jpeg;base64,' + imageData;
+      this.eventData.event_image_path = 'data:image/jpeg;base64,'+imageData;
       this.loading.dismiss();
      }, (err) => {
       this.loading.dismiss();

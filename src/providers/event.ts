@@ -11,7 +11,7 @@ import 'rxjs/add/observable/throw';
 import { Events } from 'ionic-angular';
 
 
-let apiUrl = 'http://eventarich.codepanda.web.id';
+let apiUrl =  'http://149.56.36.130';
 
 // let apiUrl = 'http://localhost:3000';
 
